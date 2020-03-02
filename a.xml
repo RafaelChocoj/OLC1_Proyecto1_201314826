@@ -1,0 +1,14 @@
+<ListaTokens>
+<Token>
+<Nombre>nombre_token1</Nombre>
+<Valor>valor_token1</Valor>
+<Fila>fila_token1</Fila>
+<Columna>columna_token1</Columna>
+</Token>
+<Token>
+<Nombre>nombre_token2</Nombre>
+<Valor>valor_token2</Valor>
+<Fila>fila_token2</Fila>
+<Columna>columna_token2</Columna>
+</Token>
+</ListaTokens>
