@@ -13,9 +13,11 @@ namespace Proyecto1
 {
     public partial class Form1 : Form
     {
+        List<rutas> rutas_ar;
         public Form1()
         {
             InitializeComponent();
+            rutas_ar = new List<rutas>();
         }
 
         private void b_analizar_Click(object sender, EventArgs e)
@@ -41,8 +43,8 @@ namespace Proyecto1
                 StreamReader streamReader = new StreamReader(ruta1, System.Text.Encoding.UTF8);
                 //string nombreC = Path.GetFileNameWithoutExtension(openFile.FileName);
                 string nombreC = Path.GetFileName(openFile.FileName);
-                MessageBox.Show(nombreC, "2 nombreC");
-                MessageBox.Show(ruta1, "2 ruta1");
+                //MessageBox.Show(nombreC, "2 nombreC");
+                //MessageBox.Show(ruta1, "2 ruta1");
 
                 while ((fila = streamReader.ReadLine()) != null)
                 {
@@ -117,22 +119,14 @@ namespace Proyecto1
             //}
             return document;
         }
-        public void InsertaPesta(String contenido, String name)
+        public void InsertaPesta(String contenido, String name, String ruta1)
         {
             int indi_pag;
-            //jspan = new JScrollPane();
 
-            //JTextArea editor = new JTextArea();
             RichTextBox editor = new RichTextBox();
-            //editor.setColumns(20);
-            //editor.setRows(5);
-            //editor.setText(contenido);
             editor.Text = contenido;
-            //jspan.setViewportView(editor);
 
 
-
-            //jTabbedPane1.addTab("Archivo " + (jTabbedPane1.getTabCount() + 1) + " (" + name + ")", jspan);
 
             TabPage newtab = new TabPage(name); // Creamos una nueva pestaña
             //tabControl1.Controls.Add(editor);
@@ -146,10 +140,11 @@ namespace Proyecto1
             newtab.Controls.Add(editor);
             tabControl1.TabPages.Add(newtab); //cargamos la pestaña en el control
 
-            //JOptionPane.showMessageDialog(null, indi_pag);
-            //jTabbedPane1.setSelectedIndex(indi_pag);
+            
+
+
             tabControl1.SelectedTab = newtab;
-            //rutas_ar.add(new rutas(indi_pag, archivo, name));
+            rutas_ar.Add(new rutas(ruta1, name, tabControl1.TabCount - 1));
 
         }
 
@@ -160,58 +155,153 @@ namespace Proyecto1
             //archivo = dialog.getSelectedFile();
             //if (archivo.canRead())
             //{
-            //    /*verificando si ya tiene abierto el arhicvo*/
-            //    for (int i = 0; i < rutas_ar.size(); i++)
-            //    {
+            /*verificando si ya tiene abierto el arhicvo*/
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "[Proyecto1]ER|*.er";
+            string texto = "";
+            string fila = "";
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                string ruta1 = openFile.FileName;
+                string nombreC = Path.GetFileName(openFile.FileName);
 
-            //        //JOptionPane.showMessageDialog(null,  "ruta **: " + rutas_ar.get(i).getArhivo() );
-            //        if (archivo.equals(rutas_ar.get(i).getArhivo()))
-            //        {
-            //            JOptionPane.showMessageDialog(null, "El documento " + archivo.getName() + " ya esta abierto");
-            //            ya = true;
-            //        }
-            //    }
-            //    /*fin*/
+                for (int i = 0; i < rutas_ar.Count; i++)
+                {
+
+                    //JOptionPane.showMessageDialog(null,  "ruta **: " + rutas_ar.get(i).getArhivo() );
+                    if (ruta1.Equals(rutas_ar.ElementAt(i).ruta_in))
+                    {
+                        MessageBox.Show("El documento " + nombreC + " ya esta abierto", "Archivo");
+                        ya = true;
+                    }
+                }
+                /*fin*/
 
                 if (ya == false)
-                {
-
-                //    if (archivo.getName().endsWith("dat") || archivo.getName().endsWith("rep"))
-                //    {
-                //        //JOptionPane.showMessageDialog(null,  archivo.getName() );
-                OpenFileDialog openFile = new OpenFileDialog();
-                openFile.Filter = "[Proyecto1]ER|*.er";
-                string texto = "";
-                string fila = "";
-                if (openFile.ShowDialog() == DialogResult.OK)
-                {
-                    string ruta1 = openFile.FileName;
-                    //StreamReader streamReader = new StreamReader(ruta1, System.Text.Encoding.UTF8);
-                    //string nombreC = Path.GetFileNameWithoutExtension(openFile.FileName);
-                    string nombreC = Path.GetFileName(openFile.FileName);
+            {
+                //    string ruta1 = openFile.FileName;
+                //    string nombreC = Path.GetFileName(openFile.FileName);
                     //MessageBox.Show(nombreC, "1 nombreC");
                     //MessageBox.Show(ruta1, "1 ruta1");
                     String contenido = AbrirArhivo(openFile);
-
-                    //InsertaPesta(contenido, archivo.getName());
-                    InsertaPesta(contenido, nombreC);
+                    InsertaPesta(contenido, nombreC, ruta1);
                 }
-                    //String contenido = AbrirArhivo(archivo);
-                    //String contenido = AbrirArhivo();
-                    //        //jeditor.setText(contenido);
-                    //        InsertaPesta(contenido, archivo.getName());
 
-                    //        //errores.add(new Error(token.getLexema(), "Error Sintáctico", "Se esperaba el simbolo '[' y se encontró "
-                    //        //            + token.getLexema(), token.getFila(), token.getColumna()));
-                    //    }
-                    //}
-                }
-            //else
-            //{
-            //    MessageBox.Show("No puede abrir archivo", " Abrir");
-            //}
+            }
+
 
         }
-    
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //TabPage current_tab = tabControl1.SelectedTab;
+            TabPage tab_actual = tabControl1.SelectedTab;
+
+            MessageBox.Show(tab_actual.Controls[0].Text, "tab_actual");
+
+            //String tex = tab_actual.Contains.ToString();
+            //String texto = tb_texto.Text;
+
+            ////MessageBox.Show(tex, "tex");
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //int indice_actual;
+            //indice_actual = jTabbedPane1.getSelectedIndex();
+            if (rutas_ar.Count <= 0)
+            {
+                MessageBox.Show("Hoy hay ningun archivo", "Guardar");
+            }
+            else
+            {
+                //JOptionPane.showMessageDialog(null, rutas_ar.get(indice_actual).getArhivo());
+                int ind = tabControl1.SelectedIndex;
+                //MessageBox.Show(ind.ToString(), "ind");
+                MessageBox.Show(rutas_ar.ElementAt(ind).ruta_in, "Guardar");
+
+                String ruta;
+                ruta = rutas_ar.ElementAt(ind).ruta_in;
+
+                GuardarAhora(ruta);
+
+
+            }
+
+
+        }
+
+        public void GuardarAhora(String archivo_g)
+        {
+
+
+            TabPage tab_actual = tabControl1.SelectedTab;
+            String doc = tab_actual.Controls[0].Text;
+
+
+            Boolean pasa = GuardarArchivo(archivo_g, doc);
+
+            if (pasa == false)
+            {
+                MessageBox.Show("error al guardar achivo");
+            }
+            MessageBox.Show("archivo guardado");
+
+
+        }
+
+        public Boolean GuardarArchivo(String arhivo, String documento)
+        {
+            Boolean pasa = true;
+            try
+            {
+                string text = documento;
+                StreamWriter writer = new StreamWriter(arhivo);
+                writer.Write(text);
+                writer.Flush();
+                writer.Close();
+
+                string nombre = Path.GetFileNameWithoutExtension(arhivo);
+            }
+            catch (Exception ex)
+            {
+                pasa = false;
+                Console.WriteLine(ex.Message);
+            }
+            return pasa;
+        }
+
+        private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rutas_ar.Count <= 0)
+            {
+                MessageBox.Show("Hoy hay ningun archivo", "Guardar como...");
+            }
+            else
+            {
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "[Proyecto1]ER|*.er";
+                saveFile.Title = "Guardar archivo";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    FileStream fs = (FileStream)saveFile.OpenFile();
+                    fs.Close();
+                    string path = saveFile.FileName;
+                    //guardar(path);
+                    GuardarAhora(path);
+                    //string nombre = Path.GetFileNameWithoutExtension(path);
+                    //Rutas path_r = new Rutas(path, nombre);
+                    //rutas.Add(path_r);
+
+                }
+
+  
+            }
+
+
+        }
     }
 }
