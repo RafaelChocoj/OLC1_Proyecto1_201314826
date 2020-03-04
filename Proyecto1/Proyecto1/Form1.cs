@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +16,15 @@ namespace Proyecto1
     public partial class Form1 : Form
     {
         List<rutas> rutas_ar;
+
+        List<Errores> lis_erores;
         public Form1()
         {
             InitializeComponent();
             rutas_ar = new List<rutas>();
+
+            lis_erores = new List<Errores>();
+            
         }
 
         private void b_analizar_Click(object sender, EventArgs e)
@@ -34,6 +41,7 @@ namespace Proyecto1
             analisis_lex.ImprimeTokens();
 
             analisis_lex.ImprimeErrores();
+            lis_erores = analisis_lex.getErroresLex();
         }
 
         //public String AbrirArhivo(File archivo)
@@ -44,29 +52,29 @@ namespace Proyecto1
             string texto = "";
             string fila = "";
 
-                string ruta1 = openFile.FileName;
-                StreamReader streamReader = new StreamReader(ruta1, System.Text.Encoding.UTF8);
-                //string nombreC = Path.GetFileNameWithoutExtension(openFile.FileName);
-                string nombreC = Path.GetFileName(openFile.FileName);
-                //MessageBox.Show(nombreC, "2 nombreC");
-                //MessageBox.Show(ruta1, "2 ruta1");
+            string ruta1 = openFile.FileName;
+            StreamReader streamReader = new StreamReader(ruta1, System.Text.Encoding.UTF8);
+            //string nombreC = Path.GetFileNameWithoutExtension(openFile.FileName);
+            string nombreC = Path.GetFileName(openFile.FileName);
+            //MessageBox.Show(nombreC, "2 nombreC");
+            //MessageBox.Show(ruta1, "2 ruta1");
 
-                while ((fila = streamReader.ReadLine()) != null)
-                {
-                    texto += fila + System.Environment.NewLine;
-                }
-                document = texto;
-                streamReader.Close();
+            while ((fila = streamReader.ReadLine()) != null)
+            {
+                texto += fila + System.Environment.NewLine;
+            }
+            document = texto;
+            streamReader.Close();
 
 
-                //rutas.Clear();
-                //Rutas path = new Rutas(ruta1, nombreC);
-                //rutas.Add(path);
+            //rutas.Clear();
+            //Rutas path = new Rutas(ruta1, nombreC);
+            //rutas.Add(path);
 
-                ////MessageBox.Show(rutas.Count.ToString() , "rutas.Count");
-                //Path_actual = ruta1;
-                //nombre_acual = nombreC;
-                //this.Text = nombre_acual;
+            ////MessageBox.Show(rutas.Count.ToString() , "rutas.Count");
+            //Path_actual = ruta1;
+            //nombre_acual = nombreC;
+            //this.Text = nombre_acual;
 
             return document;
         }
@@ -93,7 +101,7 @@ namespace Proyecto1
                 }
                 tb_texto.Text = texto;
                 streamReader.Close();
-               
+
 
                 //rutas.Clear();
                 //Rutas path = new Rutas(ruta1, nombreC);
@@ -137,15 +145,17 @@ namespace Proyecto1
             //tabControl1.Controls.Add(editor);
             //indi_pag = jTabbedPane1.getTabCount() - 1;
             //Panel pal = new Panel();
-            editor.Width = tabControl1.Width -5;
-            editor.Height = tabControl1.Height-10;
+            editor.Width = tabControl1.Width - 5;
+            editor.Height = tabControl1.Height - 10;
+
+            //MessageBox.Show(editor.Font.Size.ToString());
             //pal.Controls.Add(editor);
-            
+
 
             newtab.Controls.Add(editor);
             tabControl1.TabPages.Add(newtab); //cargamos la pestaña en el control
 
-            
+
 
 
             tabControl1.SelectedTab = newtab;
@@ -183,9 +193,9 @@ namespace Proyecto1
                 /*fin*/
 
                 if (ya == false)
-            {
-                //    string ruta1 = openFile.FileName;
-                //    string nombreC = Path.GetFileName(openFile.FileName);
+                {
+                    //    string ruta1 = openFile.FileName;
+                    //    string nombreC = Path.GetFileName(openFile.FileName);
                     //MessageBox.Show(nombreC, "1 nombreC");
                     //MessageBox.Show(ruta1, "1 ruta1");
                     String contenido = AbrirArhivo(openFile);
@@ -302,10 +312,56 @@ namespace Proyecto1
 
                 }
 
-  
+
             }
 
 
+        }
+
+        private void erroresPDFerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreandoPdf();
+        }
+
+        public void CreandoPdf()
+        {
+            //FileStream stream = new FileStream("EorresLex.pdf", FileMode.Create);
+
+            using (FileStream stream = new FileStream("EorresLex.pdf", FileMode.Create))
+            {
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+
+                PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                ////
+                pdfDoc.Add(new Paragraph("Reporte de Errores \n\n"));
+
+                PdfPTable tabla_er = new PdfPTable(4);
+                tabla_er.WidthPercentage = 60;
+                tabla_er.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                tabla_er.DefaultCell.VerticalAlignment = Element.ALIGN_CENTER;
+                tabla_er.DefaultCell.BorderWidth = 1;
+
+                tabla_er.AddCell(new Paragraph("Lexema"));
+                tabla_er.AddCell(new Paragraph("Descripción"));
+                tabla_er.AddCell(new Paragraph("linea"));
+                tabla_er.AddCell(new Paragraph("Columna"));
+
+                foreach (Errores err in lis_erores)
+                {
+                    tabla_er.AddCell(new Paragraph(err.lexema));
+                    tabla_er.AddCell(new Paragraph(err.idToken));
+                    tabla_er.AddCell(new Paragraph(err.linea.ToString()));
+                    tabla_er.AddCell(new Paragraph(err.columna.ToString()));
+                }
+
+                pdfDoc.Add(tabla_er);
+
+                pdfDoc.Close();
+                stream.Close();
+            }
+
+            System.Diagnostics.Process.Start("EorresLex.pdf");
         }
     }
 }

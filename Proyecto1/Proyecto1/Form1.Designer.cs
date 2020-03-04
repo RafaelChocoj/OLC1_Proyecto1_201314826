@@ -35,16 +35,16 @@
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.button1 = new System.Windows.Forms.Button();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.erroresPDFerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // b_analizar
             // 
-            this.b_analizar.Location = new System.Drawing.Point(33, 283);
+            this.b_analizar.Location = new System.Drawing.Point(33, 307);
             this.b_analizar.Name = "b_analizar";
             this.b_analizar.Size = new System.Drawing.Size(82, 32);
             this.b_analizar.TabIndex = 0;
@@ -54,9 +54,9 @@
             // 
             // tb_texto
             // 
-            this.tb_texto.Location = new System.Drawing.Point(151, 283);
+            this.tb_texto.Location = new System.Drawing.Point(151, 307);
             this.tb_texto.Name = "tb_texto";
-            this.tb_texto.Size = new System.Drawing.Size(602, 78);
+            this.tb_texto.Size = new System.Drawing.Size(602, 54);
             this.tb_texto.TabIndex = 1;
             this.tb_texto.Text = "";
             // 
@@ -85,7 +85,7 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
@@ -103,24 +103,6 @@
             this.guardarComoToolStripMenuItem.Text = "Guardar como...";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Location = new System.Drawing.Point(33, 28);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(720, 232);
-            this.tabControl1.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(768, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // reportesToolStripMenuItem
             // 
             this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -134,6 +116,25 @@
             this.erroresPDFerToolStripMenuItem.Name = "erroresPDFerToolStripMenuItem";
             this.erroresPDFerToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.erroresPDFerToolStripMenuItem.Text = "Errores PDF (.er)";
+            this.erroresPDFerToolStripMenuItem.Click += new System.EventHandler(this.erroresPDFerToolStripMenuItem_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Location = new System.Drawing.Point(33, 28);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(720, 273);
+            this.tabControl1.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(768, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 

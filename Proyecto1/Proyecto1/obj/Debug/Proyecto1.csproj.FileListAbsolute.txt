@@ -7,3 +7,5 @@ E:\Compi1_1s_2020\Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.csproj.Gener
 E:\Compi1_1s_2020\Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.exe
 E:\Compi1_1s_2020\Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.pdb
 E:\Compi1_1s_2020\Proyecto1\Proyecto1\Proyecto1\obj\Debug\Proyecto1.Form1.resources
+E:\Compi1_1s_2020\Proyecto1\Proyecto1\Proyecto1\bin\Debug\itextsharp.dll
+E:\Compi1_1s_2020\Proyecto1\Proyecto1\Proyecto1\bin\Debug\itextsharp.xml

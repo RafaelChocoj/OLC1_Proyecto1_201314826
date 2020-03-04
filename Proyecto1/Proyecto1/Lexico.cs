@@ -14,6 +14,8 @@ namespace Proyecto1
 
         List<String> reservadas;
 
+        //List<String> con_caracteres; // para conjunto de caracteres
+        String[] con_caracteres;
         public Lexico()
         {
             lis_tokens = new LinkedList<Token>();
@@ -21,7 +23,14 @@ namespace Proyecto1
 
             reservadas = new List<String>();
             reservadas.Add("CONJ");
-        }
+
+            /* para conjunto de caracteres*/
+            //con_caracteres = new List<String>();
+            String[] con_c = { "!", "\"", "#", "$",
+            "%","&","'","(",")","*","+",",", "-", ".","/", ":", ";", "<","=",
+            ">", "?","@", "[", "\\", "]", "^", "_", "`", "{", "|", "}"};
+            con_caracteres = con_c;
+    }
 
         public void addToken(String lexema, String idToken, int linea, int columna)
         {
@@ -32,10 +41,14 @@ namespace Proyecto1
 
         public void addError(String lexema, String idToken, int linea, int columna)
         {
-            Errores err = new Errores(lexema, idToken, linea, columna, "LEX");
+            Errores err = new Errores(lexema, idToken, linea, columna+1, "LEX");
             lis_erores.Add(err);
         }
 
+        public List<Errores> getErroresLex()
+        {
+            return lis_erores;
+        }
         public void ImprimeTokens()
         {
             //for (Token tok : lis_tokens)
@@ -73,9 +86,36 @@ namespace Proyecto1
             return enco;
         }
 
+        public Boolean Macht_Caracteres(String sente)
+        {
+            Boolean enco = false;
+            for (int i = 0; i < con_caracteres.Length; ++i)
+            {
+                if (sente.Equals(con_caracteres[i]))
+                {
+                    enco = true;
+                    return enco;
+                }
+                else { enco = false; }
+
+            }
+            return enco;
+        }
+
+    
+
         public void Analizador_cadena(String entrada)
         {
-
+            //String ü = "1";
+            //MessageBox.Show(ü, "ü");
+            int estado_conjunto = 0;
+            /*
+             * 0 = no
+             * 1 = conj
+             * 2 = :
+             * 3 = igualdad
+             * 4 = rango del conjunto
+             */
             int estado = 0;
             int columna = 0;
             int fila = 1;
@@ -190,6 +230,9 @@ namespace Proyecto1
                             lexema += c;
                             addToken(lexema, "PuntoComa", fila, columna - lexema.Length);
                             lexema = "";
+
+                            if (estado_conjunto == 4)
+                            { estado_conjunto = 0; }
                         }
                         //                        else if (c == '<')
                         //                        {
@@ -221,6 +264,9 @@ namespace Proyecto1
                             lexema += c;
                             addToken(lexema, "DosPuntos", fila, columna - lexema.Length);
                             lexema = "";
+
+                            if (estado_conjunto == 1)
+                            {estado_conjunto++;   }
                         }
 
                         /*expresiones regulares*/
@@ -255,16 +301,54 @@ namespace Proyecto1
                             lexema = "";
                         }
 
-
                         ///////////////////////////////////////////////////////////
                         /*fin operadors mat*/
+                        //antes
+                        //else
+                        //{
+                        //    //addError(c.ToString() , "Desconocido", fila, columna);
+                        //    estado = -99;
+                        //    i--;
+                        //    columna--;
+                        //}
+                        ////ahora
                         else
                         {
-                            //addError(c.ToString() , "Desconocido", fila, columna);
+                            //////addError(c.ToString() , "Desconocido", fila, columna);
+                            ////estado = -99;
+                            ////i--;
+                            ////columna--;
+
+                            if (estado_conjunto == 4)
+                            {
+                                lexema += c;
+                                //MessageBox.Show(lexema, "lexema");
+                                Boolean encontrado = false;
+                                encontrado = Macht_Caracteres(lexema);
+                                
+                                if (encontrado)
+                                {
+                                    addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                                    lexema = "";
+                                }
+                                else
+                                {
+                                    //MessageBox.Show(encontrado.ToString(), "encontrado");
+                                    estado = -99;
+                                    i--;
+                                    columna--;
+                                    lexema = "";
+                                }
+
+
+                            } else
+                            {
                             estado = -99;
                             i--;
                             columna--;
                         }
+
+                }
                         break;
                     case 1:
                         if (Char.IsLetterOrDigit(c) || c == '_')
@@ -280,11 +364,13 @@ namespace Proyecto1
                             if (encontrado)
                             {
                                 addToken(lexema, "Reservada", fila, columna - lexema.Length);
+                                estado_conjunto = 1;
                             }
                             else
                             {
                                 addToken(lexema, "Identificador", fila, columna - lexema.Length);
-
+                                if (estado_conjunto == 2)
+                                { estado_conjunto++; }
                             }
 
                             lexema = "";
@@ -353,6 +439,9 @@ namespace Proyecto1
                             //////////////////////////                    addToken(lexema, "1LinComen", fila, columna - lexema.length());
                             estado = 0;
                             lexema = "";
+
+                            columna = 0;
+                            fila++;
                         }
                         break;
                     ////////////////////////////////////////    
@@ -371,12 +460,26 @@ namespace Proyecto1
                             lexema += c;
                             estado = 9;
                         }
+                        else
+                        {
+                            lexema = "";
+                            i--;
+                            columna--;
+                            estado = -99;
+                        }
                         break;
                     case 9:
                         if (c != '!')
                         {
                             lexema += c;
                             estado = 9;
+
+                            /////new
+                            if (c == '\n')
+                            {
+                                columna = 0;
+                                fila++;
+                            }
                         }
                         else if (c == '!')
                         {
@@ -395,6 +498,7 @@ namespace Proyecto1
                             lexema += c;
                             ////////////////////////                            addToken(lexema, "MultiComen", fila, columna - lexema.length());
                             estado = 0;
+                            //MessageBox.Show(lexema, "lexema");
                             lexema = "";
                         }
                         break;
@@ -415,7 +519,10 @@ namespace Proyecto1
                             addToken(lexema, "Igualdad", fila, columna - lexema.Length);
                             estado = 0;
                             lexema = "";
-          
+
+                            if (estado_conjunto == 3)
+                            { estado_conjunto++; }
+
                         }
                         else
                         {
@@ -463,42 +570,31 @@ namespace Proyecto1
 
                     /*fin cadena de caracteres*/
 
-                    //        /*delimitador*/
-                    /*inicio de comentario 1 liena*/
-                    case 16:
-                        if (c == '%')
-                        {
-                            lexema += c;
-                            estado = 17;
-                        }
-                        break;
-                    case 17:
-                        if (c == '%')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Delimitador", fila, columna - lexema.Length);
-                            estado = 0;
-                            lexema = "";
-                        }
-                        else
-                        {
-                            i--;
-                            columna--;
-                            estado = -99;
-                            ///errorr
-                        }
-                        //if (c != '\n')
-                        //{
-                        //    lexema += c;
-                        //    addToken(lexema, "Delimitador", fila, columna - lexema.Length);
-                        //    estado = 0;
-                        //    lexema = "";
-                        //}
-                        //else
-                        //{
-                        //    ///errorr
-                        //}
-                        break;
+                    ////        /*delimitador*/
+                    ///*inicio de comentario 1 liena*/
+                    //case 16:
+                    //    if (c == '%')
+                    //    {
+                    //        lexema += c;
+                    //        estado = 17;
+                    //    }
+                    //    break;
+                    //case 17:
+                    //    if (c == '%')
+                    //    {
+                    //        lexema += c;
+                    //        addToken(lexema, "Delimitador", fila, columna - lexema.Length);
+                    //        estado = 0;
+                    //        lexema = "";
+                    //    }
+                    //    else
+                    //    {
+                    //        i--;
+                    //        columna--;
+                    //        estado = -99;
+                    //        ///errorr
+                    //    }
+                    //    break;
 
 
                     case -99:
