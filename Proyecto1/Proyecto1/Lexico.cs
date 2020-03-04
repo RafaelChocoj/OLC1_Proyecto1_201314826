@@ -12,9 +12,15 @@ namespace Proyecto1
         LinkedList<Token> lis_tokens;
         List<Errores> lis_erores;
 
+        List<String> reservadas;
+
         public Lexico()
         {
             lis_tokens = new LinkedList<Token>();
+            lis_erores = new List<Errores>();
+
+            reservadas = new List<String>();
+            reservadas.Add("CONJ");
         }
 
         public void addToken(String lexema, String idToken, int linea, int columna)
@@ -39,6 +45,32 @@ namespace Proyecto1
                 Console.Out.WriteLine(lis_tokens.ElementAt(i).lexema + " - tipo: " + lis_tokens.ElementAt(i).idToken);
 
             }
+        }
+
+        public void ImprimeErrores()
+        {
+            for (int i = 0; i < lis_erores.Count; i++)
+            {
+                Console.Out.WriteLine("******" +lis_erores.ElementAt(i).lexema + " - err: " + lis_erores.ElementAt(i).idToken);
+
+            }
+        }
+
+        public Boolean Macht_enReser(String sente)
+        {
+            Boolean enco = false;
+            for (int i = 0; i < reservadas.Count; ++i)
+            {
+                if (sente.Equals(reservadas.ElementAt(i)))
+                {
+                    enco = true;
+                    //estado_token = i;
+                    return enco;
+                }
+                else { enco = false; }
+
+            }
+            return enco;
         }
 
         public void Analizador_cadena(String entrada)
@@ -84,13 +116,13 @@ namespace Proyecto1
                             columna--;
                         }
 
-                        //            /*para el delimitador %%*/
-                        //            else if (c == '%')
-                        //            {
-                        //                estado = 16;
-                        //                i--;
-                        //                columna--;
-                        //            }
+                        ///*para el delimitador %%*/
+                        //else if (c == '%')
+                        //{
+                        //    estado = 16;
+                        //    i--;
+                        //    columna--;
+                        //}
                         /* comentario 1 linea*/
                         else if (c == '/')
                         {
@@ -99,39 +131,39 @@ namespace Proyecto1
                             columna--;
                         }
 
-                        //            /*comentario multilinea*/
-                        //            else if (c == '<')
-                        //            {
-                        //                estado = 7;
-                        //                i--;
-                        //                columna--;
-                        //            }
-                        //            /*igualdad */
-                        //            else if (c == '-')
-                        //            {
-                        //                estado = 11;
-                        //                i--;
-                        //                columna--;
-                        //            }
+                        /*comentario multilinea*/
+                        else if (c == '<')
+                        {
+                            estado = 7;
+                            i--;
+                            columna--;
+                        }
+                        /*igualdad */
+                        else if (c == '-')
+                        {
+                            estado = 11;
+                            i--;
+                            columna--;
+                        }
 
-                        //            //                        else if (c == ',')
-                        //            //                        {
-                        //            //                            estado = 6;
-                        //            //                            i--;
-                        //            //                            columna--;
-                        //            //                        }
-                        //            /*ignorar espacios*/
-                        //            else if (c == ' ')
-                        //            {
-                        //                estado = 0;
-                        //            }
-                        //            /*ignorar*/
-                        //            else if (c == '\n')
-                        //            {
-                        //                columna = 0;
-                        //                fila++;
-                        //                estado = 0;
-                        //            }
+                        //                        else if (c == ',')
+                        //                        {
+                        //                            estado = 6;
+                        //                            i--;
+                        //                            columna--;
+                        //                        }
+                        /*ignorar espacios*/
+                        else if (c == ' ')
+                        {
+                            estado = 0;
+                        }
+                        /*ignorar*/
+                        else if (c == '\n')
+                        {
+                            columna = 0;
+                            fila++;
+                            estado = 0;
+                        }
                         else if (c == '{')
                         {
                             lexema += c;
@@ -243,17 +275,17 @@ namespace Proyecto1
                         }
                         else
                         {
-                            //boolean encontrado = false;
-                            //encontrado = Macht_enReser(lexema);
-                            //if (encontrado)
-                            //{
-                            //    addToken(lexema, "Reservada", fila, columna - lexema.Length);
-                            //}
-                            //else
-                            //{
+                            Boolean encontrado = false;
+                            encontrado = Macht_enReser(lexema);
+                            if (encontrado)
+                            {
+                                addToken(lexema, "Reservada", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
                                 addToken(lexema, "Identificador", fila, columna - lexema.Length);
 
-                            //}
+                            }
 
                             lexema = "";
                             i--;
@@ -262,31 +294,31 @@ namespace Proyecto1
 
                         }
                         break;
-                    //        case 2:
-                    //            if (Character.isDigit(c))
-                    //            {
-                    //                lexema += c;
-                    //                estado = 2;
-                    //            }
-                    //            //                        /*nuevo*/
-                    //            //                        else if (c == '.')
-                    //            //                        {
-                    //            //                            estado = 8;
-                    //            //                            lexema += c;
-                    //            //                        }
-                    //            //                        /*nuevo fin*/
-                    //            else
-                    //            {
-                    //                ////token = new Token(3, "Numero", lexema, fila, columna);
-                    //                ////tokens.add(token);
-                    //                //addToken(lexema, "Digito", fila, columna, i - lexema.Length);
-                    //                addToken(lexema, "Digito", fila, columna - lexema.length());
-                    //                lexema = "";
-                    //                i--;
-                    //                columna--;
-                    //                estado = 0;
-                    //            }
-                    //            break;                    
+                    case 2:
+                        if (Char.IsDigit(c))
+                        {
+                            lexema += c;
+                            estado = 2;
+                        }
+                        //                        /*nuevo*/
+                        //                        else if (c == '.')
+                        //                        {
+                        //                            estado = 8;
+                        //                            lexema += c;
+                        //                        }
+                        //                        /*nuevo fin*/
+                        else
+                        {
+                            ////token = new Token(3, "Numero", lexema, fila, columna);
+                            ////tokens.add(token);
+                            //addToken(lexema, "Digito", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Digito", fila, columna - lexema.Length);
+                            lexema = "";
+                            i--;
+                            columna--;
+                            estado = 0;
+                        }
+                        break;
                     /*inicio de comentario 1 liena*/
                     case 4:
                         if (c == '/')
@@ -295,153 +327,178 @@ namespace Proyecto1
                             estado = 5;
                         }
                         break;
-                    //        case 5:
-                    //            if (c == '/')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 6;
-                    //            }
-                    //            else
-                    //            {
-                    //                //psts que sea comentario tiene que ser 2
-                    //                i--;
-                    //                columna--;
-                    //                estado = -99;
-                    //            }
-                    //            break;
-                    //        case 6:
-                    //            if (c != '\n')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 6;
-                    //            }
-                    //            else
-                    //            {
-                    //                lexema += c;
-                    //                //////////////////////////                            addToken(lexema, "1LinComen", fila, columna - lexema.length());
-                    //                estado = 0;
-                    //                lexema = "";
-                    //            }
-                    //            break;
-                    //        //////////////////////////////////////////    
-                    //        /*fin  de comentario 1 liena*/
-                    //        ////////////////////////////////////////
-                    //        case 7:
-                    //            if (c == '<')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 8;
-                    //            }
-                    //            break;
-                    //        case 8:
-                    //            if (c == '!')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 9;
-                    //            }
-                    //            break;
-                    //        case 9:
-                    //            if (c != '!')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 9;
-                    //            }
-                    //            else if (c == '!')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 10;
-                    //            }
-                    //            break;
-                    //        case 10:
-                    //            if (c != '>')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 9;
-                    //            }
-                    //            else if (c == '>')
-                    //            {
-                    //                lexema += c;
-                    //                ////////////////////////                            addToken(lexema, "MultiComen", fila, columna - lexema.length());
-                    //                estado = 0;
-                    //                lexema = "";
-                    //            }
-                    //            break;
-                    //        /*fin comentario multilinea*/
-                    //        ////////////////////////////////////
-                    //        /*igualdad*/
-                    //        case 11:
-                    //            if (c == '-')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 12;
-                    //            }
-                    //            break;
-                    //        case 12:
-                    //            if (c == '>')
-                    //            {
-                    //                lexema += c;
-                    //                addToken(lexema, "Igualdad", fila, columna - lexema.length());
-                    //                estado = 0;
-                    //                lexema = "";
-                    //                String a;
-                    //            }
-                    //            break;
-                    //        ////////para la cadena , estado 13
-                    //        case 13:
-                    //            if (c == '"')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 14;
-                    //            }
-                    //            break;
-                    //        case 14:
-                    //            if (c != '"')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 14;
-                    //            }
-                    //            else
-                    //            {
-                    //                estado = 15;
-                    //                i--;
-                    //                columna--;
-                    //            }
-                    //            break;
-                    //        case 15:
-                    //            if (c == '"')
-                    //            {
-                    //                lexema += c;
-                    //                addToken(lexema, "Cadena", fila, columna - lexema.length());
-                    //                estado = 0;
-                    //                lexema = "";
-                    //            }
+                    case 5:
+                        if (c == '/')
+                        {
+                            lexema += c;
+                            estado = 6;
+                        }
+                        else
+                        {
+                            //para que sea comentario tiene que ser 2
+                            i--;
+                            columna--;
+                            estado = -99;
+                        }
+                        break;
+                    case 6:
+                        if (c != '\n')
+                        {
+                            lexema += c;
+                            estado = 6;
+                        }
+                        else
+                        {
+                            lexema += c;
+                            //////////////////////////                    addToken(lexema, "1LinComen", fila, columna - lexema.length());
+                            estado = 0;
+                            lexema = "";
+                        }
+                        break;
+                    ////////////////////////////////////////    
+                    /*fin  de comentario 1 liena*/
+                    ////////////////////////////////////////
+                    case 7:
+                        if (c == '<')
+                        {
+                            lexema += c;
+                            estado = 8;
+                        }
+                        break;
+                    case 8:
+                        if (c == '!')
+                        {
+                            lexema += c;
+                            estado = 9;
+                        }
+                        break;
+                    case 9:
+                        if (c != '!')
+                        {
+                            lexema += c;
+                            estado = 9;
+                        }
+                        else if (c == '!')
+                        {
+                            lexema += c;
+                            estado = 10;
+                        }
+                        break;
+                    case 10:
+                        if (c != '>')
+                        {
+                            lexema += c;
+                            estado = 9;
+                        }
+                        else if (c == '>')
+                        {
+                            lexema += c;
+                            ////////////////////////                            addToken(lexema, "MultiComen", fila, columna - lexema.length());
+                            estado = 0;
+                            lexema = "";
+                        }
+                        break;
+                    /*fin comentario multilinea*/
+                    //////////////////////////////////
+                    /*igualdad*/
+                    case 11:
+                        if (c == '-')
+                        {
+                            lexema += c;
+                            estado = 12;
+                        }
+                        break;
+                    case 12:
+                        if (c == '>')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Igualdad", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+          
+                        }
+                        else
+                        {
 
-                    //            break;
+                            i--;
+                            columna--;
+                            estado = -99;
+                            //lexema += c;
+                            //addError(lexema, "Se experaba caracter >", fila, columna - lexema.Length);
+                            //estado = 0;
+                            //lexema = "";
+                        }
+                        break;
+                    ////////para la cadena , estado 13
+                    case 13:
+                        if (c == '"')
+                        {
+                            lexema += c;
+                            estado = 14;
+                        }
+                        break;
+                    case 14:
+                        if (c != '"')
+                        {
+                            lexema += c;
+                            estado = 14;
+                        }
+                        else
+                        {
+                            estado = 15;
+                            i--;
+                            columna--;
+                        }
+                        break;
+                    case 15:
+                        if (c == '"')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Cadena", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
 
-                    //        /*fin cadena de caracteres*/
+                        break;
+
+                    /*fin cadena de caracteres*/
 
                     //        /*delimitador*/
-                    //        /*inicio de comentario 1 liena*/
-                    //        case 16:
-                    //            if (c == '%')
-                    //            {
-                    //                lexema += c;
-                    //                estado = 17;
-                    //            }
-                    //            break;
-                    //        case 17:
-                    //            if (c != '\n')
-                    //            {
-                    //                lexema += c;
-                    //                addToken(lexema, "Delimitador", fila, columna - lexema.length());
-                    //                estado = 0;
-                    //                lexema = "";
-                    //            }
-                    //            else
-                    //            {
-                    //                ///errorr
-                    //            }
-                    //            break;
+                    /*inicio de comentario 1 liena*/
+                    case 16:
+                        if (c == '%')
+                        {
+                            lexema += c;
+                            estado = 17;
+                        }
+                        break;
+                    case 17:
+                        if (c == '%')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Delimitador", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        else
+                        {
+                            i--;
+                            columna--;
+                            estado = -99;
+                            ///errorr
+                        }
+                        //if (c != '\n')
+                        //{
+                        //    lexema += c;
+                        //    addToken(lexema, "Delimitador", fila, columna - lexema.Length);
+                        //    estado = 0;
+                        //    lexema = "";
+                        //}
+                        //else
+                        //{
+                        //    ///errorr
+                        //}
+                        break;
 
 
                     case -99:

@@ -23,12 +23,17 @@ namespace Proyecto1
         private void b_analizar_Click(object sender, EventArgs e)
         {
 
-            String texto = tb_texto.Text;  
+            TabPage tab_actual = tabControl1.SelectedTab;
+            String texto = tab_actual.Controls[0].Text;
+            //MessageBox.Show(texto, "texto");
+            //String texto = tb_texto.Text;  
 
             Lexico analisis_lex = new Lexico();
             analisis_lex.Analizador_cadena(texto);
 
             analisis_lex.ImprimeTokens();
+
+            analisis_lex.ImprimeErrores();
         }
 
         //public String AbrirArhivo(File archivo)
@@ -218,8 +223,7 @@ namespace Proyecto1
             {
                 //JOptionPane.showMessageDialog(null, rutas_ar.get(indice_actual).getArhivo());
                 int ind = tabControl1.SelectedIndex;
-                //MessageBox.Show(ind.ToString(), "ind");
-                MessageBox.Show(rutas_ar.ElementAt(ind).ruta_in, "Guardar");
+                //MessageBox.Show(rutas_ar.ElementAt(ind).ruta_in, "Guardar");
 
                 String ruta;
                 ruta = rutas_ar.ElementAt(ind).ruta_in;
