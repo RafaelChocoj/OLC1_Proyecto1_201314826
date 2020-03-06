@@ -42,6 +42,11 @@ namespace Proyecto1
 
             analisis_lex.ImprimeErrores();
             lis_erores = analisis_lex.getErroresLex();
+
+            Sintactico sin = new Sintactico();
+            sin.Parsear(analisis_lex.lis_tokens);
+
+
         }
 
         //public String AbrirArhivo(File archivo)

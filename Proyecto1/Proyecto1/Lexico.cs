@@ -9,7 +9,7 @@ namespace Proyecto1
 {
     class Lexico
     {
-        LinkedList<Token> lis_tokens;
+        public LinkedList<Token> lis_tokens;
         List<Errores> lis_erores;
 
         List<String> reservadas;
