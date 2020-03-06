@@ -11,21 +11,25 @@ namespace Proyecto1
     {
 
         LinkedList<Token> listaTokens;
+        List<Variables> lis_var;
+        /*para variables de expresiones regulares*/
+        List<VarExpReg> lis_ex_reg;
+
         int numPreanalisis;
         Token preanalisis;
         public void Parsear(LinkedList<Token> list)
         {
             //err_sin = new LinkedList<String>();
-            ///*inicializando lista de variables*/
-            //lis_var = new LinkedList<Variables>();
+            /*inicializando lista de conjuntos*/
+            lis_var = new List<Variables>();
 
-            ///*inicializando lista de expresiones regulares*/
-            //lis_ex_reg = new LinkedList<VarExpReg>();
+            /*inicializando lista de expresiones regulares*/
+            lis_ex_reg = new List<VarExpReg>();
 
             ///*inicializando evaluar las expresiones regulares*/
             //lis_evaluar_expre = new LinkedList<>();
 
- 
+
             listaTokens = list;
             listaTokens.AddLast(new Token("", "UltimoToken", 0, 0));
             //preanalisis = list.get(0);
@@ -44,10 +48,10 @@ namespace Proyecto1
             {
                 CONJ();
             }
-            //else if (preanalisis.idToken.Equals("Identificador"))
-            //{
-            //    //ER();
-            //}
+            else if (preanalisis.idToken.Equals("Identificador"))
+            {
+                ER();
+            }
 
             ///*psts evaluar las expresines regulares*/
             //if (preanalisis.idToken.equals("Delimitador"))
@@ -59,6 +63,124 @@ namespace Proyecto1
 
             ///////////////////*pueden venir expresiones*/
             //////////////////match("llaveDer"); //{
+
+        }
+
+        /*para palabras reservadas*/
+        String name_expresion_reg;
+        public void ER()
+        {
+
+            if (preanalisis.idToken.Equals("Identificador"))
+            {
+                name_expresion_reg = "";
+                name_expresion_reg = preanalisis.lexema;
+                match("Identificador"); // name variable
+                match("Igualdad"); // ->
+
+                //LinkedList<String> pref_er = new LinkedList<String>();
+                List<ER_unitario> pref_er = new List<ER_unitario>();
+                ExReg(pref_er);
+
+                if (preanalisis.idToken.Equals("PuntoComa"))
+                {
+                    match("PuntoComa"); //,
+
+                    VarExpReg new_er = new VarExpReg(name_expresion_reg, pref_er);
+                    lis_ex_reg.Add(new_er);
+                    var_tempo = "";
+
+                }
+            }
+            else
+            {
+                //error
+            }
+
+            ////recusivo para conjuntos
+            if (preanalisis.idToken.Equals("Reservada"))
+            {
+                CONJ();
+            }
+            else if (preanalisis.idToken.Equals("Identificador"))
+            {
+                ER();
+            }
+        }
+
+        /*expresion regular*/
+        public void ExReg(List<ER_unitario> pref_er)
+        {
+
+            //{
+            Boolean er_sim = false;
+            if (preanalisis.idToken.Equals("llaveIzq"))
+            {
+                match("llaveIzq"); //{
+                                   //pref_er.add(preanalisis.lexema);
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "CO"));
+                match("Identificador"); // conjunto
+                match("llaveDer"); //}
+            }
+
+            //.
+            else if (preanalisis.idToken.Equals("Conca_por"))
+            {
+                //pref_er.add(preanalisis.lexema);
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "O"));
+                match("Conca_por");
+            }
+            //|
+            else if (preanalisis.idToken.Equals("Disyun_mas"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "O"));
+                match("Disyun_mas");
+            }
+            //?
+            else if (preanalisis.idToken.Equals("0oUnavez"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "O"));
+                match("0oUnavez");
+            }
+            //*
+            else if (preanalisis.idToken.Equals("0oMasvez"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "O"));
+                match("0oMasvez");
+            }
+            //+
+            else if (preanalisis.idToken.Equals("1oMasvez"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "O"));
+                match("1oMasvez");
+            }
+            //cadena
+            else if (preanalisis.idToken.Equals("Cadena"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema.Replace("\"", ""), "CA"));
+                match("Cadena");
+            }
+            else
+            {
+                
+                //err_sin.add("Error se Esperaba un operador ER. " + preanalisis.lexema);
+                MessageBox.Show("Error se Esperaba un operador ER. " + preanalisis.lexema);
+                //error
+                er_sim = true;
+            }
+
+            if (er_sim == false)
+            {
+                if (preanalisis.idToken.Equals("PuntoComa"))
+                {
+                    //            match("PuntoComa"); //;      
+
+                }
+                else
+                {
+                    ExReg(pref_er);
+                }
+            }
 
         }
 
@@ -103,7 +225,7 @@ namespace Proyecto1
             }
             else if (preanalisis.idToken.Equals("Identificador"))
             {
-                //ER();
+                ER();
             }
         }
 
@@ -169,23 +291,31 @@ namespace Proyecto1
                     r1++;
                 }
 
-                imprime_prub_list(tempo_val);
+                
 
-                ////Variables n_var = new Variables(var_tempo, valores, "R");
-                //valores = tempo_val;
-                //Variables n_var = new Variables(var_tempo, valores, "C");
-                //lis_var.add(n_var);
-                //var_tempo = "";
+                //Variables n_var = new Variables(var_tempo, valores, "R");
+                valores = tempo_val;
+                //imprime_prub_list(valores);
+                Variables n_var = new Variables(var_tempo, valores, "C");
+                lis_var.Add(n_var);
+                var_tempo = "";
             }
             /*termina*/
             else if (preanalisis.idToken.Equals("PuntoComa"))
             {
                 match("PuntoComa"); //;
-                MessageBox.Show("listaod valores: " + valores);
-                imprime_prub_list(valores);
-                //Variables n_var = new Variables(var_tempo, valores, "C");
-                //lis_var.add(n_var);
-                //var_tempo = "";
+                //MessageBox.Show("listaod valores: " + valores);
+                //imprime_prub_list(valores);
+                Variables n_var = new Variables(var_tempo, valores, "C");
+                lis_var.Add(n_var);
+                var_tempo = "";
+            }
+
+            else
+            {
+                //err_sin.add("Error Sintactico se esperaba un caracter o Dijito lexema: " + preanalisis.lexema);
+                MessageBox.Show("Error Sintactico se esperaba una coma, SeparRango o PuntoComa lexema: " + preanalisis.lexema);
+                match("coma, SeparRango o PuntoComa"); //1
             }
         }
 

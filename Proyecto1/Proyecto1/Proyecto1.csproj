@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Errores.cs" />
+    <Compile Include="ER_unitario.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +64,8 @@
     <Compile Include="rutas.cs" />
     <Compile Include="Sintactico.cs" />
     <Compile Include="Token.cs" />
+    <Compile Include="VarExpReg.cs" />
+    <Compile Include="Variables.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

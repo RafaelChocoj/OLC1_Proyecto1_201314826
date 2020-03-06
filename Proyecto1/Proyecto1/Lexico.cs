@@ -207,14 +207,27 @@ namespace Proyecto1
                         else if (c == '{')
                         {
                             lexema += c;
-
-                            addToken(lexema, "llaveIzq", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
+                                addToken(lexema, "llaveIzq", fila, columna - lexema.Length);
+                            }
                             lexema = "";
                         }
                         else if (c == '}')
                         {
                             lexema += c;
-                            addToken(lexema, "llaveDer", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
+                                addToken(lexema, "llaveDer", fila, columna - lexema.Length);
+                            }
                             lexema = "";
                         }
 
@@ -246,7 +259,14 @@ namespace Proyecto1
                         else if (c == '~')
                         {
                             lexema += c;
-                            addToken(lexema, "SeparRango", fila, columna - lexema.Length);
+                            //if (estado_conjunto == 4)
+                            //{
+                            //    addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            //}
+                            //else
+                            //{
+                                addToken(lexema, "SeparRango", fila, columna - lexema.Length);
+                            //}
                             lexema = "";
                         }
                         //
@@ -262,7 +282,14 @@ namespace Proyecto1
                         else if (c == ':')
                         {
                             lexema += c;
-                            addToken(lexema, "DosPuntos", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
+                                addToken(lexema, "DosPuntos", fila, columna - lexema.Length);
+                            }
                             lexema = "";
 
                             if (estado_conjunto == 1)
@@ -273,31 +300,63 @@ namespace Proyecto1
                         else if (c == '.')
                         {
                             lexema += c;
-                            addToken(lexema, "Conca_por", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
+                                addToken(lexema, "Conca_por", fila, columna - lexema.Length);
+                            }
                             lexema = "";
                         }
                         else if (c == '|')
                         {
                             lexema += c;
-                            addToken(lexema, "Disyun_mas", fila, columna - lexema.Length);
+                            String tipo = "";
+                            if (estado_conjunto == 4)
+                            { tipo = "CaracterEsp"; }
+                            else
+                            {
+                                tipo = "Disyun_mas";
+                            }
+                                addToken(lexema, tipo, fila, columna - lexema.Length);
                             lexema = "";
                         }
                         else if (c == '?')
                         {
                             lexema += c;
-                            addToken(lexema, "0oUnavez", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
+                                addToken(lexema, "0oUnavez", fila, columna - lexema.Length);
+                            }
                             lexema = "";
                         }
                         else if (c == '*')
                         {
                             lexema += c;
-                            addToken(lexema, "0oMasvez", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);}
+                            else{
+                                addToken(lexema, "0oMasvez", fila, columna - lexema.Length);
+                            }
                             lexema = "";
                         }
                         else if (c == '+')
                         {
                             lexema += c;
-                            addToken(lexema, "1oMasvez", fila, columna - lexema.Length);
+                            if (estado_conjunto == 4)
+                            {
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            }
+                            else
+                            {
+                                addToken(lexema, "1oMasvez", fila, columna - lexema.Length);
+                            }
                             lexema = "";
                         }
 
