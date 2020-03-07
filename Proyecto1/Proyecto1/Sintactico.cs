@@ -15,6 +15,9 @@ namespace Proyecto1
         /*para variables de expresiones regulares*/
         List<VarExpReg> lis_ex_reg;
 
+        /*para evaluar las expresiones regulares*/
+        List<Exp_a_Evaluar> lis_evaluar_expre;
+
         int numPreanalisis;
         Token preanalisis;
         public void Parsear(LinkedList<Token> list)
@@ -26,8 +29,8 @@ namespace Proyecto1
             /*inicializando lista de expresiones regulares*/
             lis_ex_reg = new List<VarExpReg>();
 
-            ///*inicializando evaluar las expresiones regulares*/
-            //lis_evaluar_expre = new LinkedList<>();
+            /*inicializando evaluar las expresiones regulares*/
+            lis_evaluar_expre = new List<Exp_a_Evaluar>();
 
 
             listaTokens = list;
@@ -41,8 +44,9 @@ namespace Proyecto1
         void S0()
         {
 
-            ////////////////match("llaveIzq"); //}
+            //////////////////match("llaveIzq"); //}
 
+           
             /*pueden venir conjuntos*/
             if (preanalisis.idToken.Equals("Reservada"))
             {
@@ -58,12 +62,61 @@ namespace Proyecto1
             //{
             //    match("Delimitador"); //%%
             //    match("Delimitador"); //%%
-            //    EVA_ER();
+            //EVA_ER();
             //}
 
             ///////////////////*pueden venir expresiones*/
             //////////////////match("llaveDer"); //{
 
+        }
+
+        /*verificando tipo de 
+         expresion regular o evalucaion de er*/
+        public void ER_OR_EVALACION()
+        {
+            int numPreanalisis_tempo = numPreanalisis + 1;
+            Token preanalisis_tempo = listaTokens.ElementAt(numPreanalisis_tempo);
+            /*si es expresion regular*/
+            if (preanalisis_tempo.idToken.Equals("Igualdad"))
+            {
+
+            }
+            /*para evaluacion expresion regular*/
+            else if (preanalisis_tempo.idToken.Equals("DosPuntos"))
+            {
+
+            }
+        }
+
+        /*evaliuando expresion*/
+        public void EVA_ER()
+        {
+
+            if (preanalisis.idToken.Equals("Identificador"))
+            {
+                String iden = preanalisis.lexema;
+                match("Identificador"); // name var ex regular
+                                        //match("Igualdad"); // ->
+                match("DosPuntos"); // :
+                                    //JOptionPane.showMessageDialog(null,"-- Cadena. " + iden+"-" + preanalisis.lexema.replace("\"", "") );           
+                Exp_a_Evaluar eva = new Exp_a_Evaluar(iden, preanalisis.lexema.Replace("\"", ""));
+                lis_evaluar_expre.Add(eva);
+
+                match("Cadena"); // cadena
+                match("PuntoComa"); // ;
+
+                if (preanalisis.idToken.Equals("Identificador"))
+                {
+                    EVA_ER();
+                }
+               
+                
+            }
+            else
+            {
+                ////JOptionPane.showMessageDialog(null,"Error se Esperaba un Identificador. " + preanalisis.lexema );
+                //err_sin.add("Error se Esperaba un Identificador. " + preanalisis.lexema);
+            }
         }
 
         /*para palabras reservadas*/
