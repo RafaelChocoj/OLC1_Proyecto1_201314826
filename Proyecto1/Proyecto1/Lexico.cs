@@ -186,6 +186,14 @@ namespace Proyecto1
                             columna--;
                         }
 
+                        /***inicio de caracteres especiales***/
+                        else if (c == '\\')
+                        {
+                            estado = 17;
+                            i--;
+                            columna--;
+                        }
+
                         //                        else if (c == ',')
                         //                        {
                         //                            estado = 6;
@@ -586,13 +594,21 @@ namespace Proyecto1
                         else
                         {
 
-                            i--;
-                            columna--;
-                            estado = -99;
-                            //lexema += c;
-                            //addError(lexema, "Se experaba caracter >", fila, columna - lexema.Length);
-                            //estado = 0;
-                            //lexema = "";
+                            //i--;
+                            //columna--;
+                            //estado = -99;
+                            ////lexema += c;
+                            ////addError(lexema, "Se experaba caracter >", fila, columna - lexema.Length);
+                            ////estado = 0;
+                            ////lexema = "";
+
+                            /*pero si acepta -*/
+                            lexema = "";
+                            i = i - 2;
+                            columna = columna - 2;
+                            estado = 20;
+                            lexema = "";
+
                         }
                         break;
                     ////////para la cadena , estado 13
@@ -627,6 +643,87 @@ namespace Proyecto1
 
                         break;
 
+                    /*caracteres especiales*/
+                    case 17:
+                        if (c == '\\')
+                        {
+                            lexema += c;
+                            estado = 18;
+                        }
+                        break;
+                    case 18:
+                        if (c == 'n')
+                        {
+                            lexema += c;
+                            addToken(lexema, "SaltoLinea", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        else if (c == '\'')
+                        {
+                            lexema += c;
+                            addToken(lexema, "ComSimple", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        else if (c == '"')
+                        {
+                            lexema += c;
+                            addToken(lexema, "ComDoble", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        else if (c == 't')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Tabulacion", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        else
+                        {
+                            lexema += c;
+                            lexema = "";
+                            //MessageBox.Show(lexema, "lexema");
+                            //MessageBox.Show(c.ToString(), "c");
+                            ////i--;
+                            ////columna--;
+                            i = i - 2;
+                            columna = columna - 2;
+                            estado = 19;
+                            lexema = "";
+
+                        }
+                        break;
+
+                    //para solo \
+                    case 19:
+                        if (c == '\\')
+                        {
+                            lexema += c;
+                            //MessageBox.Show(lexema, "1111 lexema");
+                            //MessageBox.Show(c.ToString(), "2222 c");
+                            addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        break;
+
+
+                    //para solo -
+                    case 20:
+                        if (c == '-')
+                        {
+                            lexema += c;
+                            //MessageBox.Show(lexema, "1111 lexema");
+                            //MessageBox.Show(c.ToString(), "2222 c");
+                            addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        break;
+
+                    /////////////////
                     /*fin cadena de caracteres*/
 
                     ////        /*delimitador*/

@@ -54,7 +54,8 @@ namespace Proyecto1
             }
             else if (preanalisis.idToken.Equals("Identificador"))
             {
-                ER();
+                ////////////////ER();
+                ER_OR_EVALACION();
             }
 
             ///*psts evaluar las expresines regulares*/
@@ -79,12 +80,19 @@ namespace Proyecto1
             /*si es expresion regular*/
             if (preanalisis_tempo.idToken.Equals("Igualdad"))
             {
-
+                ER();
             }
             /*para evaluacion expresion regular*/
             else if (preanalisis_tempo.idToken.Equals("DosPuntos"))
             {
+                EVA_ER();
+            }
+            else
+            {
+                MessageBox.Show("Le debe de seguir igualdad o Dos puntos");
+                ER(); /// error de panico :v
 
+                //match("Identificador"); // 
             }
         }
 
@@ -107,7 +115,8 @@ namespace Proyecto1
 
                 if (preanalisis.idToken.Equals("Identificador"))
                 {
-                    EVA_ER();
+                    //EVA_ER();
+                    ER_OR_EVALACION();
                 }
                
                 
@@ -157,7 +166,8 @@ namespace Proyecto1
             }
             else if (preanalisis.idToken.Equals("Identificador"))
             {
-                ER();
+                //////////////////////ER();
+                ER_OR_EVALACION();
             }
         }
 
@@ -278,7 +288,8 @@ namespace Proyecto1
             }
             else if (preanalisis.idToken.Equals("Identificador"))
             {
-                ER();
+                //////////////////////ER();
+                ER_OR_EVALACION();
             }
         }
 
@@ -300,6 +311,28 @@ namespace Proyecto1
             {
                 valores.Add(preanalisis.lexema);
                 match("CaracterEsp"); //%
+            }
+
+            /*news caractes esperciales de */
+            else if (preanalisis.idToken.Equals("SaltoLinea"))
+            {
+                valores.Add(preanalisis.lexema);
+                match("SaltoLinea"); //\n
+            }
+            else if (preanalisis.idToken.Equals("ComSimple"))
+            {
+                valores.Add(preanalisis.lexema);
+                match("ComSimple"); //\'
+            }
+            else if (preanalisis.idToken.Equals("ComDoble"))
+            {
+                valores.Add(preanalisis.lexema);
+                match("ComDoble"); //\"
+            }
+            else if (preanalisis.idToken.Equals("Tabulacion"))
+            {
+                valores.Add(preanalisis.lexema);
+                match("Tabulacion"); //\t
             }
             else
             {

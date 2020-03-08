@@ -44,7 +44,7 @@
             // 
             // b_analizar
             // 
-            this.b_analizar.Location = new System.Drawing.Point(33, 307);
+            this.b_analizar.Location = new System.Drawing.Point(50, 389);
             this.b_analizar.Name = "b_analizar";
             this.b_analizar.Size = new System.Drawing.Size(82, 32);
             this.b_analizar.TabIndex = 0;
@@ -54,7 +54,7 @@
             // 
             // tb_texto
             // 
-            this.tb_texto.Location = new System.Drawing.Point(151, 307);
+            this.tb_texto.Location = new System.Drawing.Point(151, 389);
             this.tb_texto.Name = "tb_texto";
             this.tb_texto.Size = new System.Drawing.Size(602, 54);
             this.tb_texto.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(898, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(887, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -123,7 +123,7 @@
             this.tabControl1.Location = new System.Drawing.Point(33, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(720, 273);
+            this.tabControl1.Size = new System.Drawing.Size(720, 340);
             this.tabControl1.TabIndex = 3;
             // 
             // button1
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(898, 373);
+            this.ClientSize = new System.Drawing.Size(887, 455);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tb_texto);
