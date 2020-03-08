@@ -186,6 +186,13 @@ namespace Proyecto1
                             columna--;
                         }
 
+                        /*para [:todo:]*/
+                        else if (c == '[')
+                        {
+                            estado = 21;
+                            i--;
+                            columna--;
+                        }
                         /***inicio de caracteres especiales***/
                         else if (c == '\\')
                         {
@@ -513,6 +520,7 @@ namespace Proyecto1
                         break;
                     ////////////////////////////////////////    
                     /*fin  de comentario 1 liena*/
+
                     ////////////////////////////////////////
                     case 7:
                         if (c == '<')
@@ -571,6 +579,7 @@ namespace Proyecto1
                         break;
                     /*fin comentario multilinea*/
                     //////////////////////////////////
+
                     /*igualdad*/
                     case 11:
                         if (c == '-')
@@ -620,6 +629,16 @@ namespace Proyecto1
                         }
                         break;
                     case 14:
+                        ///*new */
+                        //if (c == '\n')
+                        //{
+                        //    estado = -99;
+                        //    i--;
+                        //    columna--;
+                        //    lexema = "";
+                        //}
+                        ///*origial*/
+                        //else 
                         if (c != '"')
                         {
                             lexema += c;
@@ -631,6 +650,17 @@ namespace Proyecto1
                             i--;
                             columna--;
                         }
+                        //if (c != '"')
+                        //{
+                        //    lexema += c;
+                        //    estado = 14;
+                        //}
+                        //else
+                        //{
+                        //    estado = 15;
+                        //    i--;
+                        //    columna--;
+                        //}
                         break;
                     case 15:
                         if (c == '"')
@@ -725,6 +755,67 @@ namespace Proyecto1
 
                     /////////////////
                     /*fin cadena de caracteres*/
+
+
+                    ////////inicio para [:todo:] ////////////////////////////////
+                    case 21:
+                        if (c == '[')
+                        {
+                            lexema += c;
+                            estado = 22;
+                        }
+                        break;
+                    case 22:
+                        if (c == ':')
+                        {
+                            lexema += c;
+                            estado = 23;
+                        }
+                        else
+                        {
+                            lexema = "";
+                            i--;
+                            columna--;
+                            estado = -99;
+                        }
+                        break;
+                    case 23:
+                        if (c != ':')
+                        {
+                            lexema += c;
+                            estado = 23;
+
+                            /////new
+                            if (c == '\n')
+                            {
+                                //lexema = "";
+                                i--;
+                                columna--;
+                                estado = -99;
+                            }
+                        }
+                        else if (c == ':')
+                        {
+                            lexema += c;
+                            estado = 24;
+                        }
+                        break;
+                    case 24:
+                        if (c != ']')
+                        {
+                            lexema += c;
+                            estado = 9;
+                        }
+                        else if (c == ']')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Todito", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        break;
+                    /*fin comentario multilinea*/
+                    //////////////////////////////////
 
                     ////        /*delimitador*/
                     ///*inicio de comentario 1 liena*/
