@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Armando_RPN.cs" />
     <Compile Include="Errores.cs" />
     <Compile Include="ER_unitario.cs" />
     <Compile Include="Exp_a_Evaluar.cs" />

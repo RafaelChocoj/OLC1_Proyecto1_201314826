@@ -39,6 +39,7 @@
             this.erroresPDFerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.button1 = new System.Windows.Forms.Button();
+            this.b_graficar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,9 +55,9 @@
             // 
             // tb_texto
             // 
-            this.tb_texto.Location = new System.Drawing.Point(151, 389);
+            this.tb_texto.Location = new System.Drawing.Point(308, 389);
             this.tb_texto.Name = "tb_texto";
-            this.tb_texto.Size = new System.Drawing.Size(602, 54);
+            this.tb_texto.Size = new System.Drawing.Size(445, 54);
             this.tb_texto.TabIndex = 1;
             this.tb_texto.Text = "";
             // 
@@ -136,11 +137,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // b_graficar
+            // 
+            this.b_graficar.Location = new System.Drawing.Point(150, 389);
+            this.b_graficar.Name = "b_graficar";
+            this.b_graficar.Size = new System.Drawing.Size(121, 32);
+            this.b_graficar.TabIndex = 5;
+            this.b_graficar.Text = "Crear Graficas";
+            this.b_graficar.UseVisualStyleBackColor = true;
+            this.b_graficar.Click += new System.EventHandler(this.b_graficar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 455);
+            this.Controls.Add(this.b_graficar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tb_texto);
@@ -169,6 +181,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem erroresPDFerToolStripMenuItem;
+        private System.Windows.Forms.Button b_graficar;
     }
 }
 

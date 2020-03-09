@@ -480,6 +480,7 @@ namespace Proyecto1
                         }
                         break;
                     /*inicio de comentario 1 liena*/
+                    //--
                     case 4:
                         if (c == '/')
                         {
@@ -495,10 +496,26 @@ namespace Proyecto1
                         }
                         else
                         {
-                            //para que sea comentario tiene que ser 2
-                            i--;
-                            columna--;
-                            estado = -99;
+                            ////para que sea comentario tiene que ser 2
+                            //i--;
+                            //columna--;
+                            //estado = -99;
+                            if (estado_conjunto == 4)
+                            {
+                                /*pero si acepta -*/
+                                lexema = "";
+                                i = i - 2;
+                                columna = columna - 2;
+                                estado = 25;
+                                lexema = "";
+                            }
+                            else
+                            {
+                                lexema = "";
+                                i = i - 2;
+                                columna = columna - 2;
+                                estado = -99;
+                            }
                         }
                         break;
                     case 6:
@@ -611,12 +628,24 @@ namespace Proyecto1
                             ////estado = 0;
                             ////lexema = "";
 
-                            /*pero si acepta -*/
-                            lexema = "";
-                            i = i - 2;
-                            columna = columna - 2;
-                            estado = 20;
-                            lexema = "";
+                           
+
+                            if (estado_conjunto == 4)
+                            {
+                                /*pero si acepta -*/
+                                lexema = "";
+                                i = i - 2;
+                                columna = columna - 2;
+                                estado = 20;
+                                lexema = "";
+                            }
+                            else
+                            {
+                                lexema = "";
+                                i = i - 2;
+                                columna = columna - 2;
+                                estado = -99;
+                            }
 
                         }
                         break;
@@ -712,16 +741,27 @@ namespace Proyecto1
                         }
                         else
                         {
-                            lexema += c;
-                            lexema = "";
-                            //MessageBox.Show(lexema, "lexema");
-                            //MessageBox.Show(c.ToString(), "c");
-                            ////i--;
-                            ////columna--;
-                            i = i - 2;
-                            columna = columna - 2;
-                            estado = 19;
-                            lexema = "";
+                            if (estado_conjunto == 4)
+                            {
+                                lexema += c;
+                                lexema = "";
+                                //MessageBox.Show(lexema, "lexema");
+                                //MessageBox.Show(c.ToString(), "c");
+                                ////i--;
+                                ////columna--;
+                                i = i - 2;
+                                columna = columna - 2;
+                                estado = 19;
+                                lexema = "";
+                            }
+                            else
+                            {
+                                lexema = "";
+                                i = i - 2;
+                                columna = columna - 2;
+                                estado = -99;
+                            }
+                            
 
                         }
                         break;
@@ -814,6 +854,19 @@ namespace Proyecto1
                             lexema = "";
                         }
                         break;
+
+                    //para solo /
+                    case 25:
+                        if (c == '/')
+                        {
+                            lexema += c;
+                            //MessageBox.Show(lexema, "1111 lexema");
+                            //MessageBox.Show(c.ToString(), "2222 c");
+                            addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                            estado = 0;
+                            lexema = "";
+                        }
+                        break;
                     /*fin comentario multilinea*/
                     //////////////////////////////////
 
@@ -854,6 +907,7 @@ namespace Proyecto1
                         ////                        Practica1_comp1.list_err.add(err);
                         //list_err.add("error lexico (" + lexema + ")");
 
+                        //MessageBox.Show(lexema, "lexema");
                         addError(lexema, "Carácter Desconocido", fila, columna - lexema.Length);
                         estado = 0;
                         lexema = "";

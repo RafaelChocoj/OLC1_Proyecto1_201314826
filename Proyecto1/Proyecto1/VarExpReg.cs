@@ -9,8 +9,8 @@ namespace Proyecto1
     class VarExpReg
     {
 
-        String name_exreg;
-        List<ER_unitario> prefijo;
+        public String name_exreg;
+        public List<ER_unitario> prefijo;
 
         public VarExpReg(String name_exreg, List<ER_unitario> prefijo)
         {

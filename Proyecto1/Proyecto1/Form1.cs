@@ -18,13 +18,29 @@ namespace Proyecto1
         List<rutas> rutas_ar;
 
         List<Errores> lis_erores;
+
+        /*para variables de conjuntos*/
+        List<Variables> lis_var;
+        /*para variables de expresiones regulares*/
+        List<VarExpReg> lis_ex_reg;
+        /*para evaluar las expresiones regulares*/
+        List<Exp_a_Evaluar> lis_evaluar_expre;
+
         public Form1()
         {
             InitializeComponent();
             rutas_ar = new List<rutas>();
 
             lis_erores = new List<Errores>();
-            
+
+            /*inicializando lista de variables de conjuntos*/
+            lis_var = new List<Variables>();
+            /*inicializando lista de expresiones regulares*/
+            lis_ex_reg = new List<VarExpReg>();
+            /*inicializando evaluar las expresiones regulares*/
+            lis_evaluar_expre = new List<Exp_a_Evaluar>();
+
+
         }
 
         private void b_analizar_Click(object sender, EventArgs e)
@@ -46,6 +62,11 @@ namespace Proyecto1
             Sintactico sin = new Sintactico();
             sin.Parsear(analisis_lex.lis_tokens);
 
+            lis_ex_reg = sin.getLista_ExpRegulares();
+            lis_var = sin.getLista_Conjuntos();
+            lis_evaluar_expre = sin.getLista_Evaluar();
+
+            MessageBox.Show("Terminó el Analisis", "Analisis");
 
         }
 
@@ -142,6 +163,8 @@ namespace Proyecto1
             int indi_pag;
 
             RichTextBox editor = new RichTextBox();
+            //editor.SelectionFont = new System.Drawing.Font("Microsoft Sans Serif", 15, FontStyle.Bold);
+            //editor.SelectionColor = System.Drawing.Color.Red;
             editor.Text = contenido;
 
 
@@ -215,15 +238,18 @@ namespace Proyecto1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //TabPage current_tab = tabControl1.SelectedTab;
-            TabPage tab_actual = tabControl1.SelectedTab;
+            tb_texto.SelectionFont = new System.Drawing.Font("Microsoft Sans Serif", 25, FontStyle.Bold);
+            tb_texto.SelectionColor = System.Drawing.Color.Red;
 
-            MessageBox.Show(tab_actual.Controls[0].Text, "tab_actual");
+            ////TabPage current_tab = tabControl1.SelectedTab;
+            //TabPage tab_actual = tabControl1.SelectedTab;
 
-            //String tex = tab_actual.Contains.ToString();
-            //String texto = tb_texto.Text;
+            //MessageBox.Show(tab_actual.Controls[0].Text, "tab_actual");
 
-            ////MessageBox.Show(tex, "tex");
+            ////String tex = tab_actual.Contains.ToString();
+            ////String texto = tb_texto.Text;
+
+            //////MessageBox.Show(tex, "tex");
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -368,5 +394,73 @@ namespace Proyecto1
 
             System.Diagnostics.Process.Start("EorresLex.pdf");
         }
+
+        private void b_graficar_Click(object sender, EventArgs e)
+        {
+            //if (err_lex.size() == 0 && err_sin.size() == 0)
+            if (lis_erores.Count == 0)
+            {
+                Crea_AFN_AFD_ER();
+            }
+            else
+            {
+                MessageBox.Show("Corriga errores para graficar", "err");
+            }
+
+        }
+
+        public void Crea_AFN_AFD_ER()
+        {
+            ///*probando armando el arbol*/
+            //LinkedList<ListadoArboles> lis_arnew = new LinkedList<>();
+            //lis_arbol_expre = lis_arnew;
+            for (int i = 0; i < lis_ex_reg.Count; ++i)
+            {
+                MessageBox.Show( lis_ex_reg.ElementAt(i).name_exreg /*+ " - "
+                        +lis_ex_reg.get(i).prefijo*/);
+                ///
+                List<ER_unitario> pref_er = new List<ER_unitario>();
+                pref_er = lis_ex_reg.ElementAt(i).prefijo;
+
+
+                /////creando arbol
+                Armando_RPN arbol = new Armando_RPN(pref_er);
+                //NodeArbol root_exp;
+                //root_exp = arbol.leyendo_expresiones();
+
+                /////JOptionPane.showMessageDialog(null,"res arbol: " + root);
+
+
+                //    ///////////////////inicioa graficas
+                //    //Arbol tree = new Arbol(root_exp);
+                //    Arbol tree = new Arbol(root_exp, lis_ex_reg.get(i).name_exreg);
+
+                //    tree.preOrder();
+
+                //    tree.posOrder();
+                //    tree.Graficando_arbol();
+                //    //JOptionPane.showMessageDialog(null,"recor _pos ");
+
+                //    tree.posOrder_sig();
+                //    tree.graficando_siguientes();
+
+                //    ////transiciones
+                //    //tree.TabTransiciones();
+                //    tree.Create_TabTransiciones();
+                //    tree.graficando_Automata();
+
+                //    ListadoArboles ar = new ListadoArboles(lis_ex_reg.get(i).name_exreg, tree);
+                //    lis_arbol_expre.add(ar);
+                //    //            
+                //    //////////           tree.EvaluandoLexema_final(lis_evaluar_expre.get(0).cadena_eva, lis_var);
+                //    //            
+                //    //            ////////////////fin graficas
+
+            }
+            //lis_ar();
+            //JOptionPane.showMessageDialog(null, "Termino de graficar");
+
+        }
+        //////
     }
 }

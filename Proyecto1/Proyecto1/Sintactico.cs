@@ -223,6 +223,12 @@ namespace Proyecto1
                 pref_er.Add(new ER_unitario(preanalisis.lexema.Replace("\"", ""), "CA"));
                 match("Cadena");
             }
+            //[:todito:]
+            else if (preanalisis.idToken.Equals("Todito"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "TO"));
+                match("Todito");
+            }
             else
             {
                 
@@ -312,7 +318,6 @@ namespace Proyecto1
                 valores.Add(preanalisis.lexema);
                 match("CaracterEsp"); //%
             }
-
             /*news caractes esperciales de */
             else if (preanalisis.idToken.Equals("SaltoLinea"))
             {
@@ -419,7 +424,8 @@ namespace Proyecto1
         public void match(String tipo)
         {
             //imprime el actual
-            MessageBox.Show("*******Actual= " + tipo + "************ lexema= " + preanalisis.lexema);
+            /////////////MessageBox.Show("*******Actual= " + tipo + "************ lexema= " + preanalisis.lexema);
+
             if (!tipo.Equals(preanalisis.idToken))
             {
                 MessageBox.Show("Error Sintactico se esperaba un caracter TIPO " + tipo + ", lexema: " + preanalisis.lexema);
@@ -445,5 +451,22 @@ namespace Proyecto1
 
         }
         //////////////////////////////////////////////////////////////
+
+        /*retorna listastados de conjuntos, expresiones y evaluaciones */
+        public List<Variables> getLista_Conjuntos()
+        {
+            return this.lis_var;
+        }
+
+        public List<VarExpReg> getLista_ExpRegulares()
+        {
+            return this.lis_ex_reg;
+        }
+
+        public List<Exp_a_Evaluar> getLista_Evaluar()
+        {
+            return this.lis_evaluar_expre;
+        }
+
     }
 }
