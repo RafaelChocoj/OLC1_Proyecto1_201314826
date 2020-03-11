@@ -425,8 +425,8 @@ namespace Proyecto1
 
                 /////creando arbol
                 Armando_RPN arbol = new Armando_RPN(pref_er);
-                //NodeArbol root_exp;
-                //root_exp = arbol.leyendo_expresiones();
+                NodeAFN root_exp;
+                root_exp = arbol.leyendo_expresiones();
 
                 /////JOptionPane.showMessageDialog(null,"res arbol: " + root);
 

@@ -61,10 +61,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Lexico.cs" />
+    <Compile Include="NodeAFN.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rutas.cs" />
     <Compile Include="Sintactico.cs" />
+    <Compile Include="Tipo.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="VarExpReg.cs" />
     <Compile Include="Variables.cs" />
