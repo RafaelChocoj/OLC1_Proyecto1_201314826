@@ -9,13 +9,15 @@ namespace Proyecto1
     class Tipo
     {
 
-        public enum TipoN{
+        public enum TipoN
+        {
             OR,
             AND,
             ASTER,
             PREGUN,
-            MAS
+            MAS,
+            NORMAL,
+            EPSILON
         }
-
     }
 }

@@ -4,31 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Proyecto1
 {
     class NodeAFN
     {
 
-        String lexema;
-        int id;
-        NodeAFN left;
-        NodeAFN right;
-        String Tran_left;
-        String Tran_right;
-        Tipo tipo;
+        public String lexema;
+        public int id;
+
+        /*si solo es uno se usara solo el left*/
+        public NodeAFN left;
+        public NodeAFN right;
+        public String Tran_left;
+        public String Tran_right;
+
+        public Tipo.TipoN tipo_n;
+
+        public NodeAFN ultimo_ref;
 
         //String Anulable;
         //int identificador;
         //String primeros;
         //String ultimos;
 
-        //String tipo;
+        public String tipo;
 
-        int height;
+        public int height;
+
+        public Boolean visitado;
 
 
         //public NodeAFN(String lexema, int id, String Anulable, int identificador, String primeros, String ultimos, String tipo)
-        public NodeAFN(String lexema, int id, Tipo tipo)
+        public NodeAFN(String lexema, int id, String tipo, Tipo.TipoN tipo_n)
         {
             this.id = id;
             this.lexema = lexema;
@@ -38,12 +46,17 @@ namespace Proyecto1
             this.Tran_left = null;
             this.Tran_right = null;
 
+            this.ultimo_ref = null;
+
+            this.visitado = false;
+
             //this.Anulable = Anulable;
             //this.identificador = identificador;
             //this.primeros = primeros;
             //this.ultimos = ultimos;
 
             this.tipo = tipo;
+            this.tipo_n = tipo_n;
 
             this.height = 1;
         }

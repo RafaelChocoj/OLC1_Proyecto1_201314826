@@ -431,9 +431,12 @@ namespace Proyecto1
                 /////JOptionPane.showMessageDialog(null,"res arbol: " + root);
 
 
-                //    ///////////////////inicioa graficas
-                //    //Arbol tree = new Arbol(root_exp);
-                //    Arbol tree = new Arbol(root_exp, lis_ex_reg.get(i).name_exreg);
+                ///////////////////inicioa graficas
+                //Arbol tree = new Arbol(root_exp);
+                Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg);
+                tree.SetIndex();
+                tree.IniciarVisitado();
+                tree.graficando_Thomson();
 
                 //    tree.preOrder();
 
