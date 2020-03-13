@@ -68,6 +68,9 @@ namespace Proyecto1
             File.WriteAllText("thom.txt", graf.ToString());
             System.Diagnostics.Process.Start("thom.txt");
             //return this.graf_arbolavl(graf.toString(), "graf_automata_" + name_expre);
+
+            MessageBox.Show(root.lexema, "ultimo root.lexema ");
+            MessageBox.Show(root.ultimo_ref.lexema, "ultimo root.ultimo_ref.lexema ");
             return true;
         }
 

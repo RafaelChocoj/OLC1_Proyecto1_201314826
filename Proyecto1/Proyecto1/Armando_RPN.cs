@@ -111,6 +111,9 @@ namespace Proyecto1
             NodeAFN OR = null;
             NodeAFN Cerradura = null;
 
+            NodeAFN AND = null;
+            NodeAFN MAS = null;
+
             if (oper.Equals("|"))
             {
                 //NodeAFN N1 = new NodeAFN("N1", i, "E", Tipo.TipoN.EPSILON);
@@ -183,23 +186,25 @@ namespace Proyecto1
                 N1.right = N3;
                 N1.Tran_right = "e";
 
-                //N1.right = eleIzq;
-                //N1.Tran_right = "e";
-                //N1.left = N3;
-                //N1.Tran_left = "e";
+                if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
+                {
+                    //eleIzq.left = N2;
+                    eleIzq.ultimo_ref.left = N2;
+                    N2.left = N3;
+                    N2.Tran_left = "e";
 
-                eleIzq.left = N2;
-                //eleIzq.right = N2;
+                    N2.right = eleIzq;
+                    N2.Tran_right = "e";
+                }
+                else if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.EPSILON)
+                {
+                    eleIzq.ultimo_ref.left = N3;
+                    //N2.left = N3;
+                    eleIzq.ultimo_ref.Tran_left = "e";
 
-                N2.left = N3;
-                N2.Tran_left = "e";
-                //N2.right = N3;
-                //N2.Tran_right = "e";
-
-                N2.right = eleIzq;
-                N2.Tran_right = "e";
-                //N2.left = eleIzq;
-                //N2.Tran_left = "e";
+                    eleIzq.ultimo_ref.right = eleIzq;
+                    eleIzq.ultimo_ref.Tran_right = "e";
+                }
 
                 N1.ultimo_ref = N3;
                 Cerradura = N1;
@@ -209,7 +214,48 @@ namespace Proyecto1
             //MessageBox.Show(OR.leema, "Or-inicio");
             //MessageBox.Show(OR.ultimo_ref.lexema, "Or-ultimo_ref.lexema");
 
-            return null; 
+            if (oper.Equals("."))
+            {
+                NodeAFN N3 = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
+                //eleIzq.left = eleDer;
+                //eleDer.left = N3;
+
+                eleIzq.ultimo_ref.left = eleDer;
+                MessageBox.Show(eleDer.ultimo_ref.tipo_n.ToString(), "dentro de . eleDer.ultimo_ref.tipo_n");
+                if (eleDer.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
+                {
+                    eleDer.ultimo_ref.left = N3;
+                }
+                else
+                {
+                    N3 = eleDer.ultimo_ref;
+                }
+
+                AND = eleIzq;
+                AND.ultimo_ref = N3;
+                return AND;
+            }
+
+            if (oper.Equals("+"))
+            {
+                //NodeAFN kleen = operar(eleIzq, "*", null, i);
+                //NodeAFN conca = operar(eleIzq, ".", kleen, i
+
+                //NodeAFN a1 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
+                //NodeAFN a2 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
+                //a1.Tran_left = "a1";
+                //a1.ultimo_ref = a1;
+
+                //a2.Tran_left = "a2";
+                //a2.ultimo_ref = a2;
+
+                //NodeAFN conca = operar(a1, ".", a2, i);
+                MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "eleIzq.ultimo_ref.tipo_n");
+                NodeAFN conca = operar(eleIzq, ".", eleIzq, i);
+                MAS = conca;
+                return MAS;
+            }
+                return null; 
 
         }
 
