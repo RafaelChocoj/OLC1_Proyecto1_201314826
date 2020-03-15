@@ -78,16 +78,38 @@ namespace Proyecto1
         {
             this.IniciarVisitado(this.root);
         }
+
+        public void listar()
+        {
+            //this.IniciarVisitado(this.root);
+            NodeAFN root_noda;
+            root_noda = this.root;
+            while (root_noda != null)
+            {
+                MessageBox.Show(root_noda.lexema + " -> " + root_noda.Tran_left);
+                root_noda = root_noda.left;
+            }
+        }
+
         public void IniciarVisitado(NodeAFN root_ac)
         {
             if (root_ac != null)
             {
+                //MessageBox.Show(root_ac.visitado.ToString(), root_ac.lexema);
                 if (root_ac.visitado == true)
                 {
                     root_ac.visitado = false;
                 }
                 this.SetIndex(root_ac.left);
                 this.SetIndex(root_ac.right);
+                //if (root_ac.left != null && root_ac.left.visitado == false)
+                //{
+                //    this.IniciarVisitado(root_ac.left);
+                //}
+                //if (root_ac.right != null && root_ac.right.visitado == false)
+                //{
+                //    this.IniciarVisitado(root_ac.right);
+                //}
             }
         }
 

@@ -436,7 +436,9 @@ namespace Proyecto1
                 Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg);
                 tree.SetIndex();
                 tree.IniciarVisitado();
+                
                 tree.graficando_Thomson();
+                tree.listar();
 
                 //    tree.preOrder();
 
@@ -462,6 +464,82 @@ namespace Proyecto1
             }
             //lis_ar();
             //JOptionPane.showMessageDialog(null, "Termino de graficar");
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            NodeAFN N1 = new NodeAFN("N", 1, "E", Tipo.TipoN.EPSILON);
+            NodeAFN N2 = new NodeAFN("N", 2, "E", Tipo.TipoN.EPSILON);
+
+            NodeAFN f1 = new NodeAFN("N", 2, "E", Tipo.TipoN.EPSILON);
+            NodeAFN f2 = new NodeAFN("N", 2, "E", Tipo.TipoN.EPSILON);
+
+            f1.Tran_left = "f1";
+            f2.Tran_left = "f2";
+
+
+            NodeAFN N3 = new NodeAFN("N", 2, "E", Tipo.TipoN.EPSILON);
+            NodeAFN N4 = new NodeAFN("N", 2, "E", Tipo.TipoN.EPSILON);
+
+            N1.Tran_left = "1";
+            N1.ultimo_ref = N1;
+
+            N2.Tran_left = "2";
+            N2.ultimo_ref = N2;
+            ///////
+            N3.Tran_left = "a";
+            N3.ultimo_ref = N3;
+
+            N4.Tran_left = "b";
+            N4.ultimo_ref = N4;
+
+            //N1.left = N2;
+            N1.ultimo_ref.left = N2;
+            //N2.left = f1;
+            N2.ultimo_ref.left = f1;
+
+            N1.ultimo_ref = f1;
+
+            ///////f1.left = N3;
+
+            //N3.left = N4;
+            N3.ultimo_ref.left = N4;
+            //N4.left = f2;
+            N4.ultimo_ref.left = f2;
+            N3.ultimo_ref = f2;
+
+            ///concatenando
+            //N2.left = N3;
+
+            MessageBox.Show(f1.Tran_left, "1 f1.Tran_left");
+            MessageBox.Show(N2.left.Tran_left, "1 N2.left.Tran_left");
+            MessageBox.Show(N1.ultimo_ref.Tran_left, "1 N1.ultimo_ref.Tran_left");
+            //f1 = N3;
+            N1.ultimo_ref.lexema = N3.lexema;
+            N1.ultimo_ref.left = N3.left;
+            N1.ultimo_ref.Tran_left = N3.Tran_left;
+            N1.ultimo_ref.ultimo_ref = N3.ultimo_ref;
+
+            MessageBox.Show(f1.Tran_left, "2 f1.Tran_left");
+            MessageBox.Show(N2.left.Tran_left, "2 N2.left.Tran_left");
+            MessageBox.Show(N1.ultimo_ref.Tran_left, "1 N1.ultimo_ref.Tran_left");
+
+            //MessageBox.Show(f1.Tran_left, "1 f1.Tran_left");
+            //MessageBox.Show(N2.left.Tran_left, "1 N2.left.Tran_left");
+            ////f1 = N3;
+            //f1.lexema = N3.lexema;
+            //f1.left = N3.left;
+            //f1.Tran_left = N3.Tran_left;
+
+            //MessageBox.Show(f1.Tran_left, "2 f1.Tran_left");
+            //MessageBox.Show(N2.left.Tran_left, "2 N2.left.Tran_left");
+
+
+            Thompson tree = new Thompson(N1, "prub");
+            tree.SetIndex();
+            tree.IniciarVisitado();
+            tree.graficando_Thomson();
 
         }
         //////

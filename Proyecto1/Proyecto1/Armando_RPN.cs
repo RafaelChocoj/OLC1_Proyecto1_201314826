@@ -11,6 +11,7 @@ namespace Proyecto1
 {
     class Armando_RPN
     {
+        List<NodeAFN> listado_Nodos;
 
         List<ER_unitario> pref_expresiones;
         //Stack<String> pila;
@@ -18,6 +19,8 @@ namespace Proyecto1
 
         public Armando_RPN(List<ER_unitario> pref_expresiones)
         {
+            listado_Nodos = new List<NodeAFN>();
+
             this.pref_expresiones = pref_expresiones;
             this.pila = new Stack<NodeAFN>();
         }
@@ -178,7 +181,7 @@ namespace Proyecto1
             {
                 NodeAFN N1 = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
                 NodeAFN N2 = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
-                NodeAFN N3 = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
+                NodeAFN N3 = new NodeAFN("N", 99, "E", Tipo.TipoN.EPSILON);
 
                 //eleIzq
                 N1.left = eleIzq;
@@ -195,6 +198,7 @@ namespace Proyecto1
 
                     N2.right = eleIzq;
                     N2.Tran_right = "e";
+
                 }
                 else if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.EPSILON)
                 {
@@ -220,16 +224,97 @@ namespace Proyecto1
                 //eleIzq.left = eleDer;
                 //eleDer.left = N3;
 
-                eleIzq.ultimo_ref.left = eleDer;
-                MessageBox.Show(eleDer.ultimo_ref.tipo_n.ToString(), "dentro de . eleDer.ultimo_ref.tipo_n");
-                if (eleDer.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
+                NodeAFN tempo_der;
+
+                if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
                 {
-                    eleDer.ultimo_ref.left = N3;
+                    eleIzq.ultimo_ref.left = eleDer;
+                    tempo_der = eleDer;
                 }
                 else
                 {
+                    MessageBox.Show(eleIzq.ultimo_ref.Tran_left, "eleIzq.ultimo_ref.Tran_left  sin asignacion");
+                    MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left  ");
+
+                    //Thompson tree = new Thompson(eleIzq, "iz");
+                    //tree.SetIndex();
+                    //tree.listar();
+                    
+                    //tree.IniciarVisitado();
+                    //tree.graficando_Thomson();
+
+                    
+                    //treeder.IniciarVisitado();
+                    //treeder.graficando_Thomson();
+
+                    //eleIzq.ultimo_ref = eleDer;
+                    eleIzq.ultimo_ref.id = eleDer.id;
+                    eleIzq.ultimo_ref.lexema = eleDer.lexema;
+                    eleIzq.ultimo_ref.left = eleDer.left;
+                    eleIzq.ultimo_ref.right = eleDer.right;
+                    eleIzq.ultimo_ref.Tran_left = eleDer.Tran_left;
+                    eleIzq.ultimo_ref.Tran_right = eleDer.Tran_right;
+                    eleIzq.ultimo_ref.ultimo_ref = eleDer.ultimo_ref;
+                    eleIzq.ultimo_ref.visitado = false;
+                    eleIzq.ultimo_ref.tipo = eleDer.tipo;
+                    eleIzq.ultimo_ref.tipo_n = eleDer.tipo_n;
+
+                    tempo_der = eleIzq;
+                    //tempo_der = eleIzq.ultimo_ref;
+
+
+
+                    MessageBox.Show(eleIzq.ultimo_ref.Tran_left, "eleIzq.ultimo_ref.Tran_left  yayayay");
+                    MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left  yayayay 2 ");
+
+                    //MessageBox.Show(eleIzq.ultimo_ref.lexema, "eleIzq.ultimo_ref.lexema aaaaa ");
+                    ////eleDer.lexema = "mod para der ver si cambia iz";
+                    //MessageBox.Show(eleIzq.ultimo_ref.lexema, "eleIzq.ultimo_ref.lexema bbbb ");
+                    //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "11111");
+
+                    //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "2222");
+                    ////eleIzq.ultimo_ref.left = eleDer;
+                    ////eleDer = eleIzq.ultimo_ref;
+                    //eleIzq.ultimo_ref.lexema = "mod en izquid";
+                    //MessageBox.Show(eleIzq.ultimo_ref.lexema, "eleIzq.ultimo_ref.lexema lexlex 1");
+
+                }
+
+                //MessageBox.Show(tempo_der.ultimo_ref.tipo_n.ToString(), "***No2 tran -" + tempo_der.ultimo_ref.Tran_left);
+                MessageBox.Show(tempo_der.ultimo_ref.tipo_n.ToString(), "***No2 tran -" + tempo_der.ultimo_ref.Tran_left);
+
+                MessageBox.Show(eleDer.ultimo_ref.tipo_n.ToString(), "**No2 tran -" + eleDer.ultimo_ref.Tran_left);
+
+                if (tempo_der.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
+                {
+                    //eleDer.ultimo_ref.left = N3;
+
+                    tempo_der.ultimo_ref.left = N3;
+                    //eleIzq.ultimo_ref.left = N3;
+                }
+                else
+                {
+                    Thompson treeder = new Thompson(eleIzq, "eleDer");
+                    treeder.SetIndex();
+                    treeder.listar();
+
+                    //N3 = tempo_der.ultimo_ref;
                     N3 = eleDer.ultimo_ref;
                 }
+
+                
+
+
+                //MessageBox.Show(eleDer.ultimo_ref.tipo_n.ToString(), "No2 tran -" + eleDer.ultimo_ref.Tran_left);
+                //if (eleDer.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
+                //{
+                //    eleDer.ultimo_ref.left = N3;
+                //    //eleIzq.ultimo_ref.left = N3;
+                //}
+                //else
+                //{
+                //    N3 = eleDer.ultimo_ref;
+                //}
 
                 AND = eleIzq;
                 AND.ultimo_ref = N3;
@@ -248,16 +333,26 @@ namespace Proyecto1
 
                 //a2.Tran_left = "a2";
                 //a2.ultimo_ref = a2;
+                NodeAFN a1 = eleIzq;
+                NodeAFN a2 = eleIzq;
 
-                //NodeAFN conca = operar(a1, ".", a2, i);
-                MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "eleIzq.ultimo_ref.tipo_n");
-                NodeAFN conca = operar(eleIzq, ".", eleIzq, i);
+                a2.Tran_left = "ah a nose a2";
+                a1.Tran_left = "ah a nose a1";   
+                NodeAFN conca = operar(a1, ".", a2, i);
+                //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "eleIzq.ultimo_ref.tipo_n");
+                //NodeAFN conca = operar(eleIzq, ".", eleIzq, i);
                 MAS = conca;
                 return MAS;
             }
                 return null; 
 
         }
+
+        public NodeAFN copiandoEstructura(NodeAFN orinal)
+        {
+            return null;
+        }
+
 
         private int TipoOperador(String oper)
         {
