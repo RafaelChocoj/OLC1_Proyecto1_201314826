@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,12 +55,15 @@ namespace Proyecto1
 
             //    }
             //}
-            VerArbol(graf);
+            VerArbol(automatas);
+            
+            //////VerArbol(graf);
+
             //graf.Append("node [shape = doublecircle]; ");
             //graf.Append(finales);
             graf.Append("\n");
             graf.Append("node [shape = circle];\n");
-            ////graf.Append(automatas);
+            graf.Append(automatas);
 
             graf.Append("\n}");
 
@@ -69,9 +73,35 @@ namespace Proyecto1
             System.Diagnostics.Process.Start("thom.txt");
             //return this.graf_arbolavl(graf.toString(), "graf_automata_" + name_expre);
 
+            //System.Diagnostics.Process.Start("dot -Tpng " + name_g + ".txt -o " + name_g + ".jpg");
+
             MessageBox.Show(root.lexema, "ultimo root.lexema ");
             MessageBox.Show(root.ultimo_ref.lexema, "ultimo root.ultimo_ref.lexema ");
-            return true;
+            return CreateImage("thom");
+            //return true;
+        }
+
+        public Boolean CreateImage(String name)
+        {
+            try
+            {
+                var comando = "dot -Tpng " + name + ".txt -o " + name + ".jpg";
+                var PStartInfo = new System.Diagnostics.ProcessStartInfo("cmd","/C"+ comando);
+                var proc = new System.Diagnostics.Process();
+                proc.StartInfo = PStartInfo;
+                proc.Start();
+                proc.WaitForExit();
+                //Thread.Sleep(500);
+                System.Diagnostics.Process.Start(name + ".jpg");
+                return true;
+            }
+            catch (Exception w)
+            {
+                MessageBox.Show(w.Message, "w.Message");
+                MessageBox.Show(w.StackTrace, "w.StackTrace");
+                MessageBox.Show(w.Source, "w.Source");
+                return false;
+            }
         }
 
         public void IniciarVisitado()

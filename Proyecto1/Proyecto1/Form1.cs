@@ -438,7 +438,7 @@ namespace Proyecto1
                 tree.IniciarVisitado();
                 
                 tree.graficando_Thomson();
-                tree.listar();
+                ////////////////////tree.listar();
 
                 //    tree.preOrder();
 

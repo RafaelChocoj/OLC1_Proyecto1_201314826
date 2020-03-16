@@ -233,19 +233,9 @@ namespace Proyecto1
                 }
                 else
                 {
-                    MessageBox.Show(eleIzq.ultimo_ref.Tran_left, "eleIzq.ultimo_ref.Tran_left  sin asignacion");
-                    MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left  ");
+                    //////////////////////MessageBox.Show(eleIzq.ultimo_ref.Tran_left, "eleIzq.ultimo_ref.Tran_left  sin asignacion");
+                    //////////////////////MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left  ");
 
-                    //Thompson tree = new Thompson(eleIzq, "iz");
-                    //tree.SetIndex();
-                    //tree.listar();
-                    
-                    //tree.IniciarVisitado();
-                    //tree.graficando_Thomson();
-
-                    
-                    //treeder.IniciarVisitado();
-                    //treeder.graficando_Thomson();
 
                     //eleIzq.ultimo_ref = eleDer;
                     eleIzq.ultimo_ref.id = eleDer.id;
@@ -259,45 +249,31 @@ namespace Proyecto1
                     eleIzq.ultimo_ref.tipo = eleDer.tipo;
                     eleIzq.ultimo_ref.tipo_n = eleDer.tipo_n;
 
-                    tempo_der = eleIzq;
-                    //tempo_der = eleIzq.ultimo_ref;
+                    //tempo_der = eleIzq;
+                    tempo_der = eleIzq.ultimo_ref;
 
 
 
-                    MessageBox.Show(eleIzq.ultimo_ref.Tran_left, "eleIzq.ultimo_ref.Tran_left  yayayay");
-                    MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left  yayayay 2 ");
+                    //////////////////MessageBox.Show(eleIzq.ultimo_ref.Tran_left, "eleIzq.ultimo_ref.Tran_left  yayayay");
+                    //////////////////MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left  yayayay 2 ");
 
-                    //MessageBox.Show(eleIzq.ultimo_ref.lexema, "eleIzq.ultimo_ref.lexema aaaaa ");
-                    ////eleDer.lexema = "mod para der ver si cambia iz";
-                    //MessageBox.Show(eleIzq.ultimo_ref.lexema, "eleIzq.ultimo_ref.lexema bbbb ");
-                    //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "11111");
-
-                    //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "2222");
-                    ////eleIzq.ultimo_ref.left = eleDer;
-                    ////eleDer = eleIzq.ultimo_ref;
-                    //eleIzq.ultimo_ref.lexema = "mod en izquid";
-                    //MessageBox.Show(eleIzq.ultimo_ref.lexema, "eleIzq.ultimo_ref.lexema lexlex 1");
 
                 }
 
-                //MessageBox.Show(tempo_der.ultimo_ref.tipo_n.ToString(), "***No2 tran -" + tempo_der.ultimo_ref.Tran_left);
-                MessageBox.Show(tempo_der.ultimo_ref.tipo_n.ToString(), "***No2 tran -" + tempo_der.ultimo_ref.Tran_left);
-
-                MessageBox.Show(eleDer.ultimo_ref.tipo_n.ToString(), "**No2 tran -" + eleDer.ultimo_ref.Tran_left);
+                ////////////////////////MessageBox.Show(tempo_der.ultimo_ref.tipo_n.ToString(), "***No2 tran -" + tempo_der.ultimo_ref.Tran_left);
+                //////////////////////MessageBox.Show(tempo_der.ultimo_ref.tipo_n.ToString(), "***tempo_der.ultimo_ref.tipo_n tran -" + tempo_der.ultimo_ref.Tran_left);
+                //////////////////////MessageBox.Show(eleDer.ultimo_ref.tipo_n.ToString(), "**eleDer.ultimo_ref.tipo_n tran -" + eleDer.ultimo_ref.Tran_left);
 
                 if (tempo_der.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
                 {
                     //eleDer.ultimo_ref.left = N3;
 
-                    tempo_der.ultimo_ref.left = N3;
+                    tempo_der.ultimo_ref.left = N3; ////este funciono antes
+                    tempo_der.left = N3;
                     //eleIzq.ultimo_ref.left = N3;
                 }
                 else
                 {
-                    Thompson treeder = new Thompson(eleIzq, "eleDer");
-                    treeder.SetIndex();
-                    treeder.listar();
-
                     //N3 = tempo_der.ultimo_ref;
                     N3 = eleDer.ultimo_ref;
                 }
@@ -335,6 +311,7 @@ namespace Proyecto1
                 //a2.ultimo_ref = a2;
                 NodeAFN a1 = eleIzq;
                 NodeAFN a2 = eleIzq;
+                
 
                 a2.Tran_left = "ah a nose a2";
                 a1.Tran_left = "ah a nose a1";   
