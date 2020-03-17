@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -88,6 +89,7 @@ namespace Proyecto1
                 var comando = "dot -Tpng " + name + ".txt -o " + name + ".jpg";
                 var PStartInfo = new System.Diagnostics.ProcessStartInfo("cmd","/C"+ comando);
                 var proc = new System.Diagnostics.Process();
+                PStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 proc.StartInfo = PStartInfo;
                 proc.Start();
                 proc.WaitForExit();
@@ -125,21 +127,20 @@ namespace Proyecto1
         {
             if (root_ac != null)
             {
-                //MessageBox.Show(root_ac.visitado.ToString(), root_ac.lexema);
+                MessageBox.Show("root_ac.lexema: " + root_ac.lexema, "root_ac.visitado: " + root_ac.visitado);
                 if (root_ac.visitado == true)
                 {
                     root_ac.visitado = false;
                 }
-                this.SetIndex(root_ac.left);
-                this.SetIndex(root_ac.right);
-                //if (root_ac.left != null && root_ac.left.visitado == false)
-                //{
-                //    this.IniciarVisitado(root_ac.left);
-                //}
-                //if (root_ac.right != null && root_ac.right.visitado == false)
-                //{
-                //    this.IniciarVisitado(root_ac.right);
-                //}
+
+                if (root_ac.left != null && root_ac.left.visitado == true)
+                {
+                    this.IniciarVisitado(root_ac.left);
+                }
+                if (root_ac.right != null && root_ac.right.visitado == true)
+                {
+                    this.IniciarVisitado(root_ac.right);
+                }
             }
         }
 
@@ -154,7 +155,7 @@ namespace Proyecto1
                 if (root_ac.lexema.Equals("N"))
                 {
                     index++;
-                    // MessageBox.Show(root_ac.lexema, index.ToString());
+                    MessageBox.Show("index: "+root_ac.lexema, index.ToString());
 
                     root_ac.lexema = index.ToString();
                 }
@@ -173,14 +174,15 @@ namespace Proyecto1
 
         public void VerArbol(StringBuilder graf)
         {
-            this.VerArbol(this.root, graf);
+            //this.VerArbol(this.root, graf);
+            this.VerArbol(root, graf);
         }
 
         public void VerArbol(NodeAFN root_ac, StringBuilder graf)
         {
             if (root_ac != null)
             {
-                
+                MessageBox.Show(root_ac.lexema, "lexema**************");
                 NodeAFN tempo = root_ac;
                 if (tempo.left != null)
                 {

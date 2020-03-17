@@ -33,7 +33,9 @@ namespace Proyecto1
         public int height;
 
         public Boolean visitado;
+        public String nod_visitado;
 
+        public NodeAFN tempo_copy;
 
         //public NodeAFN(String lexema, int id, String Anulable, int identificador, String primeros, String ultimos, String tipo)
         public NodeAFN(String lexema, int id, String tipo, Tipo.TipoN tipo_n)
@@ -49,6 +51,9 @@ namespace Proyecto1
             this.ultimo_ref = null;
 
             this.visitado = false;
+            this.nod_visitado = "N";
+
+            this.tempo_copy = null;
 
             //this.Anulable = Anulable;
             //this.identificador = identificador;

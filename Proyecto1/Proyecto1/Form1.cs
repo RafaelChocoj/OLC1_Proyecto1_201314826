@@ -435,9 +435,14 @@ namespace Proyecto1
                 //Arbol tree = new Arbol(root_exp);
                 Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg);
                 tree.SetIndex();
+
                 tree.IniciarVisitado();
-                
                 tree.graficando_Thomson();
+
+                //MessageBox.Show("antes de reimprimir 2da vez");
+                //tree.IniciarVisitado();
+                //tree.graficando_Thomson();
+
                 ////////////////////tree.listar();
 
                 //    tree.preOrder();

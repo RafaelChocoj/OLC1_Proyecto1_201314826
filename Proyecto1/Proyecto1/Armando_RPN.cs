@@ -98,6 +98,9 @@ namespace Proyecto1
                     n_nodo.Tran_left = pref_expresiones.ElementAt(i).er;
                     n_nodo.ultimo_ref = n_nodo;
                     pila.Push(n_nodo);
+
+                    listado_Nodos.Add(n_nodo); ///agregar ref de nodos
+
                     //////JOptionPane.showMessageDialog(null,"("+i+") "+pref_expresiones.get(i));
                 }
             }
@@ -245,7 +248,8 @@ namespace Proyecto1
                     eleIzq.ultimo_ref.Tran_left = eleDer.Tran_left;
                     eleIzq.ultimo_ref.Tran_right = eleDer.Tran_right;
                     eleIzq.ultimo_ref.ultimo_ref = eleDer.ultimo_ref;
-                    eleIzq.ultimo_ref.visitado = false;
+                    //eleIzq.ultimo_ref.visitado = false;
+                    eleIzq.ultimo_ref.visitado = eleDer.visitado;
                     eleIzq.ultimo_ref.tipo = eleDer.tipo;
                     eleIzq.ultimo_ref.tipo_n = eleDer.tipo_n;
 
@@ -299,26 +303,50 @@ namespace Proyecto1
 
             if (oper.Equals("+"))
             {
-                //NodeAFN kleen = operar(eleIzq, "*", null, i);
-                //NodeAFN conca = operar(eleIzq, ".", kleen, i
+
 
                 //NodeAFN a1 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
-                //NodeAFN a2 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
+                ////NodeAFN a2 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
                 //a1.Tran_left = "a1";
                 //a1.ultimo_ref = a1;
 
                 //a2.Tran_left = "a2";
                 //a2.ultimo_ref = a2;
-                NodeAFN a1 = eleIzq;
-                NodeAFN a2 = eleIzq;
+                //NodeAFN a1 = eleIzq;
+                //NodeAFN a2 = eleIzq;
+                
+                NodeAFN a2 = copiandoEstructura(eleIzq);
                 
 
-                a2.Tran_left = "ah a nose a2";
-                a1.Tran_left = "ah a nose a1";   
-                NodeAFN conca = operar(a1, ".", a2, i);
-                //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "eleIzq.ultimo_ref.tipo_n");
-                //NodeAFN conca = operar(eleIzq, ".", eleIzq, i);
+                //MessageBox.Show(a2.lexema, "primero a2.lexema ");
+                //MessageBox.Show(a2.ultimo_ref.lexema, "ultimo a2.ultimo_ref.lexema ");
+
+                MessageBox.Show(eleIzq.tipo_n.ToString(), "primero eleIzq.tipo_n ");
+                MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "ultimo eleIzq.ultimo_ref.tipo_n ");
+
+                MessageBox.Show(a2.tipo_n.ToString(), "primero a2.tipo_n ");
+                MessageBox.Show(a2.ultimo_ref.tipo_n.ToString(), "ultimo a2.ultimo_ref.tipo_n ");
+
+                //copiandoEstructura(eleIzq);
+
+                //a1.Tran_left = "ah a1";
+                //a2.Tran_left = "in a2";
+
+                //NodeAFN conca = operar(eleIzq, ".", a2, i);
+                ////NodeAFN kleen = operar(eleIzq, "*", null, i);
+
+                IniciarVisitado(a2);
+                IniciarVisitado(eleIzq);
+                NodeAFN conca = operar(a2, ".", eleIzq, i);
+                //MAS = eleIzq;
                 MAS = conca;
+
+                //Thompson tree = new Thompson(MAS, "mas");
+                //tree.SetIndex();
+                //tree.IniciarVisitado();
+                //tree.graficando_Thomson();
+
+                //SetIndex_soloprueba(MAS);
                 return MAS;
             }
                 return null; 
@@ -327,10 +355,141 @@ namespace Proyecto1
 
         public NodeAFN copiandoEstructura(NodeAFN orinal)
         {
-            return null;
+            IniciarVisitado(orinal);
+            //MessageBox.Show(orinal.lexema, "copiandoNodos(orinal)");
+            copiandoNodos(orinal);
+
+            IniciarVisitado(orinal);
+            //MessageBox.Show(orinal.lexema, "copiandoEnlaces(orinal)");
+            copiandoEnlaces(orinal);
+            return orinal.tempo_copy;
+
+        }
+        public void copiandoNodos(NodeAFN root_ac)
+        {
+            if (root_ac != null)
+            {
+                //MessageBox.Show("root_ac.lexema = " + root_ac.lexema);
+                //MessageBox.Show("root_ac.Tran_left = " + root_ac.Tran_left);
+                //MessageBox.Show("root_ac.Tran_right = " + root_ac.Tran_right);
+                ///*copiando valores*/
+                NodeAFN new_tem = new NodeAFN("N", 0, "E", Tipo.TipoN.EPSILON);
+                new_tem.id = root_ac.id;
+                ////////////MessageBox.Show(root_ac.lexema, "creando nodo--lexema");
+                //new_tem.lexema = root_ac.lexema;
+                new_tem.lexema = "N";
+                //new_tem.left = root_ac.left;
+                //new_tem.right = root_ac.right;
+                new_tem.Tran_left = root_ac.Tran_left + "_c"; ;
+                new_tem.Tran_right = root_ac.Tran_right + "_c"; ;
+                ////////new_tem.ultimo_ref = root_ac.ultimo_ref;
+                //new_tem.visitado = false;
+                new_tem.tipo = root_ac.tipo;
+                new_tem.tipo_n = root_ac.tipo_n;
+
+                ///guardo la refencia el nodo nuevo
+                root_ac.tempo_copy = new_tem;
+
+                root_ac.visitado = true;
+
+                if (root_ac.left != null && root_ac.left.visitado == false)
+                {
+                    this.copiandoNodos(root_ac.left);
+                }
+                if (root_ac.right != null && root_ac.right.visitado == false)
+                {
+                    this.copiandoNodos(root_ac.right);
+                }
+            }
         }
 
+        //////////////////
+        int index = 0;
+        public void SetIndex_soloprueba(NodeAFN root_ac)
+        {
+            if (root_ac != null)
+            {
+                if (root_ac.lexema.Equals("N"))
+                {
+                    index++;
+                    MessageBox.Show(index.ToString(), "set_lex");
 
+                    root_ac.lexema = index.ToString();
+                }
+
+
+                if (root_ac.left != null && root_ac.left.lexema.Equals("N"))
+                {
+                    this.SetIndex_soloprueba(root_ac.left);
+                }
+                if (root_ac.right != null && root_ac.right.lexema.Equals("N"))
+                {
+                    this.SetIndex_soloprueba(root_ac.right);
+                }
+            }
+        }
+        //////////////////////
+        public void copiandoEnlaces(NodeAFN root_ac)
+        {
+            if (root_ac != null)
+            {
+                ///*copiando enlaces*/
+               
+                NodeAFN new_tem;
+                new_tem = root_ac.tempo_copy;
+                //////////////////MessageBox.Show(root_ac.lexema, "enlzanado nodito nodo ++ lexema root_ac.lexema");
+                
+                //MessageBox.Show(new_tem.lexema, "enlzanado nodito nodo ++ lexema new_tem.lexema");
+                //new_tem.left = root_ac.left.tempo_copy;
+                //new_tem.right = root_ac.right.tempo_copy;
+                //new_tem.ultimo_ref = root_ac.ultimo_ref.tempo_copy;
+
+                if (root_ac.left != null)
+                {
+                    new_tem.left = root_ac.left.tempo_copy;
+                }
+                if (root_ac.right != null)
+                {
+                    new_tem.right = root_ac.right.tempo_copy;
+                }
+                if (root_ac.ultimo_ref != null)
+                {
+                    new_tem.ultimo_ref = root_ac.ultimo_ref.tempo_copy;
+                }
+
+                root_ac.visitado = true;    
+
+                if (root_ac.left != null && root_ac.left.visitado == false)
+                {
+                    //new_tem.left = root_ac.left.tempo_copy;
+                    this.copiandoEnlaces(root_ac.left);
+                }
+                if (root_ac.right != null && root_ac.right.visitado == false)
+                {
+                    //new_tem.right = root_ac.right.tempo_copy;
+                    this.copiandoEnlaces(root_ac.right);
+                }
+            }
+        }
+
+        public void IniciarVisitado(NodeAFN root_ac)
+        {
+            if (root_ac != null)
+            {
+                if (root_ac.visitado == true)
+                {
+                    root_ac.visitado = false;
+                }
+                if (root_ac.left != null && root_ac.left.visitado == true)
+                {
+                    this.IniciarVisitado(root_ac.left);
+                }
+                if (root_ac.right != null && root_ac.right.visitado == true)
+                {
+                    this.IniciarVisitado(root_ac.right);
+                }
+            }
+        }
         private int TipoOperador(String oper)
         {
             if (oper.Equals(".") || oper.Equals("|"))
