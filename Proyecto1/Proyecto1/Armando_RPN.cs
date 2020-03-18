@@ -96,6 +96,7 @@ namespace Proyecto1
                     //NodeAFN n_nodo = new NodeAFN(pref_expresiones.ElementAt(i).er, i,  pref_expresiones.ElementAt(i).tipo, Tipo.TipoN.NORMAL);
                     NodeAFN n_nodo = new NodeAFN("N", i, pref_expresiones.ElementAt(i).tipo, Tipo.TipoN.NORMAL);
                     n_nodo.Tran_left = pref_expresiones.ElementAt(i).er;
+                    n_nodo.Tran_left_Tipo= Tipo.TipoN.NORMAL;
                     n_nodo.ultimo_ref = n_nodo;
                     pila.Push(n_nodo);
 
@@ -119,6 +120,7 @@ namespace Proyecto1
 
             NodeAFN AND = null;
             NodeAFN MAS = null;
+            NodeAFN PREGUNTA = null;
 
             if (oper.Equals("|"))
             {
@@ -137,10 +139,13 @@ namespace Proyecto1
                 //MessageBox.Show(eleIzq.Tran_left, "eleIzq.Tran_left");
                 N1.left = eleIzq;
                 N1.Tran_left = "e";
+                N1.Tran_left_Tipo = Tipo.TipoN.EPSILON;
+                //N1.Tran_left = "ε";
 
                 //MessageBox.Show(eleDer.Tran_left, "eleDer.Tran_left");
                 N1.right = eleDer;
                 N1.Tran_right = "e";
+                N1.Tran_right_Tipo = Tipo.TipoN.EPSILON;
 
                 ////eleIzq.left = N4;
                 ////eleDer.left = N5;
@@ -152,11 +157,13 @@ namespace Proyecto1
                     eleIzq.ultimo_ref.left = N4;
                     N4.left = N6;
                     N4.Tran_left = "e";
+                    N4.Tran_left_Tipo = Tipo.TipoN.EPSILON;
                 }
                 else if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.EPSILON)
                 {
                     eleIzq.ultimo_ref.left = N6;
                     eleIzq.ultimo_ref.Tran_left = "e";
+                    eleIzq.ultimo_ref.Tran_left_Tipo = Tipo.TipoN.EPSILON;
                 }
 
                 //MessageBox.Show(eleDer.ultimo_ref.Tran_left, "uu eleDer.ultimo_ref.Tran_left");
@@ -167,11 +174,13 @@ namespace Proyecto1
                     eleDer.ultimo_ref.left = N5;
                     N5.left = N6;
                     N5.Tran_left = "e";
+                    N5.Tran_left_Tipo = Tipo.TipoN.EPSILON;
                 }
                 else if (eleDer.ultimo_ref.tipo_n == Tipo.TipoN.EPSILON)
                 {
                     eleDer.ultimo_ref.left = N6;
                     eleDer.ultimo_ref.Tran_left = "e";
+                    eleDer.ultimo_ref.Tran_left_Tipo = Tipo.TipoN.EPSILON;
                 }
 
 
@@ -189,8 +198,10 @@ namespace Proyecto1
                 //eleIzq
                 N1.left = eleIzq;
                 N1.Tran_left = "e";
+                N1.Tran_left_Tipo = Tipo.TipoN.EPSILON;
                 N1.right = N3;
                 N1.Tran_right = "e";
+                N1.Tran_right_Tipo = Tipo.TipoN.EPSILON;
 
                 if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
                 {
@@ -198,9 +209,11 @@ namespace Proyecto1
                     eleIzq.ultimo_ref.left = N2;
                     N2.left = N3;
                     N2.Tran_left = "e";
+                    N2.Tran_left_Tipo = Tipo.TipoN.EPSILON;
 
                     N2.right = eleIzq;
                     N2.Tran_right = "e";
+                    N2.Tran_right_Tipo = Tipo.TipoN.EPSILON;
 
                 }
                 else if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.EPSILON)
@@ -208,9 +221,11 @@ namespace Proyecto1
                     eleIzq.ultimo_ref.left = N3;
                     //N2.left = N3;
                     eleIzq.ultimo_ref.Tran_left = "e";
+                    eleIzq.ultimo_ref.Tran_left_Tipo = Tipo.TipoN.EPSILON;
 
                     eleIzq.ultimo_ref.right = eleIzq;
                     eleIzq.ultimo_ref.Tran_right = "e";
+                    eleIzq.ultimo_ref.Tran_right_Tipo = Tipo.TipoN.EPSILON;
                 }
 
                 N1.ultimo_ref = N3;
@@ -247,6 +262,10 @@ namespace Proyecto1
                     eleIzq.ultimo_ref.right = eleDer.right;
                     eleIzq.ultimo_ref.Tran_left = eleDer.Tran_left;
                     eleIzq.ultimo_ref.Tran_right = eleDer.Tran_right;
+                    /////////
+                    eleIzq.ultimo_ref.Tran_left_Tipo = eleDer.Tran_left_Tipo;
+                    eleIzq.ultimo_ref.Tran_right_Tipo = eleDer.Tran_right_Tipo;
+                    ////////
                     eleIzq.ultimo_ref.ultimo_ref = eleDer.ultimo_ref;
                     //eleIzq.ultimo_ref.visitado = false;
                     eleIzq.ultimo_ref.visitado = eleDer.visitado;
@@ -304,7 +323,6 @@ namespace Proyecto1
             if (oper.Equals("+"))
             {
 
-
                 //NodeAFN a1 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
                 ////NodeAFN a2 = new NodeAFN("N", i, "E", Tipo.TipoN.NORMAL);
                 //a1.Tran_left = "a1";
@@ -312,8 +330,6 @@ namespace Proyecto1
 
                 //a2.Tran_left = "a2";
                 //a2.ultimo_ref = a2;
-                //NodeAFN a1 = eleIzq;
-                //NodeAFN a2 = eleIzq;
                 
                 NodeAFN a2 = copiandoEstructura(eleIzq);
                 
@@ -324,9 +340,6 @@ namespace Proyecto1
                 //MessageBox.Show(a2.tipo_n.ToString(), "primero a2.tipo_n ");
                 //MessageBox.Show(a2.ultimo_ref.tipo_n.ToString(), "ultimo a2.ultimo_ref.tipo_n ");
 
-                //a1.Tran_left = "ah a1";
-                //a2.Tran_left = "in a2";
-
                 //NodeAFN conca = operar(eleIzq, ".", a2, i);
        
                 IniciarVisitado(a2);
@@ -335,13 +348,21 @@ namespace Proyecto1
                 NodeAFN conca = operar(a2, ".", kleen, i);
                 MAS = conca;
 
-                //Thompson tree = new Thompson(MAS, "mas");
-                //tree.SetIndex();
-                //tree.IniciarVisitado();
-                //tree.graficando_Thomson();
-
                 //SetIndex_soloprueba(MAS);
                 return MAS;
+            }
+
+            if (oper.Equals("?"))
+            {
+                NodeAFN epsilon = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
+                //epsilon.Tran_left = "e";
+                //epsilon.Tran_left = "ε";
+                epsilon.ultimo_ref = epsilon;
+
+                //NodeAFN or_ita = operar(epsilon, ".", eleIzq, i);
+                NodeAFN or_ita = operar(eleIzq, "|", epsilon, i);
+                PREGUNTA = or_ita;
+                return PREGUNTA;
             }
                 return null; 
 
@@ -379,6 +400,9 @@ namespace Proyecto1
                 //new_tem.Tran_right = root_ac.Tran_right + "_c"; ;
                 new_tem.Tran_left = root_ac.Tran_left;
                 new_tem.Tran_right = root_ac.Tran_right;
+
+                new_tem.Tran_left_Tipo = root_ac.Tran_left_Tipo;
+                new_tem.Tran_right_Tipo = root_ac.Tran_right_Tipo;
 
                 ////////new_tem.ultimo_ref = root_ac.ultimo_ref;
                 new_tem.tipo = root_ac.tipo;

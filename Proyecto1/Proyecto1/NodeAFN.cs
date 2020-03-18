@@ -19,14 +19,12 @@ namespace Proyecto1
         public String Tran_left;
         public String Tran_right;
 
+        public Tipo.TipoN Tran_left_Tipo;
+        public Tipo.TipoN Tran_right_Tipo;
+
         public Tipo.TipoN tipo_n;
 
         public NodeAFN ultimo_ref;
-
-        //String Anulable;
-        //int identificador;
-        //String primeros;
-        //String ultimos;
 
         public String tipo;
 
@@ -62,6 +60,9 @@ namespace Proyecto1
 
             this.tipo = tipo;
             this.tipo_n = tipo_n;
+
+            this.Tran_left_Tipo = Tipo.TipoN.NULL;
+            this.Tran_right_Tipo = Tipo.TipoN.NULL;
 
             this.height = 1;
         }

@@ -15,10 +15,13 @@ namespace Proyecto1
 
         NodeAFN root;
         int index;
+        List<NodeAFN> lis_Nodos_thomson;
         public Thompson(NodeAFN root, String name_expre)
         {
             this.root = root;
             index = 0;
+            lis_Nodos_thomson = new List<NodeAFN>();
+
             //this.name_expre = name_expre;
 
             //tabla_siguientes = new LinkedList<>();
@@ -123,11 +126,54 @@ namespace Proyecto1
             }
         }
 
+
+        public void listar_nodes_thom()
+        {
+            for (int i = 0; i < lis_Nodos_thomson.Count; ++i)
+            {
+                //MessageBox.Show(lis_Nodos_thomson.ElementAt(i).lexema, i.ToString());
+
+                switch (lis_Nodos_thomson.ElementAt(i).lexema)
+                {
+                    case "7":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "10";
+                        break;
+                    case "8":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "11";
+                        break;
+                    case "9":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "12";
+                        break;
+                    case "10":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "13";
+                        break;
+                    case "11":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "14";
+                        break;
+                    case "12":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "15";
+                        break;
+                    case "13":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "16";
+                        break;
+
+                    case "14":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "7";
+                        break;
+                    case "15":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "8";
+                        break;
+                    case "16":
+                        lis_Nodos_thomson.ElementAt(i).lexema = "9";
+                        break;
+                }
+            }
+        }
         public void IniciarVisitado(NodeAFN root_ac)
         {
             if (root_ac != null)
             {
-                MessageBox.Show("root_ac.lexema: " + root_ac.lexema, "root_ac.visitado: " + root_ac.visitado);
+                ////////////MessageBox.Show("root_ac.lexema: " + root_ac.lexema, "root_ac.visitado: " + root_ac.visitado);
                 if (root_ac.visitado == true)
                 {
                     root_ac.visitado = false;
@@ -158,6 +204,7 @@ namespace Proyecto1
                     //////////////////MessageBox.Show("index: "+root_ac.lexema, index.ToString());
 
                     root_ac.lexema = index.ToString();
+                    lis_Nodos_thomson.Add(root_ac);
                 }
                 
                 
@@ -188,14 +235,28 @@ namespace Proyecto1
                 {
                     //MessageBox.Show(root_ac.lexema, root_ac.Tran_left + " left");
                     graf.Append(root_ac.lexema + " -> " + tempo.left.lexema);
-                    graf.Append("[ label = \"" + root_ac.Tran_left + "\" ];");
+                    if (root_ac.Tran_left_Tipo == Tipo.TipoN.NORMAL)
+                    {
+                        graf.Append("[ label = \"" + root_ac.Tran_left + "\" ];");
+                    }
+                    else if (root_ac.Tran_left_Tipo == Tipo.TipoN.EPSILON)
+                    {
+                        graf.Append("[ label = \"" + "ε" + "\" ];");
+                    }
+
                     graf.Append("\n");
                 }
                 if (tempo.right != null)
                 {
                     //MessageBox.Show(root_ac.lexema, root_ac.Tran_right + " right");
                     graf.Append(root_ac.lexema + " -> " + tempo.right.lexema);
-                    graf.Append("[ label = \"" + root_ac.Tran_right + "\" ];");
+                    if (root_ac.Tran_right_Tipo == Tipo.TipoN.NORMAL)
+                    {
+                        graf.Append("[ label = \"" + root_ac.Tran_right + "\" ];");
+                    } else if (root_ac.Tran_right_Tipo == Tipo.TipoN.EPSILON)
+                    {
+                        graf.Append("[ label = \"" + "ε" + "\" ];");
+                    }
                     graf.Append("\n");
                 }
 

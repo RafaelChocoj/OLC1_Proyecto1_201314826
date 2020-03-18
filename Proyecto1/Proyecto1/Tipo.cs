@@ -17,7 +17,8 @@ namespace Proyecto1
             PREGUN,
             MAS,
             NORMAL,
-            EPSILON
+            EPSILON,
+            NULL
         }
     }
 }

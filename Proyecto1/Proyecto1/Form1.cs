@@ -437,12 +437,11 @@ namespace Proyecto1
                 tree.SetIndex();
 
                 tree.IniciarVisitado();
+
+                tree.listar_nodes_thom(); ////
                 tree.graficando_Thomson();
 
-                //MessageBox.Show("antes de reimprimir 2da vez");
-                //tree.IniciarVisitado();
-                //tree.graficando_Thomson();
-
+                
                 ////////////////////tree.listar();
 
                 //    tree.preOrder();
