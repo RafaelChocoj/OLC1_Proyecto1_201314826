@@ -318,27 +318,21 @@ namespace Proyecto1
                 NodeAFN a2 = copiandoEstructura(eleIzq);
                 
 
-                //MessageBox.Show(a2.lexema, "primero a2.lexema ");
-                //MessageBox.Show(a2.ultimo_ref.lexema, "ultimo a2.ultimo_ref.lexema ");
+                //MessageBox.Show(eleIzq.tipo_n.ToString(), "primero eleIzq.tipo_n ");
+                //MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "ultimo eleIzq.ultimo_ref.tipo_n ");
 
-                MessageBox.Show(eleIzq.tipo_n.ToString(), "primero eleIzq.tipo_n ");
-                MessageBox.Show(eleIzq.ultimo_ref.tipo_n.ToString(), "ultimo eleIzq.ultimo_ref.tipo_n ");
-
-                MessageBox.Show(a2.tipo_n.ToString(), "primero a2.tipo_n ");
-                MessageBox.Show(a2.ultimo_ref.tipo_n.ToString(), "ultimo a2.ultimo_ref.tipo_n ");
-
-                //copiandoEstructura(eleIzq);
+                //MessageBox.Show(a2.tipo_n.ToString(), "primero a2.tipo_n ");
+                //MessageBox.Show(a2.ultimo_ref.tipo_n.ToString(), "ultimo a2.ultimo_ref.tipo_n ");
 
                 //a1.Tran_left = "ah a1";
                 //a2.Tran_left = "in a2";
 
                 //NodeAFN conca = operar(eleIzq, ".", a2, i);
-                ////NodeAFN kleen = operar(eleIzq, "*", null, i);
-
+       
                 IniciarVisitado(a2);
                 IniciarVisitado(eleIzq);
-                NodeAFN conca = operar(a2, ".", eleIzq, i);
-                //MAS = eleIzq;
+                NodeAFN kleen = operar(eleIzq, "*", null, i);
+                NodeAFN conca = operar(a2, ".", kleen, i);
                 MAS = conca;
 
                 //Thompson tree = new Thompson(MAS, "mas");
@@ -380,10 +374,13 @@ namespace Proyecto1
                 new_tem.lexema = "N";
                 //new_tem.left = root_ac.left;
                 //new_tem.right = root_ac.right;
-                new_tem.Tran_left = root_ac.Tran_left + "_c"; ;
-                new_tem.Tran_right = root_ac.Tran_right + "_c"; ;
+
+                //new_tem.Tran_left = root_ac.Tran_left + "_c"; ;
+                //new_tem.Tran_right = root_ac.Tran_right + "_c"; ;
+                new_tem.Tran_left = root_ac.Tran_left;
+                new_tem.Tran_right = root_ac.Tran_right;
+
                 ////////new_tem.ultimo_ref = root_ac.ultimo_ref;
-                //new_tem.visitado = false;
                 new_tem.tipo = root_ac.tipo;
                 new_tem.tipo_n = root_ac.tipo_n;
 

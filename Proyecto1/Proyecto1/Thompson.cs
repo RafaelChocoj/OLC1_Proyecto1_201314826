@@ -155,7 +155,7 @@ namespace Proyecto1
                 if (root_ac.lexema.Equals("N"))
                 {
                     index++;
-                    MessageBox.Show("index: "+root_ac.lexema, index.ToString());
+                    //////////////////MessageBox.Show("index: "+root_ac.lexema, index.ToString());
 
                     root_ac.lexema = index.ToString();
                 }
@@ -182,7 +182,7 @@ namespace Proyecto1
         {
             if (root_ac != null)
             {
-                MessageBox.Show(root_ac.lexema, "lexema**************");
+                //////////////////MessageBox.Show(root_ac.lexema, "lexema**************");
                 NodeAFN tempo = root_ac;
                 if (tempo.left != null)
                 {
