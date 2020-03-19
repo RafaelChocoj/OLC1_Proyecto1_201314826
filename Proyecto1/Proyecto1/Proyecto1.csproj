@@ -71,6 +71,7 @@
     <Compile Include="Tipo.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Transiciones.cs" />
+    <Compile Include="TTransiciones_Cerraduras.cs" />
     <Compile Include="VarExpReg.cs" />
     <Compile Include="Variables.cs" />
     <EmbeddedResource Include="Form1.resx">
