@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Armando_RPN.cs" />
+    <Compile Include="Cerradura_Mueve.cs" />
     <Compile Include="Errores.cs" />
     <Compile Include="ER_unitario.cs" />
     <Compile Include="Exp_a_Evaluar.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Thompson.cs" />
     <Compile Include="Tipo.cs" />
     <Compile Include="Token.cs" />
+    <Compile Include="Transiciones.cs" />
     <Compile Include="VarExpReg.cs" />
     <Compile Include="Variables.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -17,9 +17,14 @@ namespace Proyecto1
         //Stack<String> pila;
         Stack<NodeAFN> pila;
 
+        public List<Transiciones> Listado_Tran;
+
         public Armando_RPN(List<ER_unitario> pref_expresiones)
         {
             listado_Nodos = new List<NodeAFN>();
+
+            //guarda el lsitado de tranciciones
+            Listado_Tran = new List<Transiciones>();
 
             this.pref_expresiones = pref_expresiones;
             this.pila = new Stack<NodeAFN>();
@@ -99,6 +104,14 @@ namespace Proyecto1
                     n_nodo.Tran_left_Tipo= Tipo.TipoN.NORMAL;
                     n_nodo.ultimo_ref = n_nodo;
                     pila.Push(n_nodo);
+                    //MessageBox.Show(pref_expresiones.ElementAt(i).er, pref_expresiones.ElementAt(i).tipo);
+                    //MessageBox.Show(Existe_transicion(pref_expresiones.ElementAt(i).er, pref_expresiones.ElementAt(i).tipo).ToString(), "Existe_transicion");
+          
+                    if (Existe_transicion(pref_expresiones.ElementAt(i).er, pref_expresiones.ElementAt(i).tipo) == false)
+                    {
+                        Transiciones tran_new = new Transiciones(pref_expresiones.ElementAt(i).er, pref_expresiones.ElementAt(i).tipo);
+                        Listado_Tran.Add(tran_new);
+                    }
 
                     listado_Nodos.Add(n_nodo); ///agregar ref de nodos
 
@@ -111,6 +124,17 @@ namespace Proyecto1
 
         }
 
+        public bool Existe_transicion(String tracicion, String tipo)
+        {
+            for (int i = 0; i < Listado_Tran.Count; ++i)
+            {
+                if (Listado_Tran.ElementAt(i).transicion.Equals(tracicion)  && Listado_Tran.ElementAt(i).tipo.Equals(tipo))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public NodeAFN operar(NodeAFN eleIzq, String oper, NodeAFN eleDer, int i)
         {
 

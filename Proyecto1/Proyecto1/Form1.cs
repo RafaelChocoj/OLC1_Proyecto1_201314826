@@ -433,13 +433,16 @@ namespace Proyecto1
 
                 ///////////////////inicioa graficas
                 //Arbol tree = new Arbol(root_exp);
-                Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg);
+                Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg, arbol.Listado_Tran);
                 tree.SetIndex();
 
                 tree.IniciarVisitado();
 
                 tree.listar_nodes_thom(); ////
                 tree.graficando_Thomson();
+
+                tree.IniciarVisitado();
+                tree.MetedoCerradura();
 
                 
                 ////////////////////tree.listar();
@@ -540,12 +543,75 @@ namespace Proyecto1
             //MessageBox.Show(N2.left.Tran_left, "2 N2.left.Tran_left");
 
 
-            Thompson tree = new Thompson(N1, "prub");
+            Thompson tree = new Thompson(N1, "prub",null);
             tree.SetIndex();
             tree.IniciarVisitado();
             tree.graficando_Thomson();
 
         }
-        //////
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var x = new List<string>() { "a", "b", "c" };
+
+            var y = new List<string>() { "c", "a", "b" };
+            var yes = x.Count() == y.Count() && !x.Except(y).Any(); ;
+            ////Console.WriteLine(yes);
+            MessageBox.Show(yes.ToString(), "yes");
+
+            //var no = ScrambledEquals(x, new List<string>() { "c", "b", "a", "b" });
+            ////Console.WriteLine(no);
+            //MessageBox.Show(no.ToString(), "no");
+        }
+        //public static bool ScrambledEquals(List<String> x, List<String> y)
+        //{
+        //    return x.Count() == y.Count() && !x.Except(y).Any();
+        //}
+
+        List<Cerradura_Mueve> saber;
+        //public static bool Equals2_list(List<Cerradura_Mueve> x, List<Cerradura_Mueve> y)
+        //{
+        //    return x.Count() == y.Count() && !x.Except(y).Any();
+        //}
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //List<Cerradura_Mueve> lis_cerraduras = new List<Cerradura_Mueve>();
+            //NodeAFN N1 = new NodeAFN("1", 1, "E", Tipo.TipoN.EPSILON);
+            //NodeAFN N2 = new NodeAFN("2", 2, "E", Tipo.TipoN.EPSILON);
+            //NodeAFN N3 = new NodeAFN("3", 3, "E", Tipo.TipoN.NORMAL);
+            //lis_cerraduras.Add(new Cerradura_Mueve("1", N1));
+            //lis_cerraduras.Add(new Cerradura_Mueve("2", N2));
+            //lis_cerraduras.Add(new Cerradura_Mueve("3", N3));
+
+            //var x = lis_cerraduras;
+
+            //List<Cerradura_Mueve> li_compare = new List<Cerradura_Mueve>();
+            ////NodeAFN N11 = new NodeAFN("11", 1, "E", Tipo.TipoN.EPSILON);
+            //li_compare.Add(new Cerradura_Mueve("1", N1));
+            //li_compare.Add(new Cerradura_Mueve("2", N2));
+            //li_compare.Add(new Cerradura_Mueve("3", N3));
+            //var y = li_compare;
+
+            List<int> lis_cerraduras = new List<int>();
+            lis_cerraduras.Add(1);
+            lis_cerraduras.Add(2);
+            lis_cerraduras.Add(4);
+
+            var x = lis_cerraduras;
+
+            List<int> li_compare = new List<int>();
+            //NodeAFN N11 = new NodeAFN("11", 1, "E", Tipo.TipoN.EPSILON);
+            li_compare.Add(4);
+            li_compare.Add(2);
+            li_compare.Add(1);
+            var y = li_compare;
+
+            var yes = x.Count() == y.Count() && !x.Except(y).Any(); ;
+            MessageBox.Show(yes.ToString(), "yes");
+            ////var yes = ScrambledEquals22(lis_cerraduras, li_compare);
+            ////Equals22(lis_var);
+
+        }
+
     }
 }

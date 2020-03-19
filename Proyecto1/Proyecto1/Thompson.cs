@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -16,12 +17,19 @@ namespace Proyecto1
         NodeAFN root;
         int index;
         List<NodeAFN> lis_Nodos_thomson;
-        public Thompson(NodeAFN root, String name_expre)
+
+        List<Transiciones> Listado_Tran; ///guarda el lista de trandiciones
+
+        NodeAFN nod_inicial;  ///nodo incial de thomsopn
+        NodeAFN nod_final;     ///nodo final thomson
+        public Thompson(NodeAFN root, String name_expre, List<Transiciones> Listado_Tran)
         {
             this.root = root;
             index = 0;
             lis_Nodos_thomson = new List<NodeAFN>();
 
+
+            this.Listado_Tran = Listado_Tran;
             //this.name_expre = name_expre;
 
             //tabla_siguientes = new LinkedList<>();
@@ -74,13 +82,15 @@ namespace Proyecto1
 
             MessageBox.Show(graf.ToString());
             File.WriteAllText("thom.txt", graf.ToString());
-            System.Diagnostics.Process.Start("thom.txt");
+            ////////////////////System.Diagnostics.Process.Start("thom.txt");
             //return this.graf_arbolavl(graf.toString(), "graf_automata_" + name_expre);
 
             //System.Diagnostics.Process.Start("dot -Tpng " + name_g + ".txt -o " + name_g + ".jpg");
 
             MessageBox.Show(root.lexema, "ultimo root.lexema ");
             MessageBox.Show(root.ultimo_ref.lexema, "ultimo root.ultimo_ref.lexema ");
+            nod_inicial = root;
+            nod_final = root.ultimo_ref;
             return CreateImage("thom");
             //return true;
         }
@@ -169,6 +179,81 @@ namespace Proyecto1
                 }
             }
         }
+        ////////////////////////////////////////////
+       
+        public void MetedoCerradura()
+        {
+            ////cerra_x.Add(nod_inicial.lexema);
+            List<String> lis_cerraduras = new List<String>();
+            Cerradura_X(nod_inicial, lis_cerraduras);
+
+            String cerx = "";
+            for (int i = 0; i < lis_cerraduras.Count; ++i)
+            {
+                cerx = cerx + lis_cerraduras[i] + ", ";
+            }
+            MessageBox.Show(cerx, "cerx");
+            IEnumerable<String> lis_cerraduras_sort = lis_cerraduras.OrderBy(idnod => idnod);
+            lis_cerraduras = lis_cerraduras_sort.ToList();
+            cerx = "";
+            for (int i = 0; i < lis_cerraduras.Count ; ++i)
+            {
+                cerx = cerx + lis_cerraduras[i]+ ", ";
+            }
+            MessageBox.Show(cerx, "cerx");
+
+            /*mueve a/ ir a
+             verifica en la cerradura si hay en el listado de transiciones*/
+            
+            cerx = "";
+            for (int i = 0; i < Listado_Tran.Count; ++i)
+            {
+                cerx = cerx + Listado_Tran[i].transicion + ", ";
+            }
+            MessageBox.Show(cerx, "cerx");
+        }
+
+        /*creando las cerraduras*/
+        public void Cerradura_X(NodeAFN root_ac, List<String> lis_cerraduras)
+        {
+            //if (root_ac != null)
+            if (root_ac != null)
+            {
+                MessageBox.Show("Cerradura* " + root_ac.lexema, root_ac.tipo_n.ToString());
+                //cerra_x.Add(root_ac.lexema);
+                lis_cerraduras.Add(root_ac.lexema);
+                if (root_ac.left != null)
+                {
+                    //if (root_ac.Tran_left_Tipo == Tipo.TipoN.EPSILON)
+                    //{
+                    //    //cerra_x.Add(root_ac.left.lexema);
+                    //    MessageBox.Show("left ->* " + root_ac.left.lexema, root_ac.Tran_left_Tipo.ToString());
+                    //}
+
+                }
+                if (root_ac.right != null)
+                {
+                    //if (root_ac.Tran_right_Tipo == Tipo.TipoN.EPSILON)
+                    //{
+                    //    //cerra_x.Add(root_ac.right.lexema);
+                    //    MessageBox.Show("right ->* " + root_ac.right.lexema, root_ac.Tran_right_Tipo.ToString());
+                    //}
+                }
+                
+                root_ac.visitado = true;
+
+                if (root_ac.left != null && root_ac.left.visitado == false && root_ac.Tran_left_Tipo == Tipo.TipoN.EPSILON)
+                {
+                    this.Cerradura_X(root_ac.left, lis_cerraduras);
+                }
+
+                if (root_ac.right != null && root_ac.right.visitado == false && root_ac.Tran_right_Tipo == Tipo.TipoN.EPSILON)
+                {
+                    this.Cerradura_X(root_ac.right, lis_cerraduras);
+                }
+            }
+        }
+        ///////////////////////////////////////
         public void IniciarVisitado(NodeAFN root_ac)
         {
             if (root_ac != null)
