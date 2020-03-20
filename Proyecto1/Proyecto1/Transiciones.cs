@@ -9,12 +9,14 @@ namespace Proyecto1
 
     class Transiciones
     {
-        public String transicion;
-        public String tipo;
-        public Transiciones(String transicion, String tipo)
+        public string transicion;
+        public string tipo;
+        public Transiciones(string transicion, string tipo)
         {
             this.transicion = transicion;
             this.tipo = tipo;
         }
+
+
     }
 }

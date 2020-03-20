@@ -43,7 +43,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.dtable = new System.Windows.Forms.DataGridView();
+            this.probartab = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtable)).BeginInit();
             this.SuspendLayout();
             // 
             // b_analizar
@@ -72,7 +75,7 @@
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(887, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1222, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,7 +155,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(768, 197);
+            this.button2.Location = new System.Drawing.Point(768, 351);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(107, 23);
             this.button2.TabIndex = 6;
@@ -162,7 +165,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(768, 264);
+            this.button3.Location = new System.Drawing.Point(781, 380);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 23);
             this.button3.TabIndex = 7;
@@ -172,7 +175,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(781, 309);
+            this.button4.Location = new System.Drawing.Point(781, 409);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(94, 23);
             this.button4.TabIndex = 8;
@@ -180,11 +183,35 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // dtable
+            // 
+            this.dtable.AllowUserToAddRows = false;
+            this.dtable.AllowUserToDeleteRows = false;
+            this.dtable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtable.Location = new System.Drawing.Point(768, 76);
+            this.dtable.Name = "dtable";
+            this.dtable.ReadOnly = true;
+            this.dtable.RowTemplate.Height = 24;
+            this.dtable.Size = new System.Drawing.Size(433, 227);
+            this.dtable.TabIndex = 9;
+            // 
+            // probartab
+            // 
+            this.probartab.Location = new System.Drawing.Point(940, 344);
+            this.probartab.Name = "probartab";
+            this.probartab.Size = new System.Drawing.Size(75, 23);
+            this.probartab.TabIndex = 10;
+            this.probartab.Text = "probar table";
+            this.probartab.UseVisualStyleBackColor = true;
+            this.probartab.Click += new System.EventHandler(this.probartab_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 455);
+            this.ClientSize = new System.Drawing.Size(1222, 455);
+            this.Controls.Add(this.probartab);
+            this.Controls.Add(this.dtable);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -199,6 +226,7 @@
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,6 +249,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DataGridView dtable;
+        private System.Windows.Forms.Button probartab;
     }
 }
 

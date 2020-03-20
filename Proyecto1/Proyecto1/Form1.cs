@@ -66,6 +66,7 @@ namespace Proyecto1
             lis_var = sin.getLista_Conjuntos();
             lis_evaluar_expre = sin.getLista_Evaluar();
 
+            dtable.DataSource = analisis_lex.lis_tokens;
             MessageBox.Show("Terminó el Analisis", "Analisis");
 
         }
@@ -430,21 +431,28 @@ namespace Proyecto1
 
                 /////JOptionPane.showMessageDialog(null,"res arbol: " + root);
 
-
+                
                 ///////////////////inicioa graficas
                 //Arbol tree = new Arbol(root_exp);
-                Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg, arbol.Listado_Tran);
+                Thompson tree = new Thompson(root_exp, lis_ex_reg.ElementAt(i).name_exreg, arbol.Listado_Tran);          
                 tree.SetIndex();
-
+                //dtable.DataSource = tree.view_Listado_Tran();
                 tree.IniciarVisitado();
 
-                tree.listar_nodes_thom(); ////
+                ///////tree.listar_nodes_thom(); ////
                 tree.graficando_Thomson();
 
                 tree.IniciarVisitado();
                 tree.MetedoCerradura();
 
-                
+                dtable.RowHeadersWidth = 15;
+                //dtable.ColumnHeadersHeight = 10;
+                dtable.DataSource = tree.view_Listado_Tran();
+                dtable.AutoResizeColumns();
+
+
+
+
                 ////////////////////tree.listar();
 
                 //    tree.preOrder();
@@ -620,5 +628,30 @@ namespace Proyecto1
 
         }
 
+        private void probartab_Click(object sender, EventArgs e)
+        {
+            List<Prub_tran> lis_tran = new List<Prub_tran>();
+
+            List<String> ira = new List<String>();
+
+            Prub_tran dat = new Prub_tran();
+            dat.transicion = "A";
+            dat.tipo = "c";
+
+            ira.Add("1");
+            ira.Add("2");
+            dat.ir_a = ira;
+            lis_tran.Add(dat) ;
+
+            //Prub_tran dat2 = new Prub_tran();
+            //dat2.transicion = "B";
+            //dat2.tipo = "nose";
+            //ira.Add("saber vos");
+            //dat2.ir_a = ira;
+            //lis_tran.Add(dat2);
+
+            dtable.DataSource = lis_tran;
+
+        }
     }
 }
