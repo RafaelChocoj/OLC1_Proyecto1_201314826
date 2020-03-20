@@ -552,16 +552,23 @@ namespace Proyecto1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var x = new List<string>() { "a", "b", "c" };
+            //var x = new List<string>() { "a", "b", "c" };
 
-            var y = new List<string>() { "c", "a", "b" };
-            var yes = x.Count() == y.Count() && !x.Except(y).Any(); ;
-            ////Console.WriteLine(yes);
-            MessageBox.Show(yes.ToString(), "yes");
+            //var y = new List<string>() { "c", "a", "b" };
+            //var yes = x.Count() == y.Count() && !x.Except(y).Any(); ;
+            //////Console.WriteLine(yes);
+            //MessageBox.Show(yes.ToString(), "yes");
 
-            //var no = ScrambledEquals(x, new List<string>() { "c", "b", "a", "b" });
-            ////Console.WriteLine(no);
-            //MessageBox.Show(no.ToString(), "no");
+            ////var no = ScrambledEquals(x, new List<string>() { "c", "b", "a", "b" });
+            //////Console.WriteLine(no);
+            ////MessageBox.Show(no.ToString(), "no");
+            List<String> lis_cerraduras = new List<String>();
+            lis_cerraduras.Add("1");
+            lis_cerraduras.Add("2");
+            lis_cerraduras.Add("4");
+
+            MessageBox.Show(lis_cerraduras.Contains("1").ToString(), "lis_cerraduras.Contains()");
+
         }
         //public static bool ScrambledEquals(List<String> x, List<String> y)
         //{

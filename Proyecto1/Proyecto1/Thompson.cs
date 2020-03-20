@@ -323,6 +323,7 @@ namespace Proyecto1
                         //Listado_Tran.ElementAt(i).transicion;
                         //Listado_Tran.ElementAt(i).tipo;
 
+                        //reset_Visitador_cerradura(); ///reiniciar visitados
                         MessageBox.Show(Listado_Tran.ElementAt(i).transicion, Listado_Tran.ElementAt(i).tipo);
                         List<String> mueve_ira = new List<String>();
                         MueveX_a(lis_cerraduras, Listado_Tran.ElementAt(i), mueve_ira);
@@ -331,33 +332,48 @@ namespace Proyecto1
                          * se busca las cerraduras para cada nodo
                          * encontrado en el lexema */
 
+                        List<String> lis_cerraduras_ac = new List<String>(); ///B, C, D
+                        for (int m = 0; m < mueve_ira.Count; m++)
+                        {
+                            reset_Visitador_cerradura(); ///reiniciar visitados
+                            MessageBox.Show(mueve_ira.ElementAt(m), "Cerradura de ---- mueve_ira-");
+                            NodeAFN nod_cerra = return_nodoMueve(mueve_ira.ElementAt(m));
 
-                        IEnumerable<String> mueve_sort = mueve_ira.OrderBy(idnod => idnod);
-                        mueve_ira = mueve_sort.ToList();
+                            Cerradura_X(nod_cerra, lis_cerraduras_ac);
+                        }
+                        /****fin creando cerraduras****/
+
+                        /********mueve_ira*********/
+                        /////////////////   aqui deberia de guardar moeve a mi
+                        ////tabla de estados
+                        //IEnumerable<String> mueve_sort = mueve_ira.OrderBy(idnod => idnod);
+                        //mueve_ira = mueve_sort.ToList();
+                        IEnumerable<String> lis_cerraduras_ac_sort = lis_cerraduras_ac.OrderBy(idnod => idnod);
+                        lis_cerraduras_ac = lis_cerraduras_ac_sort.ToList();
 
                         ///
                         cerx = "";
-                        for (int i2 = 0; i2 < mueve_ira.Count; ++i2)
+                        for (int i2 = 0; i2 < lis_cerraduras_ac.Count; ++i2)
                         {
-                            cerx = cerx + mueve_ira[i2] + ", ";
+                            cerx = cerx + lis_cerraduras_ac[i2] + ", ";
                         }
-                        MessageBox.Show(cerx, "mueve_ira.Count: " + mueve_ira.Count);
+                        MessageBox.Show(cerx, "lis_cerraduras_ac.Count: " + lis_cerraduras_ac.Count);
                         ///
                         /*verificando si tiene contenido y que no este repedido*/
-                        if (mueve_ira.Count > 0)
+                        if (lis_cerraduras_ac.Count > 0)
                         {
-                            MessageBox.Show(ExisteCerradura(mueve_ira).ToString(), "ExisteCerradura(mueve_ira)");
-                            if (ExisteCerradura(mueve_ira)==false)
+                            MessageBox.Show(ExisteCerradura(lis_cerraduras_ac).ToString(), "ExisteCerradura(lis_cerraduras_ac)");
+                            if (ExisteCerradura(lis_cerraduras_ac) ==false)
                             {
                                 char new_name_cerradura = tab_transiciones.Last().name_estado[0];
                                 new_name_cerradura++;
                                 MessageBox.Show(new_name_cerradura.ToString(), "new estado");
-                                ////mueve_ira son las tranciciones
+                                ////lis_cerraduras_ac son las tranciciones
 
                                 //TTransiciones_Cerraduras new_transi = new TTransiciones_Cerraduras(new_name_cerradura.ToString(), mueve_ira, "N", "N" /*, ir_a_estados*/);
                                 //tab_transiciones.Add(new_transi);
 
-                                TTransiciones_Cerraduras new_transi = new TTransiciones_Cerraduras(new_name_cerradura.ToString(), mueve_ira, "N", "N" /*, ir_a_estados*/);
+                                TTransiciones_Cerraduras new_transi = new TTransiciones_Cerraduras(new_name_cerradura.ToString(), lis_cerraduras_ac, "N", "N" /*, ir_a_estados*/);
                                 tab_transiciones.Add(new_transi);
                             }
                         }
@@ -442,8 +458,12 @@ namespace Proyecto1
             if (root_ac != null)
             {
                 MessageBox.Show("Cerradura* " + root_ac.lexema, root_ac.tipo_n.ToString());
-                //cerra_x.Add(root_ac.lexema);
-                lis_cerraduras.Add(root_ac.lexema);
+                ////////////////lis_cerraduras.Add(root_ac.lexema);
+                
+                if (lis_cerraduras.Contains(root_ac.lexema) == false)
+                {
+                    lis_cerraduras.Add(root_ac.lexema);
+                }
                 if (root_ac.left != null)
                 {
                     //if (root_ac.Tran_left_Tipo == Tipo.TipoN.EPSILON)
