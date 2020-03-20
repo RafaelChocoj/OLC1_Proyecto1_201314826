@@ -13,9 +13,9 @@ namespace Proyecto1
         public String Estado;
         public String tipo_estado;
 
-        //public LinkedList<tran_a_estados> ir_a;
+        public List<tran_a_estados> ir_a;
 
-        public TTransiciones_Cerraduras(String name_estado, List<String> cerradura, String Estado, String tipo_estado/*, LinkedList<tran_a_estados> ir_a*/)
+        public TTransiciones_Cerraduras(String name_estado, List<String> cerradura, String Estado, String tipo_estado, List<tran_a_estados> ir_a)
         {
 
             this.name_estado = name_estado;
@@ -23,7 +23,7 @@ namespace Proyecto1
             this.tipo_estado = tipo_estado;
             this.Estado = Estado;
 
-            //this.ir_a = ir_a;
+            this.ir_a = ir_a;
         }
     }
 }
