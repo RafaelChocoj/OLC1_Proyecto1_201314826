@@ -450,6 +450,8 @@ namespace Proyecto1
                 dtable.DataSource = tree.view_Listado_Tran();
                 dtable.AutoResizeColumns();
 
+                tree.graficando_Automata();
+
 
 
 

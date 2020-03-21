@@ -135,12 +135,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(768, 47);
+            this.button1.Location = new System.Drawing.Point(918, 394);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // b_graficar
@@ -188,7 +189,7 @@
             this.dtable.AllowUserToAddRows = false;
             this.dtable.AllowUserToDeleteRows = false;
             this.dtable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtable.Location = new System.Drawing.Point(768, 76);
+            this.dtable.Location = new System.Drawing.Point(768, 31);
             this.dtable.Name = "dtable";
             this.dtable.ReadOnly = true;
             this.dtable.RowTemplate.Height = 24;
@@ -197,12 +198,13 @@
             // 
             // probartab
             // 
-            this.probartab.Location = new System.Drawing.Point(940, 344);
+            this.probartab.Location = new System.Drawing.Point(768, 279);
             this.probartab.Name = "probartab";
             this.probartab.Size = new System.Drawing.Size(75, 23);
             this.probartab.TabIndex = 10;
             this.probartab.Text = "probar table";
             this.probartab.UseVisualStyleBackColor = true;
+            this.probartab.Visible = false;
             this.probartab.Click += new System.EventHandler(this.probartab_Click);
             // 
             // Form1

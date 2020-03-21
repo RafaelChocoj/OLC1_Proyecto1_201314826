@@ -376,6 +376,53 @@ namespace Proyecto1
                 return MAS;
             }
 
+            ///*******************inicio solo pureba****************************************************/
+            //if (oper.Equals("+"))
+            //{
+            //    NodeAFN N1 = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
+            //    NodeAFN N2 = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);
+            //    NodeAFN N3 = new NodeAFN("N", 99, "E", Tipo.TipoN.EPSILON);
+
+            //    //eleIzq
+            //    N1.left = eleIzq;
+            //    N1.Tran_left = "e";
+            //    N1.Tran_left_Tipo = Tipo.TipoN.EPSILON;
+            //    //////N1.right = N3;
+            //    //////N1.Tran_right = "e";
+            //    //////N1.Tran_right_Tipo = Tipo.TipoN.EPSILON;
+
+            //    if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.NORMAL)
+            //    {
+            //        //eleIzq.left = N2;
+            //        eleIzq.ultimo_ref.left = N2;
+            //        N2.left = N3;
+            //        N2.Tran_left = "e";
+            //        N2.Tran_left_Tipo = Tipo.TipoN.EPSILON;
+
+            //        N2.right = eleIzq;
+            //        N2.Tran_right = "e";
+            //        N2.Tran_right_Tipo = Tipo.TipoN.EPSILON;
+
+            //    }
+            //    else if (eleIzq.ultimo_ref.tipo_n == Tipo.TipoN.EPSILON)
+            //    {
+            //        eleIzq.ultimo_ref.left = N3;
+            //        //N2.left = N3;
+            //        eleIzq.ultimo_ref.Tran_left = "e";
+            //        eleIzq.ultimo_ref.Tran_left_Tipo = Tipo.TipoN.EPSILON;
+
+            //        eleIzq.ultimo_ref.right = eleIzq;
+            //        eleIzq.ultimo_ref.Tran_right = "e";
+            //        eleIzq.ultimo_ref.Tran_right_Tipo = Tipo.TipoN.EPSILON;
+            //    }
+
+            //    N1.ultimo_ref = N3;
+            //    Cerradura = N1;
+
+            //    return Cerradura;
+            //}
+            ///*******************fin solo pureba****************************************************/
+
             if (oper.Equals("?"))
             {
                 NodeAFN epsilon = new NodeAFN("N", i, "E", Tipo.TipoN.EPSILON);

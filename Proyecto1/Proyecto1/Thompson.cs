@@ -23,6 +23,8 @@ namespace Proyecto1
 
         List<TTransiciones_Cerraduras> tab_transiciones; ///guarda la tabla de transiciones
 
+        String name_expre;
+
         NodeAFN nod_inicial;  ///nodo incial de thomsopn
         NodeAFN nod_final;     ///nodo final thomson
         public Thompson(NodeAFN root, String name_expre, List<Transiciones> Listado_Tran)
@@ -35,7 +37,7 @@ namespace Proyecto1
 
 
             this.Listado_Tran = Listado_Tran;
-            //this.name_expre = name_expre;
+            this.name_expre = name_expre;
 
             //tabla_siguientes = new LinkedList<>();
 
@@ -100,6 +102,63 @@ namespace Proyecto1
             //return true;
         }
 
+        /*graficando automata*/
+        public Boolean graficando_Automata()
+        {
+            StringBuilder graf = new StringBuilder(); //grafica total
+
+            StringBuilder automatas = new StringBuilder(); // para las transiciones
+            StringBuilder finales = new StringBuilder(); // para los estados finales
+
+            StringBuilder inicial = new StringBuilder(); // para los estados inicial
+
+            graf.Append("digraph finite_state_machine {\n");
+            graf.Append("rankdir=LR;\n");
+            graf.Append("size=\"8,5\"");
+            graf.Append("\n");
+
+            for (int i = 0; i < tab_transiciones.Count; i++)
+            {
+
+                if (tab_transiciones.ElementAt(i).Estado.Equals("F"))
+                {
+                    finales.Append(" " + tab_transiciones.ElementAt(i).name_estado);
+                }
+                if (tab_transiciones.ElementAt(i).Estado.Equals("I"))
+                {
+                    inicial.Append(" " + tab_transiciones.ElementAt(i).name_estado);
+                }
+
+                for (int j = 0; j < tab_transiciones.ElementAt(i).ir_a.Count; j++)
+                {
+
+                    automatas.Append(tab_transiciones.ElementAt(i).name_estado + " -> " + tab_transiciones.ElementAt(i).ir_a.ElementAt(j).Ir_a_Estado);
+                    automatas.Append("[ label = \"" + tab_transiciones.ElementAt(i).ir_a.ElementAt(j).terminal + "\" ];");
+                    automatas.Append("\n");
+
+                }
+            }
+
+            graf.Append("node [shape = doublecircle]; ");
+            graf.Append(finales);
+            graf.Append("\n");
+
+            graf.Append("node [shape = Mcircle]; ");
+            graf.Append(inicial);
+            graf.Append("\n");
+
+            graf.Append("node [shape = circle];\n");
+            graf.Append(automatas);
+
+            graf.Append("\n}");
+
+            File.WriteAllText("graf_automata_" + name_expre + ".txt" , graf.ToString());
+            //return this.graf_arbolavl(graf.toString(), "graf_automata_" + name_expre);
+            return CreateImage("graf_automata_" + name_expre);
+        }
+
+
+        /////////////////////
         public Boolean CreateImage(String name)
         {
             try
@@ -276,7 +335,7 @@ namespace Proyecto1
             DataRow row;
             //DataColumn colum;
             DataTable tabtan = new DataTable();
-            tabtan.Columns.Add("Tipo", typeof(string));
+            tabtan.Columns.Add("T", typeof(string));
             tabtan.Columns.Add("Estado", typeof(string));
 
             for (int i = 0; i < Listado_Tran.Count; ++i)
@@ -287,7 +346,7 @@ namespace Proyecto1
             for (int tb = 0; tb < tab_transiciones.Count; ++tb)
             {
                 row = tabtan.NewRow();
-                row["Tipo"] = tab_transiciones.ElementAt(tb).Estado;
+                row["T"] = tab_transiciones.ElementAt(tb).Estado;
                 row["Estado"] = tab_transiciones.ElementAt(tb).name_estado;
 
                 List<tran_a_estados> terminales = tab_transiciones.ElementAt(tb).ir_a;
