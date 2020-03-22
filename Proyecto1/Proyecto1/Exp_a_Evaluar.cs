@@ -8,8 +8,8 @@ namespace Proyecto1
 {
     class Exp_a_Evaluar
     {
-        String identificador;
-        String cadena_eva;
+        public String identificador;
+        public String cadena_eva;
 
         public Exp_a_Evaluar(String identificador, String cadena_eva)
         {

@@ -26,6 +26,8 @@ namespace Proyecto1
         /*para evaluar las expresiones regulares*/
         List<Exp_a_Evaluar> lis_evaluar_expre;
 
+        ////////////guarda listado de expresiones de Thomson
+        List<Listado_Thompson> lis_thompson_expre;
         public Form1()
         {
             InitializeComponent();
@@ -40,11 +42,18 @@ namespace Proyecto1
             /*inicializando evaluar las expresiones regulares*/
             lis_evaluar_expre = new List<Exp_a_Evaluar>();
 
+            lis_thompson_expre = new List<Listado_Thompson>();
+
 
         }
 
         private void b_analizar_Click(object sender, EventArgs e)
         {
+            if (tabControl1.RowCount ==0)
+            {
+                return;
+
+            }
 
             TabPage tab_actual = tabControl1.SelectedTab;
             String texto = tab_actual.Controls[0].Text;
@@ -412,9 +421,10 @@ namespace Proyecto1
 
         public void Crea_AFN_AFD_ER()
         {
-            ///*probando armando el arbol*/
-            //LinkedList<ListadoArboles> lis_arnew = new LinkedList<>();
-            //lis_arbol_expre = lis_arnew;
+            /*probando armando el arbol*/
+            List<Listado_Thompson> lis_arnew = new List<Listado_Thompson>();
+            lis_thompson_expre = lis_arnew;
+
             for (int i = 0; i < lis_ex_reg.Count; ++i)
             {
                 MessageBox.Show( lis_ex_reg.ElementAt(i).name_exreg /*+ " - "
@@ -471,17 +481,27 @@ namespace Proyecto1
                 //    tree.Create_TabTransiciones();
                 //    tree.graficando_Automata();
 
-                //    ListadoArboles ar = new ListadoArboles(lis_ex_reg.get(i).name_exreg, tree);
-                //    lis_arbol_expre.add(ar);
-                //    //            
-                //    //////////           tree.EvaluandoLexema_final(lis_evaluar_expre.get(0).cadena_eva, lis_var);
-                //    //            
-                //    //            ////////////////fin graficas
+                Listado_Thompson thom = new Listado_Thompson(lis_ex_reg.ElementAt(i).name_exreg, tree);
+                lis_thompson_expre.Add(thom);
+                //            
+                //////////           tree.EvaluandoLexema_final(lis_evaluar_expre.get(0).cadena_eva, lis_var);
+                //            
+                //            ////////////////fin graficas
 
             }
             //lis_ar();
+            llenando_Combobox();
             //JOptionPane.showMessageDialog(null, "Termino de graficar");
 
+        }
+
+        public void llenando_Combobox()
+        {
+            cb_expresiones.Items.Clear();
+            for (int i = 0; i < lis_thompson_expre.Count; i++)
+            {
+                cb_expresiones.Items.Add(lis_thompson_expre.ElementAt(i).name_expresion);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -654,6 +674,65 @@ namespace Proyecto1
 
             dtable.DataSource = lis_tran;
 
+        }
+
+        private void cb_expresiones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indx = cb_expresiones.SelectedIndex;
+            //MessageBox.Show(indx.ToString(), "indx");
+            //lis_thompson_expre.Add(thom);
+            Thompson thom;
+            thom = lis_thompson_expre.ElementAt(indx).ex_thomson;
+
+            dtable.RowHeadersWidth = 15;
+            //dtable.ColumnHeadersHeight = 10;
+            dtable.DataSource = thom.view_Listado_Tran();
+            dtable.AutoResizeColumns();
+
+            thom.reset_Visitador_cerradura();
+            thom.graficando_Thomson();
+
+            thom.graficando_Automata();
+
+        }
+
+        public int ObtenerIndiceArbol(String exp)
+        {
+
+            for (int i = 0; i < lis_thompson_expre.Count; ++i)
+            {
+                if (lis_thompson_expre.ElementAt(i).name_expresion.Equals(exp))
+                {
+                    return i;
+                }
+            }
+            return -99;
+        }
+        private void beva_lex_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lis_evaluar_expre.Count; ++i)
+            {
+
+                MessageBox.Show(lis_evaluar_expre.ElementAt(i).cadena_eva, "Evaliando: " + lis_evaluar_expre.ElementAt(i).identificador 
+                   );
+
+                int exist = ObtenerIndiceArbol(lis_evaluar_expre.ElementAt(i).identificador);
+
+                if (exist == -99)
+                {
+                    //    area2.setText("No existe expresion Regular para " + lis_evaluar_expre.get(i).identificador);
+                }
+                else
+                {
+                    //    Arbol tree;
+                    //    tree = lis_arbol_expre.get(exist).arbol;
+
+                    //    tree.EvaluandoLexema_final(lis_evaluar_expre.get(i).cadena_eva, lis_var);
+                    //    resul_lis = tree.getResul_ex();
+                    //    lis_resul();
+                }
+
+            }
         }
     }
 }

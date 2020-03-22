@@ -45,13 +45,16 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dtable = new System.Windows.Forms.DataGridView();
             this.probartab = new System.Windows.Forms.Button();
+            this.cb_expresiones = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.beva_lex = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtable)).BeginInit();
             this.SuspendLayout();
             // 
             // b_analizar
             // 
-            this.b_analizar.Location = new System.Drawing.Point(50, 389);
+            this.b_analizar.Location = new System.Drawing.Point(33, 374);
             this.b_analizar.Name = "b_analizar";
             this.b_analizar.Size = new System.Drawing.Size(82, 32);
             this.b_analizar.TabIndex = 0;
@@ -61,9 +64,9 @@
             // 
             // tb_texto
             // 
-            this.tb_texto.Location = new System.Drawing.Point(308, 389);
+            this.tb_texto.Location = new System.Drawing.Point(294, 374);
             this.tb_texto.Name = "tb_texto";
-            this.tb_texto.Size = new System.Drawing.Size(445, 54);
+            this.tb_texto.Size = new System.Drawing.Size(459, 74);
             this.tb_texto.TabIndex = 1;
             this.tb_texto.Text = "";
             // 
@@ -135,7 +138,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(918, 394);
+            this.button1.Location = new System.Drawing.Point(1135, 420);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -146,42 +149,45 @@
             // 
             // b_graficar
             // 
-            this.b_graficar.Location = new System.Drawing.Point(150, 389);
+            this.b_graficar.Location = new System.Drawing.Point(121, 374);
             this.b_graficar.Name = "b_graficar";
             this.b_graficar.Size = new System.Drawing.Size(121, 32);
             this.b_graficar.TabIndex = 5;
-            this.b_graficar.Text = "Crear Graficas";
+            this.b_graficar.Text = "Cargar ER";
             this.b_graficar.UseVisualStyleBackColor = true;
             this.b_graficar.Click += new System.EventHandler(this.b_graficar_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(768, 351);
+            this.button2.Location = new System.Drawing.Point(1103, 420);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(107, 23);
             this.button2.TabIndex = 6;
             this.button2.Text = "probar enlace";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(781, 380);
+            this.button3.Location = new System.Drawing.Point(1116, 420);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 23);
             this.button3.TabIndex = 7;
             this.button3.Text = "pruba igual listado";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(781, 409);
+            this.button4.Location = new System.Drawing.Point(1116, 420);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(94, 23);
             this.button4.TabIndex = 8;
             this.button4.Text = "comp list nod";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dtable
@@ -189,16 +195,16 @@
             this.dtable.AllowUserToAddRows = false;
             this.dtable.AllowUserToDeleteRows = false;
             this.dtable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtable.Location = new System.Drawing.Point(768, 31);
+            this.dtable.Location = new System.Drawing.Point(759, 66);
             this.dtable.Name = "dtable";
             this.dtable.ReadOnly = true;
             this.dtable.RowTemplate.Height = 24;
-            this.dtable.Size = new System.Drawing.Size(433, 227);
+            this.dtable.Size = new System.Drawing.Size(433, 302);
             this.dtable.TabIndex = 9;
             // 
             // probartab
             // 
-            this.probartab.Location = new System.Drawing.Point(768, 279);
+            this.probartab.Location = new System.Drawing.Point(1135, 420);
             this.probartab.Name = "probartab";
             this.probartab.Size = new System.Drawing.Size(75, 23);
             this.probartab.TabIndex = 10;
@@ -207,11 +213,42 @@
             this.probartab.Visible = false;
             this.probartab.Click += new System.EventHandler(this.probartab_Click);
             // 
+            // cb_expresiones
+            // 
+            this.cb_expresiones.FormattingEnabled = true;
+            this.cb_expresiones.Location = new System.Drawing.Point(930, 28);
+            this.cb_expresiones.Name = "cb_expresiones";
+            this.cb_expresiones.Size = new System.Drawing.Size(262, 24);
+            this.cb_expresiones.TabIndex = 11;
+            this.cb_expresiones.SelectedIndexChanged += new System.EventHandler(this.cb_expresiones_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(759, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 17);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Expresiones Regulares:";
+            // 
+            // beva_lex
+            // 
+            this.beva_lex.Location = new System.Drawing.Point(33, 412);
+            this.beva_lex.Name = "beva_lex";
+            this.beva_lex.Size = new System.Drawing.Size(209, 32);
+            this.beva_lex.TabIndex = 13;
+            this.beva_lex.Text = "Evaluar Lexemas";
+            this.beva_lex.UseVisualStyleBackColor = true;
+            this.beva_lex.Click += new System.EventHandler(this.beva_lex_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 455);
+            this.Controls.Add(this.beva_lex);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cb_expresiones);
             this.Controls.Add(this.probartab);
             this.Controls.Add(this.dtable);
             this.Controls.Add(this.button4);
@@ -253,6 +290,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dtable;
         private System.Windows.Forms.Button probartab;
+        private System.Windows.Forms.ComboBox cb_expresiones;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button beva_lex;
     }
 }
 
