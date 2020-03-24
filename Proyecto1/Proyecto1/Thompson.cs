@@ -21,7 +21,7 @@ namespace Proyecto1
 
         List<Transiciones> Listado_Tran; ///guarda el lista de trandiciones
 
-        List<TTransiciones_Cerraduras> tab_transiciones; ///guarda la tabla de transiciones
+        public List<TTransiciones_Cerraduras> tab_transiciones; ///guarda la tabla de transiciones
 
         String name_expre;
 

@@ -720,16 +720,21 @@ namespace Proyecto1
 
                 if (exist == -99)
                 {
-                    //    area2.setText("No existe expresion Regular para " + lis_evaluar_expre.get(i).identificador);
+                    tb_texto.Text = "No existe expresion Regular para " + lis_evaluar_expre.ElementAt(i).identificador;
                 }
                 else
                 {
-                    //    Arbol tree;
-                    //    tree = lis_arbol_expre.get(exist).arbol;
+                    //Thompson thom;
+                    //thom = lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones;
 
-                    //    tree.EvaluandoLexema_final(lis_evaluar_expre.get(i).cadena_eva, lis_var);
-                    //    resul_lis = tree.getResul_ex();
-                    //    lis_resul();
+                    ////AFD.EvaluandoLexema_final(lis_evaluar_expre.get(i).cadena_eva, lis_var);
+                    ////resul_lis = AFD.getResul_ex();
+                    ////lis_resul();
+                    EvaluandoLexemas AFD = new EvaluandoLexemas(lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones, lis_var);
+                    //AFD.EvaluandoLexema_final(lis_evaluar_expre.ElementAt(i).cadena_eva, lis_var);
+
+                    //AFD.EvaluandoLexema_inicio(lis_evaluar_expre.ElementAt(i).cadena_eva);
+                    AFD.EvaluandoLexema_f2(lis_evaluar_expre.ElementAt(i).cadena_eva);
                 }
 
             }

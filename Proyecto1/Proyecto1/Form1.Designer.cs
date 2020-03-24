@@ -64,9 +64,12 @@
             // 
             // tb_texto
             // 
-            this.tb_texto.Location = new System.Drawing.Point(294, 374);
+            this.tb_texto.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.tb_texto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_texto.ForeColor = System.Drawing.Color.Lime;
+            this.tb_texto.Location = new System.Drawing.Point(262, 374);
             this.tb_texto.Name = "tb_texto";
-            this.tb_texto.Size = new System.Drawing.Size(459, 74);
+            this.tb_texto.Size = new System.Drawing.Size(491, 74);
             this.tb_texto.TabIndex = 1;
             this.tb_texto.Text = "";
             // 
@@ -78,7 +81,7 @@
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1222, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1325, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -199,7 +202,7 @@
             this.dtable.Name = "dtable";
             this.dtable.ReadOnly = true;
             this.dtable.RowTemplate.Height = 24;
-            this.dtable.Size = new System.Drawing.Size(433, 302);
+            this.dtable.Size = new System.Drawing.Size(539, 302);
             this.dtable.TabIndex = 9;
             // 
             // probartab
@@ -218,7 +221,7 @@
             this.cb_expresiones.FormattingEnabled = true;
             this.cb_expresiones.Location = new System.Drawing.Point(930, 28);
             this.cb_expresiones.Name = "cb_expresiones";
-            this.cb_expresiones.Size = new System.Drawing.Size(262, 24);
+            this.cb_expresiones.Size = new System.Drawing.Size(368, 24);
             this.cb_expresiones.TabIndex = 11;
             this.cb_expresiones.SelectedIndexChanged += new System.EventHandler(this.cb_expresiones_SelectedIndexChanged);
             // 
@@ -245,7 +248,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1222, 455);
+            this.ClientSize = new System.Drawing.Size(1325, 455);
             this.Controls.Add(this.beva_lex);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cb_expresiones);

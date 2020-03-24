@@ -54,6 +54,7 @@
     <Compile Include="Cerradura_Mueve.cs" />
     <Compile Include="Errores.cs" />
     <Compile Include="ER_unitario.cs" />
+    <Compile Include="EvaluandoLexemas.cs" />
     <Compile Include="Exp_a_Evaluar.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
