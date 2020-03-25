@@ -198,35 +198,118 @@ namespace Proyecto1
         /*************inicio*recorriendo*estados******************************************/
         public void RecorroLisTransiciones(String entrada)
         {
+            int estado_interno;
+            int i_ac = 0;
+
             //Raiz A, 0, estado inicial;   
             //int ir_a_es = 0;
             int idEstado = 0;
             MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
+            
+            char c;
+            int i = 0;
+            c = entrada[i];
+
+            MessageBox.Show("c: " + c.ToString(), "i: " + i.ToString() );
+    
             for (int tab = 0; tab < tab_transiciones.ElementAt(idEstado).ir_a.Count; tab++)
             {
+                Boolean pasa = false;
+                String tipo = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Tipo_ter;
                 String ter = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).terminal;
                 String ir_a = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Ir_a_Estado;
 
                 MessageBox.Show("con| ter: " + ter + ", va a| ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
                 //ir_a_es = getIndexEstado(ir_a);
+                if (tipo.Equals("CA"))
+                {
+                    //cad_actual = ter;
+                    //Ir_a_estado_si_exito = ir_a;
+                    estado_interno = 2;
 
-                RecorroLisTransiciones(entrada, ir_a);
+                    //pasa = Eva_Lexema_Estado(entrada, cad_actual, estado_interno, i);
+                    pasa = Eva_Lexema_Estado(entrada, ter, estado_interno, i);
+                    MessageBox.Show(pasa.ToString(), "pasa");
+                }
+
+                if (pasa)
+                {
+                    //i = indice_continuar + 1;
+                    ////i = indice_continuar;
+                    i_ac = indice_continuar + 1;
+
+                    //idEstado = getIndexEstado(Ir_a_estado_si_exito);
+                    //MessageBox.Show("CA pasa: " + pasa + " Ir_a_estado_si_exito: " + Ir_a_estado_si_exito);
+
+                    String Aceptacion = tab_transiciones.ElementAt(idEstado).Estado;
+                    //if (Aceptacion.Equals("F"))
+                    //{
+                    //    Acepta_lexema = true;
+                    //}
+                    //else
+                    //{
+                    //    Acepta_lexema = false;
+                    //}
+                    RecorroLisTransiciones(entrada, ir_a, i_ac);
+                }
+                ////////////RecorroLisTransiciones(entrada, ir_a, i_ac);
             }
         }
 
-        public void RecorroLisTransiciones(String entrada, String Estado)
+        public void RecorroLisTransiciones(String entrada, String Estado, int i)
         {
+            int estado_interno;
+            int i_ac = 0;
+
             int ir_a_es = getIndexEstado(Estado);
             MessageBox.Show(tab_transiciones.ElementAt(ir_a_es).ir_a.Count.ToString(), " tab_transiciones.ElementAt(ir_a_es).ir_a.Count");
+
+            char c;
+            c = entrada[i];
+
+            MessageBox.Show("** c: " + c.ToString(), "*** i: " + i.ToString());
+
             for (int tab = 0; tab < tab_transiciones.ElementAt(ir_a_es).ir_a.Count; tab++)
             {
+                Boolean pasa = false;
+                String tipo = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).Tipo_ter;
                 String ter = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).terminal;
                 String ir_a = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).Ir_a_Estado;
 
                 MessageBox.Show("*** con| ter: " + ter + ", *** va a| ir a: " + ir_a, tab_transiciones.ElementAt(ir_a_es).name_estado);
                 //ir_a_es = getIndexEstado(ir_a);
+                if (tipo.Equals("CA"))
+                {
+                    //cad_actual = ter;
+                    //Ir_a_estado_si_exito = ir_a;
+                    estado_interno = 2;
 
-                RecorroLisTransiciones(entrada, ir_a);
+                    //pasa = Eva_Lexema_Estado(entrada, cad_actual, estado_interno, i);
+                    pasa = Eva_Lexema_Estado(entrada, ter, estado_interno, i);
+                    MessageBox.Show(pasa.ToString(), "pasa");
+                }
+
+                if (pasa)
+                {
+                    //i = indice_continuar + 1;
+                    ////i = indice_continuar;
+                    i_ac = indice_continuar + 1;
+
+                    //idEstado = getIndexEstado(Ir_a_estado_si_exito);
+                    //MessageBox.Show("CA pasa: " + pasa + " Ir_a_estado_si_exito: " + Ir_a_estado_si_exito);
+
+                    String Aceptacion = tab_transiciones.ElementAt(ir_a_es).Estado;
+                    //if (Aceptacion.Equals("F"))
+                    //{
+                    //    Acepta_lexema = true;
+                    //}
+                    //else
+                    //{
+                    //    Acepta_lexema = false;
+                    //}
+                    RecorroLisTransiciones(entrada, ir_a, i_ac);
+                }
+                ////////////RecorroLisTransiciones(entrada, ir_a, i_ac);
             }
         }
 
