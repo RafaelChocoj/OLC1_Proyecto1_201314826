@@ -731,10 +731,11 @@ namespace Proyecto1
                     ////resul_lis = AFD.getResul_ex();
                     ////lis_resul();
                     EvaluandoLexemas AFD = new EvaluandoLexemas(lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones, lis_var);
-                    //AFD.EvaluandoLexema_final(lis_evaluar_expre.ElementAt(i).cadena_eva, lis_var);
+                    ///////AFD.EvaluandoLexema_final(lis_evaluar_expre.ElementAt(i).cadena_eva);
+                    AFD.RecorroLisTransiciones(lis_evaluar_expre.ElementAt(i).cadena_eva);
 
                     //AFD.EvaluandoLexema_inicio(lis_evaluar_expre.ElementAt(i).cadena_eva);
-                    AFD.EvaluandoLexema_f2(lis_evaluar_expre.ElementAt(i).cadena_eva);
+                    //AFD.EvaluandoLexema_f2(lis_evaluar_expre.ElementAt(i).cadena_eva);
                 }
 
             }

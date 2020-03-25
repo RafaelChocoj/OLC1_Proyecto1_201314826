@@ -20,25 +20,121 @@ namespace Proyecto1
         }
 
 
-        public void EvaluandoLexema_f2 (String entrada)
+        public void EvaluandoLexema_x_Terminal(String entrada, int index_ac, String tipo, String ter, String ir_a)
         {
-
+            String cad_actual = "";
+            String Ir_a_estado_si_exito = "";
+            int estado_interno = 0;
+            ///
             int idEstado = 0;
+            char c;
+            Boolean Acepta_lexema = false;
+
+            //int i_ante = 0;
+            //int idEstado_ante = 0;
+            for (int i = 0; i < entrada.Length; i++)
+            {
+                c = entrada[i];
+                //i_ante = i;
+                //idEstado_ante = idEstado;
+
+                MessageBox.Show(c.ToString(), i.ToString() + " EvaluandoLexema_final 11");
+                //MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
+                //for (int tab = 0; tab < tab_transiciones.ElementAt(idEstado).ir_a.Count; tab++)
+                //{
+                Boolean pasa = false;
+
+                //String tipo = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Tipo_ter;
+                //String ter = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).terminal;
+                //String ir_a = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Ir_a_Estado;
+
+                //MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(idEstado).name_estado);
+                //MessageBox.Show("ter: " + ter + ", ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
+                // MessageBox.Show(ir_a, "ir_a" + tab_transiciones.ElementAt(idEstado).name_estado);
+                /**********************/
+                if (tipo.Equals("CA"))
+                    {
+                        cad_actual = ter;
+                        Ir_a_estado_si_exito = ir_a;
+                        estado_interno = 2;
+
+                        pasa = Eva_Lexema_Estado(entrada, cad_actual, estado_interno, i);
+                        MessageBox.Show(pasa.ToString(), "pasa");
+                        if (pasa)
+                        {
+                            //i = indice_continuar + 1;
+                            i = indice_continuar;
+                            //tab = 0;
+                            idEstado = getIndexEstado(Ir_a_estado_si_exito);
+                            MessageBox.Show("CA pasa: " + pasa + " Ir_a_estado_si_exito: " + Ir_a_estado_si_exito);
+
+                            String Aceptacion = tab_transiciones.ElementAt(idEstado).Estado;
+                            if (Aceptacion.Equals("F"))
+                            {
+                                Acepta_lexema = true;
+                            }
+                            else
+                            {
+                                Acepta_lexema = false;
+                            }
+                        }
+                        else
+                        {
+                            Acepta_lexema = false;
+                            //i = i_ante;
+                            //idEstado = idEstado_ante;
+                            //MessageBox.Show(i.ToString(), "i_ante, no pasa");
+                            //MessageBox.Show(idEstado.ToString(), "idEstado_ante, no pasa");
+                        }
+                    }
+                    /**********************/
+
+                //}
+                //if (Acepta_lexema == false)
+                //{
+
+                //    MessageBox.Show("Error falta, se esperaba caracter");
+                //}
+                ////////if (tab_transiciones.ElementAt(idEstado).ir_a.Count == 0)
+                ////////{
+                ////////    Acepta_lexema = false;
+                ////////}
+
+
+            }
+
+            //if (Acepta_lexema)
+            //{
+            //    MessageBox.Show("lexema aceptado");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Lexema invalido");
+            //}
+        }
+
+        public void EvaluandoLexema_f2(String entrada)
+        {
+            
+            int idEstado = 0;
+            int i = 0;
+            //c = entrada[i];
 
             MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
             for (int tab = 0; tab < tab_transiciones.ElementAt(idEstado).ir_a.Count; tab++)
             {
                 //Boolean pasa = false;
-
+                MessageBox.Show(tab.ToString(), "tab");
                 String tipo = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Tipo_ter;
                 String ter = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).terminal;
                 String ir_a = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Ir_a_Estado;
 
-                //MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(idEstado).name_estado);
-                MessageBox.Show("ter: " + ter + ", ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
-                // MessageBox.Show(ir_a, "ir_a" + tab_transiciones.ElementAt(idEstado).name_estado);
-                
+                MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(idEstado).name_estado);
+                MessageBox.Show("ter: " + ter + "    ----ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
+                //MessageBox.Show(ir_a, "ir_a" + tab_transiciones.ElementAt(idEstado).name_estado);
                 /**********************/
+
+                EvaluandoLexema_x_Terminal(entrada, i, tipo, ter, ir_a);
                 //if (tipo.Equals("CA"))
                 //{
                 //    cad_actual = ter;
@@ -98,6 +194,79 @@ namespace Proyecto1
 
 
         }
+
+        /*************inicio*recorriendo*estados******************************************/
+        public void RecorroLisTransiciones(String entrada)
+        {
+            //Raiz A, 0, estado inicial;   
+            //int ir_a_es = 0;
+            int idEstado = 0;
+            MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
+            for (int tab = 0; tab < tab_transiciones.ElementAt(idEstado).ir_a.Count; tab++)
+            {
+                String ter = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).terminal;
+                String ir_a = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Ir_a_Estado;
+
+                MessageBox.Show("con| ter: " + ter + ", va a| ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
+                //ir_a_es = getIndexEstado(ir_a);
+
+                RecorroLisTransiciones(entrada, ir_a);
+            }
+        }
+
+        public void RecorroLisTransiciones(String entrada, String Estado)
+        {
+            int ir_a_es = getIndexEstado(Estado);
+            MessageBox.Show(tab_transiciones.ElementAt(ir_a_es).ir_a.Count.ToString(), " tab_transiciones.ElementAt(ir_a_es).ir_a.Count");
+            for (int tab = 0; tab < tab_transiciones.ElementAt(ir_a_es).ir_a.Count; tab++)
+            {
+                String ter = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).terminal;
+                String ir_a = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).Ir_a_Estado;
+
+                MessageBox.Show("*** con| ter: " + ter + ", *** va a| ir a: " + ir_a, tab_transiciones.ElementAt(ir_a_es).name_estado);
+                //ir_a_es = getIndexEstado(ir_a);
+
+                RecorroLisTransiciones(entrada, ir_a);
+            }
+        }
+
+        /*************fin*******************************************/
+
+        //////////////////
+        //public void RecorroLisTransiciones(String entrada)
+        //{
+        //    //Raiz A, 0, estado inicial;   
+        //    //int ir_a_es = 0;
+        //    int idEstado = 0;
+        //    MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
+        //    for (int tab = 0; tab < tab_transiciones.ElementAt(idEstado).ir_a.Count; tab++)
+        //    {
+        //        String ter = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).terminal;
+        //        String ir_a = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Ir_a_Estado;
+
+        //        MessageBox.Show("con| ter: " + ter + ", va a| ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
+        //        //ir_a_es = getIndexEstado(ir_a);
+
+        //        RecorroLisTransiciones(entrada, ir_a);
+        //    }
+        //}
+
+        //public void RecorroLisTransiciones(String entrada, String Estado)
+        //{
+        //    int ir_a_es = getIndexEstado(Estado);
+        //    MessageBox.Show(tab_transiciones.ElementAt(ir_a_es).ir_a.Count.ToString(), " tab_transiciones.ElementAt(ir_a_es).ir_a.Count");
+        //    for (int tab = 0; tab < tab_transiciones.ElementAt(ir_a_es).ir_a.Count; tab++)
+        //    {
+        //        String ter = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).terminal;
+        //        String ir_a = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).Ir_a_Estado;
+
+        //        MessageBox.Show("*** con| ter: " + ter + ", *** va a| ir a: " + ir_a, tab_transiciones.ElementAt(ir_a_es).name_estado);
+        //        //ir_a_es = getIndexEstado(ir_a);
+
+        //        RecorroLisTransiciones(entrada, ir_a);
+        //    }
+        //}
+        //////////////////
 
         public void Verificando_Terminal(String entrada, int idEstado, int i, char c)
         {
@@ -177,7 +346,7 @@ namespace Proyecto1
 
         }
 
-        public void EvaluandoLexema_final(String entrada, List<Variables> lis_con)
+        public void EvaluandoLexema_final(String entrada)
         {
             String cad_actual = "";
             String Ir_a_estado_si_exito = "";
@@ -192,8 +361,8 @@ namespace Proyecto1
             for (int i = 0; i < entrada.Length; i++)
             {
                 c = entrada[i];
-                i_ante = i;
-                idEstado_ante = idEstado;
+                ////i_ante = i;
+                ////idEstado_ante = idEstado;
 
                 MessageBox.Show(c.ToString(), i.ToString() + " EvaluandoLexema_final 11");
                 MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
