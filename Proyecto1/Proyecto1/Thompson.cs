@@ -88,7 +88,7 @@ namespace Proyecto1
 
 
             MessageBox.Show(graf.ToString());
-            File.WriteAllText("thom.txt", graf.ToString());
+            File.WriteAllText("thom_" + name_expre+".txt", graf.ToString());
             ////////////////////System.Diagnostics.Process.Start("thom.txt");
             //return this.graf_arbolavl(graf.toString(), "graf_automata_" + name_expre);
 
@@ -98,7 +98,7 @@ namespace Proyecto1
             MessageBox.Show(root.ultimo_ref.lexema, "ultimo root.ultimo_ref.lexema ");
             nod_inicial = root;
             nod_final = root.ultimo_ref;
-            return CreateImage("thom");
+            return CreateImage("thom_" + name_expre);
             //return true;
         }
 

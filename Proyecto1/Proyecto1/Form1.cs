@@ -730,13 +730,16 @@ namespace Proyecto1
                     ////AFD.EvaluandoLexema_final(lis_evaluar_expre.get(i).cadena_eva, lis_var);
                     ////resul_lis = AFD.getResul_ex();
                     ////lis_resul();
-                    EvaluandoLexemas AFD = new EvaluandoLexemas(lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones, lis_var);
+                    EvaluandoLexemas AFD = new EvaluandoLexemas(lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones, lis_var, lis_evaluar_expre.ElementAt(i).identificador);
                     ///////AFD.EvaluandoLexema_final(lis_evaluar_expre.ElementAt(i).cadena_eva);
                     AFD.RecorroLisTransiciones(lis_evaluar_expre.ElementAt(i).cadena_eva);
 
 
                     MessageBox.Show("leyendo paso lex");
+                    AFD.Tokes_n_Errors_xml();
                     AFD.Paso_Lexema();
+                    tb_texto.Text = tb_texto.Text + AFD.return_texto_val();
+
                     //AFD.EvaluandoLexema_inicio(lis_evaluar_expre.ElementAt(i).cadena_eva);
                     //AFD.EvaluandoLexema_f2(lis_evaluar_expre.ElementAt(i).cadena_eva);
                 }
