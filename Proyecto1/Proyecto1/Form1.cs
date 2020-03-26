@@ -734,6 +734,9 @@ namespace Proyecto1
                     ///////AFD.EvaluandoLexema_final(lis_evaluar_expre.ElementAt(i).cadena_eva);
                     AFD.RecorroLisTransiciones(lis_evaluar_expre.ElementAt(i).cadena_eva);
 
+
+                    MessageBox.Show("leyendo paso lex");
+                    AFD.Paso_Lexema();
                     //AFD.EvaluandoLexema_inicio(lis_evaluar_expre.ElementAt(i).cadena_eva);
                     //AFD.EvaluandoLexema_f2(lis_evaluar_expre.ElementAt(i).cadena_eva);
                 }

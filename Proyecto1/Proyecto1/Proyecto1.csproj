@@ -62,6 +62,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lexemas_Evaluados.cs" />
     <Compile Include="Lexico.cs" />
     <Compile Include="Listado_Thompson.cs" />
     <Compile Include="NodeAFN.cs" />
