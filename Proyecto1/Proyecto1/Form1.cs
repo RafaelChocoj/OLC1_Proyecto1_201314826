@@ -76,7 +76,51 @@ namespace Proyecto1
             lis_evaluar_expre = sin.getLista_Evaluar();
 
             dtable.DataSource = analisis_lex.lis_tokens;
+            TabladeConjuntos();
             MessageBox.Show("Terminó el Analisis", "Analisis");
+            
+
+        }
+
+        public void TabladeConjuntos()
+        {
+            //lis_var
+
+            DataRow row;
+            //DataColumn colum;
+            DataTable tabtan = new DataTable();
+            tabtan.Columns.Add("Nombre", typeof(string));
+            tabtan.Columns.Add("Valores", typeof(string));
+
+
+            for (int tb = 0; tb < lis_var.Count; ++tb)
+            {
+                row = tabtan.NewRow();
+                row["Nombre"] = lis_var.ElementAt(tb).name_var;
+                List<String> val = lis_var.ElementAt(tb).valores;
+                String val_s = "";
+                for (int i = 0; i < val.Count; ++i)
+                {
+                    if (i < val.Count -1)
+                    {
+                        val_s = val_s + val.ElementAt(i) + ",  ";
+                    } else
+                    {
+                        val_s = val_s + val.ElementAt(i);
+                    }
+                    
+                }
+
+                row["Valores"] = val_s;
+
+
+                tabtan.Rows.Add(row);
+            }
+
+            tconjun.RowHeadersWidth = 12;
+            //tconjun.ColumnHeadersHeight = 10;
+            tconjun.DataSource = tabtan;
+            tconjun.AutoResizeColumns();
 
         }
 
@@ -455,7 +499,7 @@ namespace Proyecto1
                 tree.IniciarVisitado();
                 tree.MetedoCerradura();
 
-                dtable.RowHeadersWidth = 15;
+                dtable.RowHeadersWidth = 12;
                 //dtable.ColumnHeadersHeight = 10;
                 dtable.DataSource = tree.view_Listado_Tran();
                 dtable.AutoResizeColumns();

@@ -368,6 +368,7 @@ namespace Proyecto1
                     String ter = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).terminal;
                     String ir_a = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).Ir_a_Estado;
 
+                    MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(ir_a_es).name_estado);
                     MessageBox.Show("*** con| ter: " + ter + ", *** va a| ir a: " + ir_a, tab_transiciones.ElementAt(ir_a_es).name_estado);
                     //ir_a_es = getIndexEstado(ir_a);
                     if (tipo.Equals("CA"))
@@ -380,9 +381,18 @@ namespace Proyecto1
                         //c = entrada[i];
                         //MessageBox.Show("----------------- c: " + c.ToString(), "--- i: " + i.ToString());
                         pasa = Eva_Lexema_Estado(entrada, ter, estado_interno, i);
-                        MessageBox.Show(pasa.ToString(), "pasa");
+                        //MessageBox.Show(pasa.ToString(), "pasa");
                     }
 
+                    if (tipo.Equals("CO"))
+                    {
+                        estado_interno = 1;
+                        pasa = Eva_Lexema_Estado(entrada, ter, estado_interno, i);
+                        //MessageBox.Show(pasa.ToString(), "pasa");
+                    }
+
+
+                    MessageBox.Show(pasa.ToString(), "pasa"); ///
                     if (pasa)
                     {
                         //i = indice_continuar + 1;
@@ -405,7 +415,14 @@ namespace Proyecto1
 
                         //List<String> l_tokens_lex = new List<String>();
                         encontro_transicion = true;
-                        l_tokens_lex.Add(ter);
+                        if (tipo.Equals("CO"))
+                        {
+                            l_tokens_lex.Add(ter + " - " + entrada[i]);
+                        }
+                        else
+                        {
+                            l_tokens_lex.Add(ter);
+                        }
                         //MessageBox.Show(ter, "2 ter ter ter ter");
                         RecorroLisTransiciones(entrada, ir_a, i_ac, l_tokens_lex, l_errores_lex);
                     }
@@ -772,6 +789,33 @@ namespace Proyecto1
             return -99;
         }
 
+        /*si existe conjunto */
+        public Variables existeCon(String name_con)
+        {
+
+            for (int i = 0; i < lis_con.Count ; i++)
+            {
+                if (name_con.Equals(lis_con.ElementAt(i).name_var))
+                {
+                    return lis_con.ElementAt(i);
+                }
+            }
+            return null;
+        }
+        ///*si existe valor en listado*/
+        //public boolean existe_valor_enConjunto(String val, List<String> valores)
+        //{
+        //    for (int i = 0; i < valores.size(); i++)
+        //    {
+        //        if (val.equals(valores.get(i)))
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
+
+
         int indice_continuar;
         public Boolean Eva_Lexema_Estado(String entrada, String cad_actual, int estado_interno, int ind)
         {
@@ -787,6 +831,70 @@ namespace Proyecto1
 
                 switch (estado_interno)
                 {
+                    /*para armar conjuntos*/
+                    case 1:
+
+                        /*buscando si existe conjunto*/
+                        Variables conjunto = existeCon(cad_actual);
+                        if (conjunto == null)
+                        {
+                            MessageBox.Show("no existe conjunto Conjunto " + cad_actual);
+                            return false;
+                        }
+                        /*verificando tipo de conjunto*/
+                        if (conjunto.tipo.Equals("C"))
+                        {
+                            /*verificando si es caracter especial*/
+                            String character;
+                            if (c == '\n')
+                            {
+                                character = "\\n";
+                            }
+                            else if (c == '\'')
+                            {
+                                character = "\\'";
+                            }
+                            else if (c == '\t')
+                            {
+                                character = "\\t";
+                            }
+                            /*no se valida con comillas dobles*/
+                            //else if (c == '\"')
+                            //{
+                            //    character = "\\"";
+                            //}
+                            else
+                            {
+                                /**********si no es caracter especial**********/
+                                character = c.ToString();
+                                /*********fin*si no es caracter especial**********/
+                            }
+                            MessageBox.Show(character, "character");
+
+                            ////Boolean existe = existe_valor_enConjunto(String.valueOf(c), conjunto.valores);
+                            //Boolean existe = conjunto.valores.Contains(c.ToString());
+                            Boolean existe = conjunto.valores.Contains(character);
+                            if (existe)
+                                {
+
+                                    estado_interno = 0;
+                                    cad_actual = "";
+                                    lexema = "";
+                                    indice_continuar = i;
+                                    return true;
+                                }
+                                else
+                                {
+                                    ////////////JOptionPane.showMessageDialog(null, "No existe valor "+ c + " en Conjunto " + cad_actual);
+                                    return false;
+                                }
+                                
+                            
+
+                        }
+
+
+                        break;
                     /*para armar la cadena*/
                     case 2:
                         lexema += c;

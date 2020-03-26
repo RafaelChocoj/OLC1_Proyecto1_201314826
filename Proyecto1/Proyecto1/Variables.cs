@@ -9,9 +9,9 @@ namespace Proyecto1
     class Variables
     {
 
-        String name_var;
-        List<String> valores;
-        String tipo; // C = conjunto, R = rango
+        public String name_var;
+        public List<String> valores;
+        public String tipo; // C = conjunto, R = rango
 
 
         public Variables(String name_var, List<String> valores, String tipo)
