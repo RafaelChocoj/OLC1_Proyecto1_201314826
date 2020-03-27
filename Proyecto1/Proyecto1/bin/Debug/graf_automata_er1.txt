@@ -1,21 +1,11 @@
 digraph finite_state_machine {
 rankdir=LR;
 size="8,5"
-node [shape = doublecircle];  B C D E
+node [shape = doublecircle];  B C
 node [shape = Mcircle];  A
 node [shape = circle];
-A -> B[ label = "letra" ];
-B -> C[ label = "_" ];
-B -> D[ label = "digito" ];
-B -> E[ label = "letra" ];
-C -> C[ label = "_" ];
-C -> D[ label = "digito" ];
-C -> E[ label = "letra" ];
-D -> C[ label = "_" ];
-D -> D[ label = "digito" ];
-D -> E[ label = "letra" ];
-E -> C[ label = "_" ];
-E -> D[ label = "digito" ];
-E -> E[ label = "letra" ];
+A -> B[ label = "d" ];
+B -> C[ label = "d" ];
+C -> C[ label = "d" ];
 
 }

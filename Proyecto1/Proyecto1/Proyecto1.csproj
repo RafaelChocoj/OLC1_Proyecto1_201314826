@@ -79,6 +79,7 @@
     <Compile Include="TTransiciones_Cerraduras.cs" />
     <Compile Include="VarExpReg.cs" />
     <Compile Include="Variables.cs" />
+    <Compile Include="xmlData.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -107,7 +107,9 @@ namespace Proyecto1
                                         //match("Igualdad"); // ->
                 match("DosPuntos"); // :
                                     //JOptionPane.showMessageDialog(null,"-- Cadena. " + iden+"-" + preanalisis.lexema.replace("\"", "") );           
-                Exp_a_Evaluar eva = new Exp_a_Evaluar(iden, preanalisis.lexema.Replace("\"", ""));
+
+                ////////////////Exp_a_Evaluar eva = new Exp_a_Evaluar(iden, preanalisis.lexema.Replace("\"", ""));
+                Exp_a_Evaluar eva = new Exp_a_Evaluar(iden, preanalisis.lexema.Replace("\"", ""), preanalisis.linea, preanalisis.columna);
                 lis_evaluar_expre.Add(eva);
 
                 match("Cadena"); // cadena

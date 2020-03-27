@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,11 +16,19 @@ namespace Proyecto1
         List<Variables> lis_con;
         String name_expre;
         String cad;
-        public EvaluandoLexemas(List<TTransiciones_Cerraduras> tab_transiciones, List<Variables> lis_con, String name_expre)
+
+        int pos_eval;
+        int fil;
+        int colum;
+        public EvaluandoLexemas(List<TTransiciones_Cerraduras> tab_transiciones, List<Variables> lis_con, String name_expre, int pos_eval, int fil, int colum)
         {
             this.tab_transiciones = tab_transiciones;
             this.lis_con = lis_con;
             this.name_expre = name_expre;
+
+            this.pos_eval = pos_eval;
+            this.fil = fil;
+            this.colum = colum +1;
         }
 
 
@@ -301,17 +310,21 @@ namespace Proyecto1
                     //}
 
                     /*para listado de tokens*/
-                    List<String> l_tokens_lex = new List<String>();
+                    ////////////////List<String> l_tokens_lex = new List<String>();
+                    List<xmlData> l_tokens_lex = new List<xmlData>();
                     if (tipo.Equals("CO"))
                     {
-                        l_tokens_lex.Add(ter + " - " + entrada[i]);
+                        //l_tokens_lex.Add(ter + " - " + entrada[i]);
+                        l_tokens_lex.Add(new xmlData(tipo + "-" + ter, entrada[i].ToString() , fil, colum + i));
                     }
                     else
                     {
-                        l_tokens_lex.Add(ter);
+                        //l_tokens_lex.Add(ter);
+                        l_tokens_lex.Add(new xmlData(tipo, ter, fil, colum + i));
                     }
                     /*para listado de errores*/
-                    List<String> l_errores_lex = new List<String>();
+                    //////////////////////List<String> l_errores_lex = new List<String>();
+                    List<xmlData> l_errores_lex = new List<xmlData>();
                     encontro_transicion = true;
                     l_evaluados.Add(new Lexemas_Evaluados(l_tokens_lex, l_errores_lex) );
 
@@ -331,16 +344,20 @@ namespace Proyecto1
                     let = entrada[i];
                 }
                 /*para listado de tokens*/
-                List<String> l_tokens_lex = new List<String>();
+                ////////////////List<String> l_tokens_lex = new List<String>();
+                List<xmlData> l_tokens_lex = new List<xmlData>();
                 /*para listado de errores*/
-                List<String> l_errores_lex = new List<String>();
-                l_errores_lex.Add(let + ", No se Encontro Transicion 0");
+                ////////////////List<String> l_errores_lex = new List<String>();
+                List<xmlData> l_errores_lex = new List<xmlData>();
+                ///l_errores_lex.Add(let + ", No se Encontro Transicion 0");
+                l_errores_lex.Add(new xmlData("Err", let + ", No se Encontro Transicion 0", fil, colum + i));
                 l_evaluados.Add(new Lexemas_Evaluados(l_tokens_lex, l_errores_lex));
                 
             }
         }
 
-        public void RecorroLisTransiciones(String entrada, String Estado, int i, List<String> l_tokens_lex, List<String> l_errores_lex)
+        //////public void RecorroLisTransiciones(String entrada, String Estado, int i, List<String> l_tokens_lex, List<String> l_errores_lex)
+        public void RecorroLisTransiciones(String entrada, String Estado, int i, List<xmlData> l_tokens_lex, List<xmlData> l_errores_lex)
         {
             int estado_interno;
             int i_ac = 0;
@@ -383,14 +400,16 @@ namespace Proyecto1
                 ////si cadena finaliza sin estado de aceptacion
                 if (Acepta_lexema == false)
                 {
-                    l_errores_lex.Add("Cadena Finalizada sin Estado de Aceptación");
+                    //////////l_errores_lex.Add("Cadena Finalizada sin Estado de Aceptación");
+                    l_errores_lex.Add(new xmlData("Err", "Cadena Finalizada sin Estado de Aceptación", fil, colum + i));
                 }
             }
 
             /*si es estado final pero ya no sigue nada*/
             if (tab_transiciones.ElementAt(ir_a_es).ir_a.Count == 0 && i < entrada.Length )
             {
-                l_errores_lex.Add(entrada[i] + ", Caracter invalido, caracteres de más");
+                //////////l_errores_lex.Add(entrada[i] + ", Caracter invalido, caracteres de más");
+                l_errores_lex.Add(new xmlData("Err", entrada[i] + ", Caracter invalido, caracteres de más", fil, colum + i));
             }
 
             //MessageBox.Show("** c: ", "*** i: " + i.ToString());
@@ -477,11 +496,13 @@ namespace Proyecto1
                         encontro_transicion = true;
                         if (tipo.Equals("CO"))
                         {
-                            l_tokens_lex.Add(ter + " - " + entrada[i]);
+                            ////////////////l_tokens_lex.Add(ter + " - " + entrada[i]);
+                            l_tokens_lex.Add(new xmlData(tipo + "-" + ter, entrada[i].ToString(), fil, colum + i));
                         }
                         else
                         {
-                            l_tokens_lex.Add(ter);
+                            //////////l_tokens_lex.Add(ter);
+                            l_tokens_lex.Add(new xmlData(tipo, ter, fil, colum + i));
                         }
                         //MessageBox.Show(ter, "2 ter ter ter ter");
                         RecorroLisTransiciones(entrada, ir_a, i_ac, l_tokens_lex, l_errores_lex);
@@ -498,7 +519,8 @@ namespace Proyecto1
                     {
                         let = entrada[i];
                     }
-                    l_errores_lex.Add(let + ", No se Encontro Transicion 1");
+                    ////////////////l_errores_lex.Add(let + ", No se Encontro Transicion 1");
+                    l_errores_lex.Add(new xmlData("Err", let + ", No se Encontro Transicion 1", fil, colum + i));
                 }
             }
 
@@ -506,23 +528,23 @@ namespace Proyecto1
 
         public void Paso_Lexema()
         {
-            for (int i = 0; i < l_evaluados.Count; i++)
-            {
-                MessageBox.Show(i.ToString(), "i");
-                List<String> l_tokens = l_evaluados.ElementAt(i).l_tokens_lex;
-                List<String> l_errores = l_evaluados.ElementAt(i).l_errores_lex;
+            ////for (int i = 0; i < l_evaluados.Count; i++)
+            ////{
+            ////    MessageBox.Show(i.ToString(), "i");
+            ////    List<String> l_tokens = l_evaluados.ElementAt(i).l_tokens_lex;
+            ////    List<String> l_errores = l_evaluados.ElementAt(i).l_errores_lex;
 
-                for (int j = 0; j < l_tokens.Count ; j++)
-                {
-                    MessageBox.Show(l_tokens.ElementAt(j), "l_tokens.ElementAt(j) = " + j);
-                }
+            ////    for (int j = 0; j < l_tokens.Count ; j++)
+            ////    {
+            ////        MessageBox.Show(l_tokens.ElementAt(j), "l_tokens.ElementAt(j) = " + j);
+            ////    }
 
-                for (int j = 0; j < l_errores.Count; j++)
-                {
-                    MessageBox.Show(l_errores.ElementAt(j), "l_errores.ElementAt(j) = " + j);
-                }
+            ////    for (int j = 0; j < l_errores.Count; j++)
+            ////    {
+            ////        MessageBox.Show(l_errores.ElementAt(j), "l_errores.ElementAt(j) = " + j);
+            ////    }
 
-            }
+            ////}
         }
 
         //public void Retorna_lex_validos()
@@ -556,8 +578,10 @@ namespace Proyecto1
             for (int i = 0; i < l_evaluados.Count; i++)
             {
                 //MessageBox.Show(i.ToString(), "i");
-                List<String> l_tokens = l_evaluados.ElementAt(i).l_tokens_lex;
-                List<String> l_errores = l_evaluados.ElementAt(i).l_errores_lex;
+                //////List<String> l_tokens = l_evaluados.ElementAt(i).l_tokens_lex;
+                //////List<String> l_errores = l_evaluados.ElementAt(i).l_errores_lex;
+                List<xmlData> l_tokens = l_evaluados.ElementAt(i).l_tokens_lex;
+                List<xmlData> l_errores = l_evaluados.ElementAt(i).l_errores_lex;
 
                 StringBuilder tokens_xml = new StringBuilder();
                 StringBuilder err_xml = new StringBuilder();
@@ -569,16 +593,17 @@ namespace Proyecto1
                     {
                         //MessageBox.Show(l_tokens.ElementAt(j), "l_tokens.ElementAt(j) = " + j);
                         tokens_xml.Append("<Token>\n");
-                        //tokens_xml.Append("<Nombre>nombre_token1</Nombre>\n");
-                        tokens_xml.Append("<Valor>" + l_tokens.ElementAt(j) + "</Valor>\n");
-                        //tokens_xml.Append("<Fila>fila_token1</Fila>\n");
-                        //tokens_xml.Append("<Columna>columna_token1</Columna>\n");
+                        tokens_xml.Append("<Nombre>" + l_tokens.ElementAt(j).name_token + "</Nombre>\n");
+                        tokens_xml.Append("<Valor>" + l_tokens.ElementAt(j).valor_token + "</Valor>\n");
+                        tokens_xml.Append("<Fila>" + l_tokens.ElementAt(j).fila + "</Fila>\n");
+                        tokens_xml.Append("<Columna>" + l_tokens.ElementAt(j).columna + "</Columna>\n");
                         tokens_xml.Append("</Token>\n");
 
                     }
                     tokens_xml.Append("</ListaTokens>");
-                    File.WriteAllText("tokens_" + name_expre + "_" + i + ".xml", tokens_xml.ToString());
-                    System.Diagnostics.Process.Start("tokens_" + name_expre + "_" + i + ".xml");
+                    File.WriteAllText(pos_eval+"_tokens_" + name_expre + "_" + i + ".xml", tokens_xml.ToString());
+                    Thread.Sleep(500);
+                    System.Diagnostics.Process.Start(pos_eval + "_tokens_" + name_expre + "_" + i + ".xml");
                 }
                 if (l_errores.Count > 0)
                 {
@@ -588,28 +613,29 @@ namespace Proyecto1
                     {
                         //MessageBox.Show(l_errores.ElementAt(j), "l_errores.ElementAt(j) = " + j);
                         err_xml.Append("<Error>\n");
-                        err_xml.Append("<Valor>" + l_errores.ElementAt(j) + "</Valor>\n");
-                        //err_xml.Append("<Fila>fila_error1</Fila>\n");
-                        //err_xml.Append("<Columna>columna_error1</Columna>\n");
+                        err_xml.Append("<Valor>" + l_errores.ElementAt(j).valor_token + "</Valor>\n");
+                        err_xml.Append("<Fila>" + l_tokens.ElementAt(j).fila + "</Fila>\n");
+                        err_xml.Append("<Columna>" + l_tokens.ElementAt(j).columna + "</Columna>\n");
                         err_xml.Append("</Error>\n");
                     }
                     err_xml.Append("</ListaErrores>");
 
-                    File.WriteAllText("errores_" + name_expre + "_" + i + ".xml", err_xml.ToString());
-                    System.Diagnostics.Process.Start("errores_" + name_expre + "_" + i + ".xml");
+                    File.WriteAllText(pos_eval + "_errores_" + name_expre + "_" + i + ".xml", err_xml.ToString());
+                    Thread.Sleep(500);
+                    System.Diagnostics.Process.Start(pos_eval + "_errores_" + name_expre + "_" + i + ".xml");
                 }
 
                 /*verificando si no tiene errores, y haya pasado la validacion*/
                 if (l_errores.Count == 0)
                 {
                     hay_valido++;
-                    lex_tok = lex_tok + "Expresión " + cad + " para la EXP " + name_expre + " ** Es Valida \n";
+                    lex_tok = lex_tok + "Expresión \"" + cad + "\" para la EXP " + name_expre + " ** Es Valida \n";
                 }
 
                 /*verificando si tiene errores encontrados*/
                 if (l_errores.Count > 0)
                 {
-                    lex_err = lex_err + "Expresión " + cad + " para la EXP " + name_expre + " -- No es Valida \n";
+                    lex_err = lex_err + "Expresión \"" + cad + "\" para la EXP " + name_expre + " -- No es Valida \n";
                 }
 
             }
@@ -629,6 +655,91 @@ namespace Proyecto1
         {
             return resul_lexema;
         }
+
+        ////
+        ////public void Tokes_n_Errors_xml()
+        ////{
+        ////    resul_lexema = "";
+
+        ////    String lex_tok = "";
+        ////    String lex_err = "";
+        ////    int hay_valido = 0;
+        ////    int err = 0;
+        ////    for (int i = 0; i < l_evaluados.Count; i++)
+        ////    {
+        ////        //MessageBox.Show(i.ToString(), "i");
+        ////        List<String> l_tokens = l_evaluados.ElementAt(i).l_tokens_lex;
+        ////        List<String> l_errores = l_evaluados.ElementAt(i).l_errores_lex;
+
+        ////        StringBuilder tokens_xml = new StringBuilder();
+        ////        StringBuilder err_xml = new StringBuilder();
+
+        ////        if (l_tokens.Count > 0)
+        ////        {
+        ////            tokens_xml.Append("<ListaTokens> \n");
+        ////            for (int j = 0; j < l_tokens.Count; j++)
+        ////            {
+        ////                //MessageBox.Show(l_tokens.ElementAt(j), "l_tokens.ElementAt(j) = " + j);
+        ////                tokens_xml.Append("<Token>\n");
+        ////                //tokens_xml.Append("<Nombre>nombre_token1</Nombre>\n");
+        ////                tokens_xml.Append("<Valor>" + l_tokens.ElementAt(j) + "</Valor>\n");
+        ////                //tokens_xml.Append("<Fila>fila_token1</Fila>\n");
+        ////                //tokens_xml.Append("<Columna>columna_token1</Columna>\n");
+        ////                tokens_xml.Append("</Token>\n");
+
+        ////            }
+        ////            tokens_xml.Append("</ListaTokens>");
+        ////            File.WriteAllText(pos_eval + "_tokens_" + name_expre + "_" + i + ".xml", tokens_xml.ToString());
+        ////            Thread.Sleep(500);
+        ////            System.Diagnostics.Process.Start(pos_eval + "_tokens_" + name_expre + "_" + i + ".xml");
+        ////        }
+        ////        if (l_errores.Count > 0)
+        ////        {
+        ////            err++;
+        ////            err_xml.Append("<ListaErrores>\n");
+        ////            for (int j = 0; j < l_errores.Count; j++)
+        ////            {
+        ////                //MessageBox.Show(l_errores.ElementAt(j), "l_errores.ElementAt(j) = " + j);
+        ////                err_xml.Append("<Error>\n");
+        ////                err_xml.Append("<Valor>" + l_errores.ElementAt(j) + "</Valor>\n");
+        ////                //err_xml.Append("<Fila>fila_error1</Fila>\n");
+        ////                //err_xml.Append("<Columna>columna_error1</Columna>\n");
+        ////                err_xml.Append("</Error>\n");
+        ////            }
+        ////            err_xml.Append("</ListaErrores>");
+
+        ////            File.WriteAllText(pos_eval + "_errores_" + name_expre + "_" + i + ".xml", err_xml.ToString());
+        ////            Thread.Sleep(500);
+        ////            System.Diagnostics.Process.Start(pos_eval + "_errores_" + name_expre + "_" + i + ".xml");
+        ////        }
+
+        ////        /*verificando si no tiene errores, y haya pasado la validacion*/
+        ////        if (l_errores.Count == 0)
+        ////        {
+        ////            hay_valido++;
+        ////            lex_tok = lex_tok + "Expresión \"" + cad + "\" para la EXP " + name_expre + " ** Es Valida \n";
+        ////        }
+
+        ////        /*verificando si tiene errores encontrados*/
+        ////        if (l_errores.Count > 0)
+        ////        {
+        ////            lex_err = lex_err + "Expresión \"" + cad + "\" para la EXP " + name_expre + " -- No es Valida \n";
+        ////        }
+
+        ////    }
+
+        ////    if (hay_valido > 0)
+        ////    {
+        ////        resul_lexema = lex_tok;
+        ////    }
+        ////    if (err > 0 && hay_valido == 0)
+        ////    {
+        ////        resul_lexema = lex_err;
+        ////    }
+        ////    //resul_lexema
+        ////}
+        ////
+
         /*************fin*******************************************/
 
         //////////////////
@@ -941,6 +1052,10 @@ namespace Proyecto1
                                     cad_actual = "";
                                     lexema = "";
                                     indice_continuar = i;
+                                    if (c == '\n')
+                                    {
+                                        fil++;
+                                    }
                                     return true;
                                 }
                                 else
@@ -982,6 +1097,10 @@ namespace Proyecto1
                             cad_actual = "";
                             lexema = "";
                             indice_continuar = i;
+                            if (c == '\n')
+                            {
+                                fil++;
+                            }
                             return true;
                         }
                         else

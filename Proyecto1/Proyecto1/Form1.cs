@@ -493,8 +493,8 @@ namespace Proyecto1
                 //dtable.DataSource = tree.view_Listado_Tran();
                 tree.IniciarVisitado();
 
-                ///////tree.listar_nodes_thom(); ////
-                tree.graficando_Thomson();
+                ////////////////////////tree.graficando_Thomson();  ////**
+                tree.Set_Start_End_nodos();
 
                 tree.IniciarVisitado();
                 tree.MetedoCerradura();
@@ -504,7 +504,7 @@ namespace Proyecto1
                 dtable.DataSource = tree.view_Listado_Tran();
                 dtable.AutoResizeColumns();
 
-                tree.graficando_Automata();
+                ////////////////////////tree.graficando_Automata();  ////**
 
 
 
@@ -775,14 +775,15 @@ namespace Proyecto1
                     ////AFD.EvaluandoLexema_final(lis_evaluar_expre.get(i).cadena_eva, lis_var);
                     ////resul_lis = AFD.getResul_ex();
                     ////lis_resul();
-                    EvaluandoLexemas AFD = new EvaluandoLexemas(lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones, lis_var, lis_evaluar_expre.ElementAt(i).identificador);
+                    EvaluandoLexemas AFD = new EvaluandoLexemas(lis_thompson_expre.ElementAt(exist).ex_thomson.tab_transiciones, lis_var, lis_evaluar_expre.ElementAt(i).identificador, i,
+                        lis_evaluar_expre.ElementAt(i).fila, lis_evaluar_expre.ElementAt(i).columna);
                     ///////AFD.EvaluandoLexema_final(lis_evaluar_expre.ElementAt(i).cadena_eva);
                     AFD.RecorroLisTransiciones(lis_evaluar_expre.ElementAt(i).cadena_eva);
 
 
                     MessageBox.Show("leyendo paso lex");
                     AFD.Tokes_n_Errors_xml();
-                    AFD.Paso_Lexema();
+                    /////////AFD.Paso_Lexema();
                     tb_texto.Text = tb_texto.Text + AFD.return_texto_val();
 
                     //AFD.EvaluandoLexema_inicio(lis_evaluar_expre.ElementAt(i).cadena_eva);

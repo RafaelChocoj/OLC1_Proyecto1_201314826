@@ -87,8 +87,9 @@ namespace Proyecto1
             graf.Append("\n}");
 
 
-            MessageBox.Show(graf.ToString());
+            ////////////////////////MessageBox.Show(graf.ToString());
             File.WriteAllText("thom_" + name_expre+".txt", graf.ToString());
+
             ////////////////////System.Diagnostics.Process.Start("thom.txt");
             //return this.graf_arbolavl(graf.toString(), "graf_automata_" + name_expre);
 
@@ -100,6 +101,12 @@ namespace Proyecto1
             nod_final = root.ultimo_ref;
             return CreateImage("thom_" + name_expre);
             //return true;
+        }
+
+        public void Set_Start_End_nodos()
+        {
+            nod_inicial = root;
+            nod_final = root.ultimo_ref;
         }
 
         /*graficando automata*/
@@ -171,6 +178,7 @@ namespace Proyecto1
                 proc.Start();
                 proc.WaitForExit();
                 //Thread.Sleep(500);
+                Thread.Sleep(500);
                 System.Diagnostics.Process.Start(name + ".jpg");
                 return true;
             }

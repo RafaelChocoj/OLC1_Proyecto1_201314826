@@ -57,7 +57,7 @@
             // 
             // b_analizar
             // 
-            this.b_analizar.Location = new System.Drawing.Point(33, 374);
+            this.b_analizar.Location = new System.Drawing.Point(37, 416);
             this.b_analizar.Name = "b_analizar";
             this.b_analizar.Size = new System.Drawing.Size(82, 32);
             this.b_analizar.TabIndex = 0;
@@ -155,7 +155,7 @@
             // 
             // b_graficar
             // 
-            this.b_graficar.Location = new System.Drawing.Point(121, 374);
+            this.b_graficar.Location = new System.Drawing.Point(125, 416);
             this.b_graficar.Name = "b_graficar";
             this.b_graficar.Size = new System.Drawing.Size(121, 32);
             this.b_graficar.TabIndex = 5;
@@ -239,7 +239,7 @@
             // 
             // beva_lex
             // 
-            this.beva_lex.Location = new System.Drawing.Point(33, 412);
+            this.beva_lex.Location = new System.Drawing.Point(37, 454);
             this.beva_lex.Name = "beva_lex";
             this.beva_lex.Size = new System.Drawing.Size(209, 32);
             this.beva_lex.TabIndex = 13;
