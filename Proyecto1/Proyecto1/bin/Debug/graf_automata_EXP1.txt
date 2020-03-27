@@ -1,21 +1,28 @@
 digraph finite_state_machine {
 rankdir=LR;
 size="8,5"
-node [shape = doublecircle];  B C D E
+node [shape = doublecircle];  B F G H
 node [shape = Mcircle];  A
 node [shape = circle];
-A -> B[ label = "#" ];
-B -> C[ label = "digitos" ];
-B -> D[ label = "letras" ];
-B -> E[ label = "LETRAS" ];
-C -> C[ label = "digitos" ];
-C -> D[ label = "letras" ];
-C -> E[ label = "LETRAS" ];
-D -> C[ label = "digitos" ];
-D -> D[ label = "letras" ];
-D -> E[ label = "LETRAS" ];
-E -> C[ label = "digitos" ];
-E -> D[ label = "letras" ];
-E -> E[ label = "LETRAS" ];
+A -> B[ label = "vocales_min" ];
+B -> C[ label = " " ];
+B -> D[ label = "logicos" ];
+B -> E[ label = "minusculas" ];
+B -> F[ label = "VOCALES_may" ];
+C -> G[ label = "relacionales" ];
+D -> G[ label = "relacionales" ];
+E -> H[ label = "mayusculas" ];
+F -> C[ label = " " ];
+F -> D[ label = "logicos" ];
+F -> E[ label = "minusculas" ];
+F -> F[ label = "VOCALES_may" ];
+G -> C[ label = " " ];
+G -> D[ label = "logicos" ];
+G -> E[ label = "minusculas" ];
+G -> F[ label = "VOCALES_may" ];
+H -> C[ label = " " ];
+H -> D[ label = "logicos" ];
+H -> E[ label = "minusculas" ];
+H -> F[ label = "VOCALES_may" ];
 
 }

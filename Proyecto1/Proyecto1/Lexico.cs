@@ -174,9 +174,23 @@ namespace Proyecto1
                         /*comentario multilinea*/
                         else if (c == '<')
                         {
-                            estado = 7;
-                            i--;
-                            columna--;
+                            //estado = 7;
+                            //i--;
+                            //columna--;
+
+                            ////////
+                            if (estado_conjunto == 4)
+                            {
+                                lexema += c;
+                                addToken(lexema, "CaracterEsp", fila, columna - lexema.Length);
+                                lexema = "";
+                            }
+                            else
+                            {
+                                estado = 7;
+                                i--;
+                                columna--;
+                            }
                         }
                         /*igualdad */
                         else if (c == '-')

@@ -57,7 +57,7 @@
             // 
             // b_analizar
             // 
-            this.b_analizar.Location = new System.Drawing.Point(38, 473);
+            this.b_analizar.Location = new System.Drawing.Point(31, 473);
             this.b_analizar.Name = "b_analizar";
             this.b_analizar.Size = new System.Drawing.Size(82, 32);
             this.b_analizar.TabIndex = 0;
@@ -70,9 +70,9 @@
             this.tb_texto.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.tb_texto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_texto.ForeColor = System.Drawing.Color.Lime;
-            this.tb_texto.Location = new System.Drawing.Point(262, 473);
+            this.tb_texto.Location = new System.Drawing.Point(246, 473);
             this.tb_texto.Name = "tb_texto";
-            this.tb_texto.Size = new System.Drawing.Size(585, 149);
+            this.tb_texto.Size = new System.Drawing.Size(601, 149);
             this.tb_texto.TabIndex = 1;
             this.tb_texto.Text = "";
             // 
@@ -155,7 +155,7 @@
             // 
             // b_graficar
             // 
-            this.b_graficar.Location = new System.Drawing.Point(126, 473);
+            this.b_graficar.Location = new System.Drawing.Point(119, 473);
             this.b_graficar.Name = "b_graficar";
             this.b_graficar.Size = new System.Drawing.Size(121, 32);
             this.b_graficar.TabIndex = 5;
@@ -239,7 +239,7 @@
             // 
             // beva_lex
             // 
-            this.beva_lex.Location = new System.Drawing.Point(38, 511);
+            this.beva_lex.Location = new System.Drawing.Point(31, 511);
             this.beva_lex.Name = "beva_lex";
             this.beva_lex.Size = new System.Drawing.Size(209, 32);
             this.beva_lex.TabIndex = 13;

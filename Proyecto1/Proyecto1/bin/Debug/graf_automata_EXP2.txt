@@ -1,0 +1,24 @@
+digraph finite_state_machine {
+rankdir=LR;
+size="8,5"
+node [shape = doublecircle];  A B D E H
+node [shape = Mcircle]; 
+node [shape = circle];
+A -> B[ label = "relacionales" ];
+A -> C[ label = "simbolos" ];
+B -> D[ label = "digitos" ];
+B -> E[ label = "operadores" ];
+B -> B[ label = "relacionales" ];
+B -> C[ label = "simbolos" ];
+C -> F[ label = "minusculas" ];
+D -> B[ label = "relacionales" ];
+D -> C[ label = "simbolos" ];
+E -> E[ label = "operadores" ];
+E -> B[ label = "relacionales" ];
+E -> C[ label = "simbolos" ];
+F -> G[ label = " " ];
+G -> H[ label = "TEXTO" ];
+H -> B[ label = "relacionales" ];
+H -> C[ label = "simbolos" ];
+
+}

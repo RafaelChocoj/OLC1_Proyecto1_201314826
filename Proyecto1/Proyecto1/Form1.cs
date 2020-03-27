@@ -767,7 +767,7 @@ namespace Proyecto1
 
                 if (exist == -99)
                 {
-                    tb_texto.Text = "No existe expresion Regular para " + lis_evaluar_expre.ElementAt(i).identificador;
+                    tb_texto.Text = tb_texto.Text +  "No existe expresion Regular para " + lis_evaluar_expre.ElementAt(i).identificador + "\n";
                 }
                 else
                 {
