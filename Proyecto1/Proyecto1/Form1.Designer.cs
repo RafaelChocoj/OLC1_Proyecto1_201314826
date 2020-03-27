@@ -57,7 +57,7 @@
             // 
             // b_analizar
             // 
-            this.b_analizar.Location = new System.Drawing.Point(37, 416);
+            this.b_analizar.Location = new System.Drawing.Point(38, 473);
             this.b_analizar.Name = "b_analizar";
             this.b_analizar.Size = new System.Drawing.Size(82, 32);
             this.b_analizar.TabIndex = 0;
@@ -70,9 +70,9 @@
             this.tb_texto.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.tb_texto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_texto.ForeColor = System.Drawing.Color.Lime;
-            this.tb_texto.Location = new System.Drawing.Point(262, 416);
+            this.tb_texto.Location = new System.Drawing.Point(262, 473);
             this.tb_texto.Name = "tb_texto";
-            this.tb_texto.Size = new System.Drawing.Size(491, 149);
+            this.tb_texto.Size = new System.Drawing.Size(585, 149);
             this.tb_texto.TabIndex = 1;
             this.tb_texto.Text = "";
             // 
@@ -139,12 +139,12 @@
             this.tabControl1.Location = new System.Drawing.Point(33, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(720, 378);
+            this.tabControl1.Size = new System.Drawing.Size(720, 427);
             this.tabControl1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1238, 475);
+            this.button1.Location = new System.Drawing.Point(72, 599);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -155,7 +155,7 @@
             // 
             // b_graficar
             // 
-            this.b_graficar.Location = new System.Drawing.Point(125, 416);
+            this.b_graficar.Location = new System.Drawing.Point(126, 473);
             this.b_graficar.Name = "b_graficar";
             this.b_graficar.Size = new System.Drawing.Size(121, 32);
             this.b_graficar.TabIndex = 5;
@@ -165,7 +165,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1206, 475);
+            this.button2.Location = new System.Drawing.Point(40, 599);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(107, 23);
             this.button2.TabIndex = 6;
@@ -176,7 +176,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1219, 475);
+            this.button3.Location = new System.Drawing.Point(53, 599);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 23);
             this.button3.TabIndex = 7;
@@ -187,7 +187,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1219, 475);
+            this.button4.Location = new System.Drawing.Point(53, 599);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(94, 23);
             this.button4.TabIndex = 8;
@@ -205,12 +205,12 @@
             this.dtable.Name = "dtable";
             this.dtable.ReadOnly = true;
             this.dtable.RowTemplate.Height = 24;
-            this.dtable.Size = new System.Drawing.Size(539, 340);
+            this.dtable.Size = new System.Drawing.Size(539, 389);
             this.dtable.TabIndex = 9;
             // 
             // probartab
             // 
-            this.probartab.Location = new System.Drawing.Point(1238, 475);
+            this.probartab.Location = new System.Drawing.Point(72, 599);
             this.probartab.Name = "probartab";
             this.probartab.Size = new System.Drawing.Size(75, 23);
             this.probartab.TabIndex = 10;
@@ -239,7 +239,7 @@
             // 
             // beva_lex
             // 
-            this.beva_lex.Location = new System.Drawing.Point(37, 454);
+            this.beva_lex.Location = new System.Drawing.Point(38, 511);
             this.beva_lex.Name = "beva_lex";
             this.beva_lex.Size = new System.Drawing.Size(209, 32);
             this.beva_lex.TabIndex = 13;
@@ -250,7 +250,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(759, 416);
+            this.label2.Location = new System.Drawing.Point(853, 473);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 17);
             this.label2.TabIndex = 14;
@@ -261,7 +261,7 @@
             this.tconjun.AllowUserToAddRows = false;
             this.tconjun.AllowUserToDeleteRows = false;
             this.tconjun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tconjun.Location = new System.Drawing.Point(836, 416);
+            this.tconjun.Location = new System.Drawing.Point(930, 473);
             this.tconjun.Name = "tconjun";
             this.tconjun.ReadOnly = true;
             this.tconjun.RowTemplate.Height = 24;
@@ -272,7 +272,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1325, 577);
+            this.ClientSize = new System.Drawing.Size(1325, 634);
             this.Controls.Add(this.tconjun);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.beva_lex);

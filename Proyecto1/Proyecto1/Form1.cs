@@ -471,8 +471,9 @@ namespace Proyecto1
 
             for (int i = 0; i < lis_ex_reg.Count; ++i)
             {
-                MessageBox.Show( lis_ex_reg.ElementAt(i).name_exreg /*+ " - "
-                        +lis_ex_reg.get(i).prefijo*/);
+                ////////////////MessageBox.Show(lis_ex_reg.ElementAt(i).name_exreg );//**
+                //MessageBox.Show( lis_ex_reg.ElementAt(i).name_exreg /*+ " - "  **
+                //        +lis_ex_reg.get(i).prefijo*/);
                 ///
                 List<ER_unitario> pref_er = new List<ER_unitario>();
                 pref_er = lis_ex_reg.ElementAt(i).prefijo;
@@ -536,6 +537,8 @@ namespace Proyecto1
             //lis_ar();
             llenando_Combobox();
             //JOptionPane.showMessageDialog(null, "Termino de graficar");
+
+            MessageBox.Show("Termino el proceso","Creacion AFD");
 
         }
 
@@ -758,8 +761,7 @@ namespace Proyecto1
             for (int i = 0; i < lis_evaluar_expre.Count; ++i)
             {
 
-                MessageBox.Show(lis_evaluar_expre.ElementAt(i).cadena_eva, "Evaliando: " + lis_evaluar_expre.ElementAt(i).identificador 
-                   );
+                ////////////MessageBox.Show(lis_evaluar_expre.ElementAt(i).cadena_eva, "Evaliando: " + lis_evaluar_expre.ElementAt(i).identificador );****
 
                 int exist = ObtenerIndiceArbol(lis_evaluar_expre.ElementAt(i).identificador);
 
@@ -781,7 +783,7 @@ namespace Proyecto1
                     AFD.RecorroLisTransiciones(lis_evaluar_expre.ElementAt(i).cadena_eva);
 
 
-                    MessageBox.Show("leyendo paso lex");
+                    //////////////////////MessageBox.Show("leyendo paso lex");**
                     AFD.Tokes_n_Errors_xml();
                     /////////AFD.Paso_Lexema();
                     tb_texto.Text = tb_texto.Text + AFD.return_texto_val();
@@ -791,6 +793,8 @@ namespace Proyecto1
                 }
 
             }
+
+            MessageBox.Show("Terminó el proceso", "Evaluación de Lexemas");
         }
     }
 }

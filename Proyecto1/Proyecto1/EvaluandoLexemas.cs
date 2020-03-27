@@ -220,21 +220,21 @@ namespace Proyecto1
             //Raiz A, 0, estado inicial;   
             //int ir_a_es = 0;
             int idEstado = 0;
-            MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");
+            //////////////////MessageBox.Show(tab_transiciones.ElementAt(idEstado).ir_a.Count.ToString(), " tab_transiciones.ElementAt(idEstado).ir_a.Count");**
             /*si ya no tiene mas estados pero todavia
              hay caracteres error lexema*/
             char c;
             int i = 0;
-            MessageBox.Show("i = " + i.ToString(), "entrada.Length = " + entrada.Length.ToString());
+            ////////////////MessageBox.Show("i = " + i.ToString(), "entrada.Length = " + entrada.Length.ToString());**
             if (i < entrada.Length)
             {
                 c = entrada[i];
-                MessageBox.Show("c: " + c.ToString(), "i: " + i.ToString());
+                ////////////////////MessageBox.Show("c: " + c.ToString(), "i: " + i.ToString());**
             }
 
             if (i == entrada.Length)
             {
-                MessageBox.Show("1 la cadena termino");
+                //////////////////////MessageBox.Show("1 la cadena termino");**
             }
 
             Boolean encontro_transicion;
@@ -246,8 +246,9 @@ namespace Proyecto1
                 String ter = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).terminal;
                 String ir_a = tab_transiciones.ElementAt(idEstado).ir_a.ElementAt(tab).Ir_a_Estado;
 
-                MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(idEstado).name_estado);
-                MessageBox.Show("con| ter: " + ter + ", va a| ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);
+                //////////////////////MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(idEstado).name_estado);**
+                //////////////////////MessageBox.Show("con| ter: " + ter + ", va a| ir a: " + ir_a, tab_transiciones.ElementAt(idEstado).name_estado);***
+                
                 //ir_a_es = getIndexEstado(ir_a);
                 if (tipo.Equals("CA"))
                 {
@@ -288,7 +289,7 @@ namespace Proyecto1
                     pasa = Eva_Lexema_Estado(entrada, ter_2, estado_interno, i);
                 }
 
-                MessageBox.Show(pasa.ToString(), "pasa");
+                //////////////MessageBox.Show(pasa.ToString(), "pasa");***
 
                 if (pasa)
                 {
@@ -364,7 +365,7 @@ namespace Proyecto1
 
             int ir_a_es = getIndexEstado(Estado);
             //MessageBox.Show("1 Estado = " + Estado, "ir_a_es = " + ir_a_es.ToString());
-            MessageBox.Show(tab_transiciones.ElementAt(ir_a_es).ir_a.Count.ToString(), " tab_transiciones.ElementAt(ir_a_es).ir_a.Count");
+            //////////////////////////MessageBox.Show(tab_transiciones.ElementAt(ir_a_es).ir_a.Count.ToString(), " tab_transiciones.ElementAt(ir_a_es).ir_a.Count");***
             /*si ya no tiene mas estados pero todavia
              hay caracteres error lexema*/
 
@@ -378,25 +379,25 @@ namespace Proyecto1
             {
                 Acepta_lexema = false;
             }
-            MessageBox.Show(Acepta_lexema.ToString(), "Acepta_lexema");
+            //////////////////////MessageBox.Show(Acepta_lexema.ToString(), "Acepta_lexema");**
 
             char c;
-            MessageBox.Show("i = " + i.ToString(), "entrada.Length = " + entrada.Length.ToString());
+            //////////////////MessageBox.Show("i = " + i.ToString(), "entrada.Length = " + entrada.Length.ToString());***
             if (i < entrada.Length)
             {
                 c = entrada[i];
-                MessageBox.Show("** c: " + c.ToString(), "*** i: " + i.ToString());
+                //////////////////////////MessageBox.Show("** c: " + c.ToString(), "*** i: " + i.ToString());**
             }
 
             if (i == entrada.Length)
             {
                 //////////////c = entrada[i];
-                MessageBox.Show("== i: " + i.ToString());
+                ////////////////////////MessageBox.Show("== i: " + i.ToString());****
             }
 
             if (i == entrada.Length)
             {
-                MessageBox.Show("2 la cadena termino ++++++++++++++++++++++++++++");
+                //////////////////MessageBox.Show("2 la cadena termino ++++++++++++++++++++++++++++");***
                 ////si cadena finaliza sin estado de aceptacion
                 if (Acepta_lexema == false)
                 {
@@ -425,8 +426,8 @@ namespace Proyecto1
                     String ter = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).terminal;
                     String ir_a = tab_transiciones.ElementAt(ir_a_es).ir_a.ElementAt(tab).Ir_a_Estado;
 
-                    MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(ir_a_es).name_estado);
-                    MessageBox.Show("*** con| ter: " + ter + ", *** va a| ir a: " + ir_a, tab_transiciones.ElementAt(ir_a_es).name_estado);
+                    ////////////////////////////MessageBox.Show(tipo, "tipo " + tab_transiciones.ElementAt(ir_a_es).name_estado);**
+                    ////////////////////////////MessageBox.Show("*** con| ter: " + ter + ", *** va a| ir a: " + ir_a, tab_transiciones.ElementAt(ir_a_es).name_estado);***
                     //ir_a_es = getIndexEstado(ir_a);
                     if (tipo.Equals("CA"))
                     {
@@ -471,7 +472,7 @@ namespace Proyecto1
                         pasa = Eva_Lexema_Estado(entrada, ter_2, estado_interno, i);
                     }
 
-                    MessageBox.Show(pasa.ToString(), "pasa"); ///
+                    ////////////////////MessageBox.Show(pasa.ToString(), "pasa"); ///***
                     if (pasa)
                     {
                         //i = indice_continuar + 1;
@@ -512,7 +513,7 @@ namespace Proyecto1
 
                 if (encontro_transicion == false && tab_transiciones.ElementAt(ir_a_es).ir_a.Count != 0)
                 {
-                    MessageBox.Show("encontro_transicion = " + encontro_transicion.ToString(), "tab_transiciones.ElementAt(ir_a_es).ir_a.Count = " + tab_transiciones.ElementAt(ir_a_es).ir_a.Count);
+                    //////////////////MessageBox.Show("encontro_transicion = " + encontro_transicion.ToString(), "tab_transiciones.ElementAt(ir_a_es).ir_a.Count = " + tab_transiciones.ElementAt(ir_a_es).ir_a.Count);****
 
                     char let = ' ';
                     if (i < entrada.Length)
@@ -614,8 +615,8 @@ namespace Proyecto1
                         //MessageBox.Show(l_errores.ElementAt(j), "l_errores.ElementAt(j) = " + j);
                         err_xml.Append("<Error>\n");
                         err_xml.Append("<Valor>" + l_errores.ElementAt(j).valor_token + "</Valor>\n");
-                        err_xml.Append("<Fila>" + l_tokens.ElementAt(j).fila + "</Fila>\n");
-                        err_xml.Append("<Columna>" + l_tokens.ElementAt(j).columna + "</Columna>\n");
+                        err_xml.Append("<Fila>" + l_errores.ElementAt(j).fila + "</Fila>\n");
+                        err_xml.Append("<Columna>" + l_errores.ElementAt(j).columna + "</Columna>\n");
                         err_xml.Append("</Error>\n");
                     }
                     err_xml.Append("</ListaErrores>");
@@ -629,13 +630,13 @@ namespace Proyecto1
                 if (l_errores.Count == 0)
                 {
                     hay_valido++;
-                    lex_tok = lex_tok + "Expresión \"" + cad + "\" para la EXP " + name_expre + " ** Es Valida \n";
+                    lex_tok = lex_tok + "Expresión \"" + cad + "\" para la EXP " + name_expre + " **** Es VALIDA \n";
                 }
 
                 /*verificando si tiene errores encontrados*/
                 if (l_errores.Count > 0)
                 {
-                    lex_err = lex_err + "Expresión \"" + cad + "\" para la EXP " + name_expre + " -- No es Valida \n";
+                    lex_err = lex_err + "Expresión \"" + cad + "\" para la EXP " + name_expre + " -- NO es Valida \n";
                 }
 
             }
@@ -998,7 +999,7 @@ namespace Proyecto1
             {
                 c = entrada[i];
 
-                MessageBox.Show(c.ToString(), i.ToString() + "Eva_Lexema_Estado **");
+                ////////////////////////MessageBox.Show(c.ToString(), i.ToString() + "Eva_Lexema_Estado **");****
 
                 switch (estado_interno)
                 {
@@ -1040,7 +1041,7 @@ namespace Proyecto1
                                 character = c.ToString();
                                 /*********fin*si no es caracter especial**********/
                             }
-                            MessageBox.Show(character, "character");
+                            ////////////////////MessageBox.Show(character, "character");**
 
                             ////Boolean existe = existe_valor_enConjunto(String.valueOf(c), conjunto.valores);
                             //Boolean existe = conjunto.valores.Contains(c.ToString());
@@ -1121,7 +1122,7 @@ namespace Proyecto1
                         }
 
                         String conca_cad = cad_actual.Substring(0, i_cad_actual);
-                        MessageBox.Show("+++cad_actual: "+ cad_actual + "|| creando cad: " + conca_cad + " - lex: "+ lexema);
+                        ////////////////////////MessageBox.Show("+++cad_actual: "+ cad_actual + "|| creando cad: " + conca_cad + " - lex: "+ lexema);***
 
                         if (conca_cad.Equals(lexema))
                         {
@@ -1133,7 +1134,7 @@ namespace Proyecto1
                                 cad_actual = "";
                                 lexema = "";
                                 indice_continuar = i;
-                                MessageBox.Show("Cadena aceptada", "i = " + i.ToString()); 
+                                //////////////////////MessageBox.Show("Cadena aceptada", "i = " + i.ToString()); ***
                                 return true;
                             }
                         }
@@ -1159,7 +1160,7 @@ namespace Proyecto1
                         }
 
                         String conca_cad_tod = cad_actual.Substring(0, i_cad_actual);
-                        MessageBox.Show("tod +cad_actual: " + cad_actual + "|| creando cad: " + conca_cad_tod + " - lex: " + lexema);
+                        //////////////////MessageBox.Show("tod +cad_actual: " + cad_actual + "|| creando cad: " + conca_cad_tod + " - lex: " + lexema);****
 
                         if (conca_cad_tod.Equals(lexema))
                         {
@@ -1171,7 +1172,7 @@ namespace Proyecto1
                                 cad_actual = "";
                                 lexema = "";
                                 indice_continuar = i;
-                                MessageBox.Show("Tod Cadena aceptada", "i = " + i.ToString());
+                                //////////////MessageBox.Show("Tod Cadena aceptada", "i = " + i.ToString());**
                                 return true;
                             }
                         }
