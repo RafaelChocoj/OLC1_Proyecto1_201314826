@@ -754,6 +754,7 @@ namespace Proyecto1
         }
         private void beva_lex_Click(object sender, EventArgs e)
         {
+            tb_texto.Text = "";
             for (int i = 0; i < lis_evaluar_expre.Count; ++i)
             {
 

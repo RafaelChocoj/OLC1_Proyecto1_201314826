@@ -70,7 +70,7 @@
             this.tb_texto.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.tb_texto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_texto.ForeColor = System.Drawing.Color.Lime;
-            this.tb_texto.Location = new System.Drawing.Point(262, 382);
+            this.tb_texto.Location = new System.Drawing.Point(262, 416);
             this.tb_texto.Name = "tb_texto";
             this.tb_texto.Size = new System.Drawing.Size(491, 149);
             this.tb_texto.TabIndex = 1;
@@ -139,7 +139,7 @@
             this.tabControl1.Location = new System.Drawing.Point(33, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(720, 340);
+            this.tabControl1.Size = new System.Drawing.Size(720, 378);
             this.tabControl1.TabIndex = 3;
             // 
             // button1
@@ -205,7 +205,7 @@
             this.dtable.Name = "dtable";
             this.dtable.ReadOnly = true;
             this.dtable.RowTemplate.Height = 24;
-            this.dtable.Size = new System.Drawing.Size(539, 302);
+            this.dtable.Size = new System.Drawing.Size(539, 340);
             this.dtable.TabIndex = 9;
             // 
             // probartab
@@ -250,18 +250,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(759, 382);
+            this.label2.Location = new System.Drawing.Point(759, 416);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 17);
+            this.label2.Size = new System.Drawing.Size(75, 17);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Conjuntos";
+            this.label2.Text = "Conjuntos:";
             // 
             // tconjun
             // 
             this.tconjun.AllowUserToAddRows = false;
             this.tconjun.AllowUserToDeleteRows = false;
             this.tconjun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tconjun.Location = new System.Drawing.Point(836, 382);
+            this.tconjun.Location = new System.Drawing.Point(836, 416);
             this.tconjun.Name = "tconjun";
             this.tconjun.ReadOnly = true;
             this.tconjun.RowTemplate.Height = 24;
@@ -272,7 +272,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1325, 543);
+            this.ClientSize = new System.Drawing.Size(1325, 577);
             this.Controls.Add(this.tconjun);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.beva_lex);

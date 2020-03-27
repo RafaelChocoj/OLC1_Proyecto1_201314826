@@ -123,7 +123,7 @@ namespace Proyecto1
             char c;
             entrada = entrada + " ";
 
-            MessageBox.Show("#" + entrada+"#", " entrada");
+            //////////////////MessageBox.Show("#" + entrada+"#", " entrada");
             for (int i = 0; i < entrada.Length; i++)
             {
                 c = entrada[i];

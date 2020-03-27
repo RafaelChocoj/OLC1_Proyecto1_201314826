@@ -229,6 +229,34 @@ namespace Proyecto1
                 pref_er.Add(new ER_unitario(preanalisis.lexema, "TO"));
                 match("Todito");
             }
+
+            /*inicio new nuevo para caracteres especiales*/
+            //\n
+            else if (preanalisis.idToken.Equals("SaltoLinea"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "ESP"));
+                match("SaltoLinea");
+            }
+            //\'
+            else if (preanalisis.idToken.Equals("ComSimple"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "ESP"));
+                match("ComSimple");
+            }
+            //\t
+            else if (preanalisis.idToken.Equals("Tabulacion"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "ESP"));
+                match("Tabulacion");
+            }
+            //\"
+            else if (preanalisis.idToken.Equals("ComDoble"))
+            {
+                pref_er.Add(new ER_unitario(preanalisis.lexema, "ESP"));
+                match("ComDoble");
+            }
+            /*fin new nuevo para caracteres especiales*/
+
             else
             {
                 
